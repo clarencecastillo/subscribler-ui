@@ -23,7 +23,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "bootstrap": "^4.3.1",
+    "countries-list": "^2.4.3",
     "rxjs": "~6.4.0",
+    "startbootstrap-sb-admin-2": "^4.0.6",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

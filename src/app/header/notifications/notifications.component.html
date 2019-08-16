@@ -1,0 +1,16 @@
+<div ngbDropdown class="no-arrow">
+  <div ngbDropdownToggle class="nav-link cursor-pointer">
+    <fa-icon [icon]="notificationIcon"></fa-icon>
+    <span class="badge badge-danger badge-counter">{{notifications.length}}</span>
+  </div>
+  <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in show" ngbDropdownMenu>
+    <h6 class="dropdown-header">Alerts Center</h6>
+    <div class="dropdown-item d-flex align-items-center" *ngFor="let notification of notifications">
+      <div class="font-weight-bold">
+        <div class="small text-gray-500">{{notification.date}}</div>
+        <div class="font-weight-bold">{{notification.text}}</div>
+      </div>
+    </div>
+    <div class="dropdown-item text-center small text-gray-500">Show All Alerts</div>
+  </div>
+</div>

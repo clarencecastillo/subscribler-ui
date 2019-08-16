@@ -4,28 +4,60 @@ import { PackagesComponent } from './packages/packages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { LogisticsComponent } from './logistics/logistics.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterWorkflowComponent } from './register-workflow/register-workflow.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'app',
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'register',
+    component: RegisterWorkflowComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'account',
+        pathMatch: 'full'
+      },
+      {
+        path: 'account',
+        component: RegisterWorkflowComponent
+      },
+      {
+        path: 'packages',
+        component: RegisterWorkflowComponent
+      }
+    ]
   },
   {
-    path: 'packages',
-    component: PackagesComponent
-  },
-  {
-    path: 'subscriptions',
-    component: SubscriptionsComponent
-  },
-  {
-    path: 'logistics',
-    component: LogisticsComponent
+    path: 'app',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'packages',
+        component: PackagesComponent
+      },
+      {
+        path: 'subscriptions',
+        component: SubscriptionsComponent
+      },
+      {
+        path: 'logistics',
+        component: LogisticsComponent
+      }
+    ]
   }
 ];
 

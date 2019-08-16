@@ -1,1 +1,24 @@
-<p>register works!</p>
+<h1 class="text-gray-900 mb-5">Create Business Account</h1>
+<form [formGroup]="userRegistrationForm" (ngSubmit)="onSubmit(registrationForm.value)" class="user">
+  <div class="row">
+    <div class="col-sm form-group">
+      <input type="text" formControlName="firstName" class="form-control form-control-user" placeholder="First Name">
+    </div>
+    <div class="col-sm form-group">
+      <input type="text" formControlName="lastName" class="form-control form-control-user" placeholder="Last Name">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col form-group">
+      <input type="email" formControlName="email" class="form-control form-control-user" placeholder="Email">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm form-group">
+      <input type="password" formControlName="password" class="form-control form-control-user" placeholder="Password">
+    </div>
+    <div class="col-sm form-group">
+      <input type="password" formControlName="confirmPassword" class="form-control form-control-user" placeholder="Confirm Password">
+    </div>
+  </div>
+</form>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { PackageService, Package } from '../package.service';
 
 @Component({
   selector: 'sbr-packages',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PackagesComponent implements OnInit {
 
-  constructor() { }
+  newPackageIcon = faPlus;
+
+  packages: Package[];
+  activePackageId: string;
+
+  constructor(private packageService: PackageService) { }
 
   ngOnInit() {
+    this.packages = this.packageService.getPackages();
+    this.activePackageId = this.packages[0].id;
+  }
+
+  createPackage() {
+    const packageId = this.packageService.createPackage();
+    this.activePackageId = packageId;
   }
 
 }

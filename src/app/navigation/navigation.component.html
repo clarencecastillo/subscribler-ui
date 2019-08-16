@@ -1,11 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Subscribler</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-link" *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">{{link.text}}</a>
-    </div>
-  </div>
+<nav class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/">
+    <div class="sidebar-brand-text mx-3">Subscribler</div>
+  </a>
+  <hr class="sidebar-divider my-0">
+  <li class="nav-item" *ngFor="let link of links" routerLinkActive="active">
+    <a class="nav-link" [routerLink]="link.path">
+      <fa-icon [icon]="link.icon" class="mr-3"></fa-icon>
+      <span>{{link.text}}</span>
+    </a>
+  </li>
 </nav>

@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+ngb-carousel {
+  background-color: #f8f9fc;
+}
+
+.image-wrapper {
+  position: relative;
+
+  img {
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    zoom: 0.22;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
