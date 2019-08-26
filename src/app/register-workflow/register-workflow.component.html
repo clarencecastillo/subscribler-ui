@@ -1,28 +1,31 @@
-<div class="flex-container bg-gradient-primary h-100">
-  <div class="container pt-5">
+<div class="flex-container bg-gradient-primary d-flex h-100">
+  <div class="container py-5 m-auto">
     <ngb-carousel #carousel [wrap]="false" 
     [showNavigationArrows]="false" [interval]="0"
-    [keyboard]="false" class="card o-hidden border-0 shadow-lg">
+    [showNavigationIndicators]="false" [keyboard]="false"
+    class="card o-hidden border-0 shadow-lg">
       <ng-template ngbSlide id="account">
-        <div class="row">
-          <div class="col-lg-5 o-hidden d-none d-lg-block image-wrapper">
-            <img src="https://images.unsplash.com/photo-1560626833-1ef263dc356c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80" alt="">
-          </div>
-          <div class="col-lg-7 p-5">
-            <h3 class="text-muted">STEP 1</h3>
-            <sbr-register></sbr-register>
-            <div class="d-flex justify-content-between mt-5">
-              <a href="">Already have an account? Login!</a>
-              <a class="btn btn-primary" routerLink="/register/packages">Next</a>
+        <div class="slide-content h-100">
+          <div class="row">
+            <div class="col-lg-5 o-hidden d-none d-lg-block image-wrapper">
+              <img src="https://images.unsplash.com/photo-1560626833-1ef263dc356c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80" alt="">
+            </div>
+            <div class="col-lg-7 p-5">
+              <h3 class="text-muted">STEP 1</h3>
+              <sbr-register></sbr-register>
+              <div class="d-flex justify-content-between mt-5">
+                <a href="">Already have an account? Login!</a>
+                <a class="btn btn-primary" routerLink="/register/packages">Next</a>
+              </div>
             </div>
           </div>
         </div>
       </ng-template>
       <ng-template ngbSlide id="packages">
-        <div class="p-5">
+        <div class="slide-content max-height p-5">
           <h3 class="text-muted">STEP 2</h3>
-          <sbr-packages></sbr-packages>
-          <div class="d-flex justify-content-between mt-5">
+          <sbr-packages class="flex-grow-1 flex-shrink-1 d-block"></sbr-packages>
+          <div class="d-flex justify-content-between flex-grow-0 pt-5">
             <a class="btn btn-primary" routerLink="/register/account">Back</a>
             <!-- <a class="btn btn-primary" routerLink="/register/packages">Next</a> -->
           </div>

@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary">Select Items</h6>
+    <button type="button" class="close" (click)="close()">
+      <fa-icon [icon]="closeIcon"></fa-icon>
+    </button>
+  </div>
+  <div class="card-body col-12 bg-light-alt">
+    <!-- <div class="form-group form-inline">
+      <label for="search">Search:</label>
+      <input type="text" id="search" class="form-control">
+    </div> -->
+    <div class="row d-flex flex-wrap mx-1">
+      <div class="col-3" *ngFor="let item of items">
+        <div class="item-card card shadow mx-2 my-4 cursor-pointer">
+          <div class="selected-overlay" [class.visible]="selectedItemIds.includes(item.id)" (click)="selectItem(item)">
+            <div class="backdrop"></div>
+            <fa-icon class="btn btn-circle btn-lg btn-primary" [icon]="selectedIcon"></fa-icon>
+          </div>
+          <div class="card-image" [style.height.px]="160" [style.background-image]="'url(' + item.imageUrl + ')'">
+            <div class="context-overlay no-arrow" ngbDropdown container="body" placement="bottom-right">
+              <div class="backdrop" (click)="selectItem(item)"></div>
+              <fa-icon class="btn btn-lg text-light" [icon]="contextMenuIcon" ngbDropdownToggle></fa-icon>
+              <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right shadow animated--grow-in show">
+                <button ngbDropdownItem (click)="presentEditItemModal(item)">
+                  <fa-icon [fixedWidth]="true" [icon]="editIcon" class="text-black-50"></fa-icon>
+                  Edit
+                </button>
+                <button ngbDropdownItem (click)="presentConfirmDeleteItemModal(item)">
+                  <fa-icon [fixedWidth]="true" [icon]="deleteIcon" class="text-black-50"></fa-icon>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" [style.height.px]="140" (click)="selectItem(item)">
+            <div class="card-title m-0">
+              <strong class="card-title">{{item.name}}</strong>
+            </div>
+            <small class="card-text text-muted">
+              {{item.description | slice : 0 : 70}}
+              {{item.description.length > 100 ? '...' : ''}}
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card mx-2 my-4 btn btn-light text-muted cursor-pointer" [style.height.px]="300" (click)="presentEditItemModal()">
+          <fa-icon [icon]="addItemIcon" class="my-auto" [style.font-size.rem]="3"></fa-icon>
+      </div>
+      </div>
+      <div class="col-9 d-flex align-items-center text-gray-400 text-center" *ngIf="items.length == 0">
+        <h4 class="m-auto">Click the '<fa-icon [icon]="addItemIcon"></fa-icon>' button to create a new item</h4>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer py-3 d-flex flex-row justify-content-end">
+    <button type="button" class="btn btn-primary" [disabled]="selectedItemIds.length == 0" (click)="submit()">
+      Select Item(s) ({{selectedItemIds.length}})
+    </button>
+  </div>
+</div>

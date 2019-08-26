@@ -1,0 +1,49 @@
+.card {
+
+  .package-item {
+    position: relative;
+
+    .click-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .context-menu {
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+    }
+
+    &.show.dropdown,
+    &:hover {
+      .context-menu {
+        opacity: 1;
+      }
+    }
+  }
+
+  & > .row {
+    position: relative;
+
+    .col {
+      position: absolute;
+      overflow: scroll;
+      height: 100%;
+
+      &:first-of-type {
+        left: 0;
+      }
+
+      &:last-of-type {
+        right: 0;
+      }
+    }
+  }
+
+  // .scroll {
+    
+  // }
+}

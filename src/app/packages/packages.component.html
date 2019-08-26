@@ -1,18 +1,32 @@
-<h1 class="text-gray-900 mb-5">Manage Packages</h1>
-<div class="card o-hidden">
-  <div class="row m-0">
-    <div class="col-lg-3 p-0">
-      <ul class="list-group list-group-flush">
-        <div class="list-group-item list-group-item-action" *ngFor="let package of packages" [ngClass]="{'active': package.id === activePackageId}" (click)="activePackageId = package.id">
-          <div class="font-weight-bold">{{package.name ? package.name : 'New Package'}}</div>
-        </div>
-        <div class="list-group-item list-group-item-action text-center border-bottom" (click)="createPackage()">
-          <fa-icon [icon]="newPackageIcon"></fa-icon>
-        </div>
-      </ul>
-    </div>
-    <div class="col-lg p-5 border-left">
-      <sbr-modify-package [packageId]="activePackageId"></sbr-modify-package>
+<div class="flex-container h-100 d-flex flex-column">
+  <h1 class="text-gray-900 mb-5">Manage Packages</h1>
+  <div class="card flex-grow-1">
+    <div class="row h-100 m-0">
+      <div class="col w-25 p-0">
+        <ul class="list-group list-group-flush">
+          <div class="list-group-item list-group-item-action package-item no-arrow" *ngFor="let package of packages"
+            [ngClass]="{'active': package.id === activePackageId}"
+            ngbDropdown container="body" placement="bottom-left">
+            <div class="click-overlay" (click)="activePackageId = package.id"></div>
+            <div class="d-flex justify-content-between m-0">
+              <strong>{{package.name ? package.name : 'New Package'}}</strong>
+              <fa-icon class="cursor-pointer context-menu" [icon]="contextMenuIcon" ngbDropdownToggle></fa-icon>
+            </div>
+            <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right shadow animated--grow-in show">
+              <button ngbDropdownItem (click)="presentConfirmDeletePackageModal(package)">
+                <fa-icon [fixedWidth]="true" [icon]="deleteIcon" class="text-black-50"></fa-icon>
+                Delete
+              </button>
+            </div>
+          </div>
+          <div class="list-group-item list-group-item-action text-center border-bottom" (click)="createPackage()">
+            <fa-icon [icon]="newPackageIcon"></fa-icon>
+          </div>
+        </ul>
+      </div>
+      <div class="col w-75 p-5 border-left">
+        <sbr-edit-package *ngIf="activePackageId" [packageId]="activePackageId"></sbr-edit-package>
+      </div>
     </div>
   </div>
 </div>

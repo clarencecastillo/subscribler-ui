@@ -7,6 +7,16 @@ ngb-carousel {
   background-color: #f8f9fc;
 }
 
+.slide-content {
+  max-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+
+  &.max-height {
+    height: calc(100vh - 6rem);
+  }
+}
+
 .image-wrapper {
   position: relative;
 

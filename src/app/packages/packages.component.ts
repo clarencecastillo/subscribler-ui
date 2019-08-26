@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { PackageService, Package } from '../package.service';
+import { Component, OnInit } from '@angular/core';
+import { faPlus, faAngleDown, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { PackageService } from '../package.service';
+import { Package } from 'src/models/package';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'sbr-packages',
@@ -10,20 +14,54 @@ import { PackageService, Package } from '../package.service';
 export class PackagesComponent implements OnInit {
 
   newPackageIcon = faPlus;
+  contextMenuIcon = faAngleDown;
+  deleteIcon = faTrash;
 
   packages: Package[];
   activePackageId: string;
 
-  constructor(private packageService: PackageService) { }
+  constructor(
+    private packageService: PackageService,
+    private modalService: NgbModal,
+    private toastrService: ToastrService
+  ) { }
 
   ngOnInit() {
     this.packages = this.packageService.getPackages();
-    this.activePackageId = this.packages[0].id;
+    // this.activePackageId = this.packages[0].id;
   }
 
   createPackage() {
     const packageId = this.packageService.createPackage();
     this.activePackageId = packageId;
+  }
+
+  deletePackage(p: Package) {
+    this.packageService.deletePackage(p.id).then(() => {
+      this.toastrService.show(`Package ${p.name} was deleted successfully`, '', {
+        timeOut: 3000,
+        toastClass: 'alert bg-success shadow text-light'
+      });
+
+      if (this.activePackageId === p.id) {
+        this.activePackageId = undefined;
+      }
+
+    }).catch(error => {
+      this.toastrService.show(`Failed to delete package: ${error}`, '', {
+        timeOut: 3000,
+        toastClass: 'alert bg-danger shadow text-light'
+      });
+    });
+  }
+
+  presentConfirmDeletePackageModal(p: Package) {
+    const modal = this.modalService.open(ConfirmModalComponent, {
+      centered: true
+    });
+    const confirmModalComponent: ConfirmModalComponent = modal.componentInstance;
+    confirmModalComponent.prompt = 'Are you sure you want to delete this package?';
+    modal.result.then(() => this.deletePackage(p)).catch(() => {});
   }
 
 }

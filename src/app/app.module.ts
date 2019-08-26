@@ -21,7 +21,15 @@ import { UserComponent } from './header/user/user.component';
 import { MessagesComponent } from './header/messages/messages.component';
 import { NotificationsComponent } from './header/notifications/notifications.component';
 import { CreatePackageComponent } from './create-package/create-package.component';
-import { ModifyPackageComponent } from './modify-package/modify-package.component';
+import { EditPackageComponent } from './edit-package/edit-package.component';
+import { SelectItemModalComponent } from './select-item-modal/select-item-modal.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { EditItemComponent } from './edit-item/edit-item.component';
+import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+
 
 const COMPONENTS = [
   RegisterComponent,
@@ -34,28 +42,42 @@ const COMPONENTS = [
   NavigationComponent,
   HomeComponent,
   RegisterWorkflowComponent,
-  PackageComponent
+  PackageComponent,
+  HeaderComponent,
+  UserComponent,
+  MessagesComponent,
+  NotificationsComponent,
+  CreatePackageComponent,
+  EditPackageComponent,
+  EditItemComponent
+];
+
+const MODALS = [
+  SelectItemModalComponent,
+  ConfirmModalComponent,
+  EditItemModalComponent
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ...COMPONENTS,
-    HeaderComponent,
-    UserComponent,
-    MessagesComponent,
-    NotificationsComponent,
-    CreatePackageComponent,
-    ModifyPackageComponent
+    ...MODALS
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgxFileDropModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ...MODALS
+  ]
 })
 export class AppModule { }

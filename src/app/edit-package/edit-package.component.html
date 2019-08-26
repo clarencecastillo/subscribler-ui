@@ -1,0 +1,121 @@
+<form [formGroup]="packageForm">
+  <div class="row">
+    <div class="col form-group">
+      <h5 class="mb-4 text-dark border-bottom pb-2">Package Details</h5>
+      <div class="row">
+        <div class="col form-group">
+          <label for="package-name">Package Name</label>
+          <input id="package-name" type="text" formControlName="name" class="form-control" placeholder="Package Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="package-description">Description</label>
+          <textarea id="package-description" type="text" formControlName="description" class="form-control" placeholder="Description"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="package-cycle">Cycle</label>
+          <select id="package-cycle" class="form-control" formControlName="cycle">
+            <option *ngFor="let cycle of cycles" [value]="cycle.symbol">{{cycle.frequency | titlecase}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" formArrayName="items">
+    <div class="col form-group">
+      <h5 class="mb-4 text-dark border-bottom pb-2">Items</h5>
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th scope="col" [style.width.px]="50">#</th>
+            <th scope="col">Item</th>
+            <th scope="col" [style.width.%]="20">Quantity</th>
+            <th scope="col" [style.width.%]="10">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="packageForm.get('items').value.length == 0">
+            <td colspan="4">
+              <div class="text-center py-5 text-gray-400">
+                <fa-icon [icon]="emptyItemsIcon" [style.font-size.px]="40"></fa-icon>
+                <small class="d-block">No Items</small>
+              </div>
+            </td>
+          </tr>
+          <tr *ngFor="let item of selectedItems; let i = index" [formGroupName]="i">
+            <th scope="row" class="align-middle">{{i + 1}}</th>
+            <td>
+              <strong class="d-block">{{item.name}}</strong>
+              <span>{{item.description}}</span>
+            </td>
+            <td class="align-middle">
+              <div class="input-group">
+                <input type="number" formControlName="quantity" class="form-control" placeholder="0">
+                <div class="input-group-append">
+                  <span class="input-group-text">{{item.unit}}</span>
+                </div>
+              </div>
+            </td>
+            <td class="text-center align-middle">
+              <button class="btn" (click)="removeItem(i)">
+                <fa-icon [icon]="removeItemIcon"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" (click)="presentSelectItemModal()">
+          Add Item
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row" formArrayName="billingOptions">
+    <div class="col form-group">
+      <h5 class="mb-4 text-dark border-bottom pb-2">Billing Options</h5>
+
+      <div class="card shadow form-group" *ngFor="let option of packageForm.get('billingOptions').controls; let i = index" [formGroupName]="i">
+        <div class="card-header d-flex justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Option {{i + 1}}</h6>
+          <button type="button" class="close" (click)="deleteBillingOption(i)" [disabled]="i == 0 && packageForm.get('billingOptions').length == 1">
+            <small [class.text-black-50]="i == 0 && packageForm.get('billingOptions').length == 1">
+              <fa-icon [icon]="deleteBillingOptionIcon"></fa-icon>
+            </small>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col form-group">
+              <label for="billing-duration-{{i+1}}">Cycles</label>
+              <input id="billing-duration-{{i+1}}" type="number" formControlName="cycles" class="form-control" placeholder="Duration">
+            </div>
+            <div class="col form-group">
+              <label for="billing-price-{{i+1}}">Price</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">SGD</span>
+                </div>
+                <input id="billing-price-{{i+1}}" type="number" formControlName="price" class="form-control" placeholder="Price">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="billing-description-{{i+1}}">Description</label>
+              <textarea id="billing-description-{{i+1}}" type="text" formControlName="description" class="form-control" placeholder="Description"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" (click)="addBillingOption()">
+          Add Billing Option
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,32 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Package } from 'src/models/package';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PackageService {
-
-  cycles: Cycle[] = [
-    {
-      value: 'D',
-      text: 'daily',
-      days: 1
-    },
-    {
-      value: 'W',
-      text: 'weekly',
-      days: 7
-    },
-    {
-      value: 'M',
-      text: 'monthly',
-      days: 30
-    },
-    {
-      value: 'Y',
-      text: 'yearly',
-      days: 365
-    }
-  ];
 
   packages: Package[] = [
     {
@@ -35,15 +13,32 @@ export class PackageService {
       description: 'Some package',
       cycle: 'D',
       items: [],
-      billingOptions: []
+      billingOptions: [{
+        cycles: 1,
+        price: undefined,
+        description: ''
+      }]
     },
     {
       id: 'packageb',
       name: 'Package B',
-      description: 'Some other package',
+      description: 'Some package',
       cycle: 'D',
-      items: [],
-      billingOptions: []
+      items: [
+        {
+          itemId: 'itema',
+          quantity: 1
+        }
+      ],
+      billingOptions: [{
+        cycles: 1,
+        price: undefined,
+        description: ''
+      }, {
+        cycles: 2,
+        price: undefined,
+        description: ''
+      }]
     }
   ];
 
@@ -65,40 +60,34 @@ export class PackageService {
       description: '',
       cycle: 'D',
       items: [],
-      billingOptions: []
+      billingOptions: [
+        {
+          cycles: 1,
+          price: undefined,
+          description: ''
+        }
+      ]
     });
     return packageId;
   }
 
-  getCycles(): Cycle[] {
-    return this.cycles;
+  updatePackage(packageId: string, update: PackageDetails): Promise<void> {
+    const existingPackage = this.packages.find(p => p.id === packageId);
+    if (!existingPackage) {
+      return Promise.reject();
+    }
+
+    Object.keys(update).forEach(key => {
+      existingPackage[key] = update[key];
+    });
+
+    return Promise.resolve();
+  }
+
+  deletePackage(packageId: string): Promise<void> {
+    this.packages.splice(this.packages.findIndex(p => p.id === packageId), 1);
+    return Promise.resolve();
   }
 }
 
-export interface Cycle {
-  value: string;
-  text: string;
-  days: number;
-}
-
-export interface Item {
-  name: string;
-  unit: string;
-  quantity: number;
-  photos: string[];
-}
-
-export interface BillingOption {
-  cycle: string;
-  duration: number;
-  price: number;
-}
-
-export interface Package {
-  id: string;
-  name: string;
-  description: string;
-  cycle: string;
-  items: Item[];
-  billingOptions: BillingOption[];
-}
+export type PackageDetails = Pick<Package, 'name' | 'description' | 'cycle' | 'items' | 'billingOptions'>;
