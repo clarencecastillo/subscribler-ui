@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faPlus, faAngleDown, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faAngleDown, faTrash, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { PackageService } from '../package.service';
 import { Package } from 'src/models/package';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +16,7 @@ export class PackagesComponent implements OnInit {
   newPackageIcon = faPlus;
   contextMenuIcon = faAngleDown;
   deleteIcon = faTrash;
+  noSelectedPackageIcon = faBoxOpen;
 
   packages: Package[];
   activePackageId: string;

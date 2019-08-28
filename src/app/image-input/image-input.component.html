@@ -1,0 +1,16 @@
+<ngx-file-drop id="item-image" dropZoneLabel="Drop files here" accept="image/*" (onFileOver)="fileHover = true"
+  (onFileLeave)="fileHover = false" (onFileDrop)="dropped($event); fileHover = false" multiple="false"
+  dropZoneClassName="file-drop-zone {{fileHover ? 'file-hover' : ''}}" contentClassName="file-drop-zone-content">
+  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    <div class="file-drop-zone-selector" (click)="openFileSelector()"
+      [class.no-image]="!image" [style.background-image]="image ? 'url(' + image + ')' : ''">
+      <div class="overlay">
+        <div class="backdrop"></div>
+        <div class="content">
+          <fa-icon [icon]="dropZoneIcon" [style.font-size.rem]="3" class="d-block"></fa-icon>
+          <span>Drop an image here or <strong>choose a file</strong>.</span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ngx-file-drop>

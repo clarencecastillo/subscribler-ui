@@ -1,0 +1,83 @@
+@import '../../styles';
+
+.file-drop-zone {
+  @extend .rounded;
+  @extend .bg-white;
+
+  height: 240px;
+
+  .file-drop-zone-content {
+    height: 100%;
+
+    .file-drop-zone-selector {
+      @extend .rounded;
+
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      position: relative;
+      background-position: center;
+      background-size: cover;
+
+      .overlay {
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.1s ease-in-out;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $secondary;
+
+        .content {
+          margin: auto;
+          text-align: center;
+          z-index: 2;
+        }
+
+        .backdrop {
+          background-color: black;
+          opacity: 0;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      &.no-image {
+        .overlay {
+          opacity: 1;
+          border: 2px dashed rgba($secondary, 0.3);
+        }
+
+        img {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &:hover,
+  &.file-hover {
+    @extend .bg-light;
+
+    .file-drop-zone-selector {
+      &:not(.no-image) {
+        .overlay {
+          color: $light;
+          opacity: 1;
+
+          .backdrop {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+
+}

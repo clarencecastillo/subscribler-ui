@@ -29,7 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
-
+import { ImageInputComponent } from './image-input/image-input.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -49,7 +49,8 @@ const COMPONENTS = [
   NotificationsComponent,
   CreatePackageComponent,
   EditPackageComponent,
-  EditItemComponent
+  EditItemComponent,
+  ImageInputComponent
 ];
 
 const MODALS = [

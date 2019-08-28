@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectItemModalComponent } from '../select-item-modal/select-item-modal.component';
 import { ItemService } from '../item.service';
 import { Item } from 'src/models/item';
-import { BillingOption } from 'src/models/billing-option';
+import { PricingOption } from 'src/models/pricing-option';
 import { PackageItem } from 'src/models/package-item';
 import { filter } from 'rxjs/operators';
 
@@ -30,7 +30,7 @@ export class EditPackageComponent implements OnInit, OnChanges {
 
   removeItemIcon = faTimes;
   emptyItemsIcon = faTruckLoading;
-  deleteBillingOptionIcon = faTimes;
+  deletePricingOptionIcon = faTimes;
 
   selectedItems: Item[] = [];
   loadChanges = false;
@@ -47,7 +47,7 @@ export class EditPackageComponent implements OnInit, OnChanges {
       description: [''],
       cycle: ['', [Validators.required]],
       items: this.formBuilder.array([]),
-      billingOptions: this.formBuilder.array([], [Validators.minLength(1)]),
+      pricingOption: this.formBuilder.array([], [Validators.minLength(1)]),
     });
 
     this.packageForm.valueChanges.pipe(
@@ -70,7 +70,7 @@ export class EditPackageComponent implements OnInit, OnChanges {
         description: this.package.description,
         cycle: this.package.cycle
       });
-      this.setBillingOptions(this.package.billingOptions);
+      this.setpricingOption(this.package.pricingOption);
       await this.setPackageItems(this.package.items);
       this.loadChanges = false;
     }
@@ -82,22 +82,22 @@ export class EditPackageComponent implements OnInit, OnChanges {
     this.packageForm.setControl('items', this.formBuilder.array(value, [Validators.minLength(1)]));
   }
 
-  setBillingOptions(billingOptions: BillingOption[]) {
-    const value = billingOptions.map(billingOption => this.buildBillingOptionForm(billingOption));
-    this.packageForm.setControl('billingOptions', this.formBuilder.array(value, [Validators.minLength(1)]));
+  setpricingOption(pricingOption: PricingOption[]) {
+    const value = pricingOption.map(PricingOption => this.buildPricingOptionForm(PricingOption));
+    this.packageForm.setControl('pricingOption', this.formBuilder.array(value, [Validators.minLength(1)]));
   }
 
-  buildBillingOptionForm(billingOption?: BillingOption) {
+  buildPricingOptionForm(PricingOption?: PricingOption) {
     return this.formBuilder.group({
-      cycles: [billingOption ? billingOption.cycles : 1, [Validators.required]],
-      price: [billingOption ? billingOption.price : undefined, [Validators.required]],
-      description: [billingOption ? billingOption.description : '']
+      cycles: [PricingOption ? PricingOption.cycles : 1, [Validators.required]],
+      price: [PricingOption ? PricingOption.price : undefined, [Validators.required]],
+      description: [PricingOption ? PricingOption.description : '']
     });
   }
 
-  addBillingOption() {
-    const billingOptions = this.packageForm.get('billingOptions') as FormArray;
-    billingOptions.push(this.buildBillingOptionForm());
+  addPricingOption() {
+    const pricingOption = this.packageForm.get('pricingOption') as FormArray;
+    pricingOption.push(this.buildPricingOptionForm());
   }
 
   buildPackageItemForm(item: PackageItem) {
@@ -131,8 +131,8 @@ export class EditPackageComponent implements OnInit, OnChanges {
     }).catch(() => {});
   }
 
-  deleteBillingOption(index: number) {
-    const billingOptions = this.packageForm.get('billingOptions') as FormArray;
-    billingOptions.removeAt(index);
+  deletePricingOption(index: number) {
+    const pricingOption = this.packageForm.get('pricingOption') as FormArray;
+    pricingOption.removeAt(index);
   }
 }

@@ -26,6 +26,18 @@
       </div>
       <div class="col w-75 p-5 border-left">
         <sbr-edit-package *ngIf="activePackageId" [packageId]="activePackageId"></sbr-edit-package>
+        <div class="placeholder" *ngIf="!activePackageId && packages.length == 0">
+          <div class="placeholder-content">
+            <fa-icon class="placeholder-icon" [icon]="noSelectedPackageIcon"></fa-icon>
+            <span>Click the '<fa-icon [icon]="newPackageIcon"></fa-icon>' button to create your first package.</span>
+          </div>
+        </div>
+        <div class="placeholder" *ngIf="!activePackageId && packages.length > 0">
+          <div class="placeholder-content">
+            <fa-icon class="placeholder-icon" [icon]="noSelectedPackageIcon"></fa-icon>
+            <span>Choose a package on the left to edit.</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

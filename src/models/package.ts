@@ -1,5 +1,5 @@
 import { PackageItem } from './package-item';
-import { BillingOption } from './billing-option';
+import { PricingOption } from './pricing-option';
 
 export interface Package {
   id: string;
@@ -7,5 +7,5 @@ export interface Package {
   description: string;
   cycle: string;
   items: PackageItem[];
-  billingOptions: BillingOption[];
+  pricingOption: PricingOption[];
 }

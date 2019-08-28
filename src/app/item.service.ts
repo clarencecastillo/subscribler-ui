@@ -8,14 +8,14 @@ import * as uuid from 'uuid/v4';
 export class ItemService {
 
   private items: Item[] = [
-    {
-      id: 'itema',
-      name: 'Coffee',
-      description: `Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species.
-      The genus Coffea is native to tropical Africa and Madagascar, the Comoros, Mauritius, and Réunion in the Indian Ocean.`,
-      unit: 'cup',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/1200px-A_small_cup_of_coffee.JPG'
-    }
+    // {
+    //   id: 'itema',
+    //   name: 'Coffee',
+    //   description: `Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species.
+    //   The genus Coffea is native to tropical Africa and Madagascar, the Comoros, Mauritius, and Réunion in the Indian Ocean.`,
+    //   unit: 'cup',
+    //   imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/1200px-A_small_cup_of_coffee.JPG'
+    // }
   ];
 
   constructor() { }

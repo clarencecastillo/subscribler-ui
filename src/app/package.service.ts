@@ -13,7 +13,7 @@ export class PackageService {
       description: 'Some package',
       cycle: 'D',
       items: [],
-      billingOptions: [{
+      pricingOption: [{
         cycles: 1,
         price: undefined,
         description: ''
@@ -25,12 +25,12 @@ export class PackageService {
       description: 'Some package',
       cycle: 'D',
       items: [
-        {
-          itemId: 'itema',
-          quantity: 1
-        }
+        // {
+        //   itemId: 'itema',
+        //   quantity: 1
+        // }
       ],
-      billingOptions: [{
+      pricingOption: [{
         cycles: 1,
         price: undefined,
         description: ''
@@ -60,7 +60,7 @@ export class PackageService {
       description: '',
       cycle: 'D',
       items: [],
-      billingOptions: [
+      pricingOption: [
         {
           cycles: 1,
           price: undefined,
@@ -90,4 +90,4 @@ export class PackageService {
   }
 }
 
-export type PackageDetails = Pick<Package, 'name' | 'description' | 'cycle' | 'items' | 'billingOptions'>;
+export type PackageDetails = Pick<Package, 'name' | 'description' | 'cycle' | 'items' | 'pricingOption'>;
