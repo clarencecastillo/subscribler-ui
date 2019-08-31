@@ -1,33 +1,30 @@
 @import '../../styles';
 
-.code-container {
-  padding: 1rem;
+.qr-poster-container {
   position: relative;
-  background-color: rgba($dark, 0.8);
 
-  pre {
-    @extend .text-light;
-    @extend .text-monospace;
-
-    margin: 0;
-    padding: 0 .5rem;
-  }
-
-  .code-buttons {
-    display: flex;
+  .print-overlay {
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.5);
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+  }
 
-    button {
-      @extend .btn-dark;
+  sbr-qr-poster {
+    height: 600px;
+    width: 430px;
+  }
 
-      margin: auto;
-      margin-right: 1rem;
-      background-color: rgba($dark, 0.8);
-      font-size: 0.5rem;
+  &:hover {
+    .print-overlay {
+      opacity: 1;
     }
   }
 }

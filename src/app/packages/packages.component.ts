@@ -39,20 +39,14 @@ export class PackagesComponent implements OnInit {
 
   deletePackage(p: Package) {
     this.packageService.deletePackage(p.id).then(() => {
-      this.toastrService.show(`Package ${p.name} was deleted successfully`, '', {
-        timeOut: 3000,
-        toastClass: 'alert bg-success shadow text-light'
-      });
+      this.toastrService.success(`Package ${p.name} was deleted successfully`);
 
       if (this.activePackageId === p.id) {
         this.activePackageId = undefined;
       }
 
     }).catch(error => {
-      this.toastrService.show(`Failed to delete package: ${error}`, '', {
-        timeOut: 3000,
-        toastClass: 'alert bg-danger shadow text-light'
-      });
+      this.toastrService.error(`Failed to delete package: ${error}`);
     });
   }
 

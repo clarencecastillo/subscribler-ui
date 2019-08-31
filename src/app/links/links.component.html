@@ -1,34 +1,56 @@
 <div class="flex-container">
-  <div class="link-container">
-    <h3 class="mb-4 text-dark pb-2">1. Share by QR Code</h3>
-    <sbr-qr-poster class="card m-auto m-4"></sbr-qr-poster>
-    <div class="code-container rounded mb-4">
-      <pre><code>http://somelink.com/ad245dfgdy.jpg</code></pre>
-      <div class="code-buttons">
-        <button type="button" class="btn btn-sm">COPY</button>
+  <div class="card mb-5 shadow">
+    <div class="card-header">
+      <h6 class="m-0 font-weight-bold text-primary">QR Code</h6>
+    </div>
+    <div class="card-body">
+      <p>Click on the poster below to print your Subscribler QR code.</p>
+      <div class="link-container">
+        <div class="link-content">
+          <a class="qr-poster-container bg-dark d-flex rounded o-hidden border" target="_blank" routerLink="/print/qr">
+            <div class="print-overlay">
+              <div class="w-100 text-center text-light">
+                <fa-icon [icon]="printIcon" [style.font-size.rem]="6"></fa-icon>
+              </div>
+            </div>
+            <sbr-qr-poster class="m-auto"></sbr-qr-poster> 
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="link-container">
-    <h3 class="mb-4 text-dark pb-2">2. Share by Link</h3>
-    <div class="code-container rounded mb-4">
-      <pre><code>http://somelink.com/ad245dfgdy</code></pre>
-      <div class="code-buttons">
-        <button type="button" class="btn btn-sm">COPY</button>
+  <div class="card mb-5 shadow">
+    <div class="card-header">
+      <h6 class="m-0 font-weight-bold text-primary">URL Link</h6>
+    </div>
+    <div class="card-body">
+      <p>Use the link below to direct your customers to your Subscribler page.</p>
+      <div class="link-container">
+        <div class="link-content">
+          <sbr-code name="URL" [code]="merchantPageUrl"></sbr-code>
+        </div>
       </div>
     </div>
   </div>
-  <div class="link-container">
-    <h3 class="mb-4 text-dark pb-2">3. Share by Button</h3>
-    <div class="code-container rounded mb-4">
-      <pre><code>{{buttonLinkCode}}</code></pre>
-      <div class="code-buttons">
-        <button type="button" class="btn btn-sm">COPY</button>
+  <div class="card mb-5 shadow">
+    <div class="card-header">
+      <h6 class="m-0 font-weight-bold text-primary">HTML Button</h6>
+    </div>
+    <div class="card-body">
+      <p>Paste the code below to add a Subscribler button to your website.</p>
+      <div class="link-container">
+        <div class="link-content">
+          <sbr-code name="codes" [code]="buttonLinkCode"></sbr-code>
+        </div>
       </div>
     </div>
   </div>
-  <div class="link-container">
-    <h3 class="mb-4 pb-2">4. API Integration</h3>
-    Coming soon!
+  <div class="card mb-5 shadow">
+    <div class="card-header">
+      <h6 class="m-0 font-weight-bold text-primary">API Integration</h6>
+    </div>
+    <div class="card-body">
+      <p>Coming soon!</p>
+    </div>
   </div>
 </div>

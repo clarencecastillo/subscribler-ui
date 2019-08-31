@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPrint } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sbr-links',
@@ -7,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinksComponent implements OnInit {
 
-  buttonLinkCode = `<button>Subscribe<button>`;
+  printIcon = faPrint;
+
+  buttonLinkCode = `<button>Subscribe<button>\nasd`;
+  merchantPageUrl = 'http://somelink.com/ad245dfgdy';
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

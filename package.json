@@ -26,6 +26,8 @@
     "@types/uuid": "^3.4.5",
     "bootstrap": "^4.3.1",
     "countries-list": "^2.4.3",
+    "html2canvas": "^1.0.0-rc.3",
+    "ngx-clipboard": "^12.2.1",
     "ngx-file-drop": "^8.0.7",
     "ngx-toastr": "^10.1.0",
     "rxjs": "~6.4.0",

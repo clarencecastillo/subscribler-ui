@@ -35,6 +35,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { LinksComponent } from './links/links.component';
 import { QrPosterComponent } from './qr-poster/qr-poster.component';
 import { HttpClientModule } from '@angular/common/http';
+import { QrPrinterComponent } from './qr-printer/qr-printer.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { CodeComponent } from './code/code.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -59,7 +62,8 @@ const COMPONENTS = [
   EditMerchantProfileComponent,
   ProfileComponent,
   LinksComponent,
-  QrPosterComponent
+  QrPosterComponent,
+  QrPrinterComponent
 ];
 
 const MODALS = [
@@ -72,7 +76,8 @@ const MODALS = [
   declarations: [
     AppComponent,
     ...COMPONENTS,
-    ...MODALS
+    ...MODALS,
+    CodeComponent
   ],
   imports: [
     BrowserModule,
@@ -81,9 +86,18 @@ const MODALS = [
     NgbModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      timeOut: 5000,
+      toastClass: 'alert shadow text-light',
+      iconClasses: {
+        error: 'bg-danger',
+        success: 'bg-success'
+      }
+    }),
     NgxFileDropModule,
-    HttpClientModule
+    HttpClientModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

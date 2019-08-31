@@ -43,15 +43,9 @@ export class EditItemModalComponent implements OnInit {
 
   save() {
     this.editItemComponent.save().then(() => {
-      this.toastrService.show(`Item ${this.itemId ? 'updated' : 'created'} successfully`, '', {
-        timeOut: 3000,
-        toastClass: 'alert bg-success shadow text-light'
-      });
+      this.toastrService.success(`Item ${this.itemId ? 'updated' : 'created'} successfully`);
     }).catch(error => {
-      this.toastrService.show(`Failed to save item: ${error}`, '', {
-        timeOut: 3000,
-        toastClass: 'alert bg-danger shadow text-light'
-      });
+      this.toastrService.error(`Failed to save item: ${error}`);
     });
     this.modal.close();
   }

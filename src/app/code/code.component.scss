@@ -1,0 +1,35 @@
+@import '../../styles';
+
+:host {
+  @extend .rounded;
+
+  position: relative;
+  background-color: rgba($dark, 0.8);
+  display: block;
+  padding: 1rem;
+
+  pre {
+    @extend .text-light;
+    @extend .text-monospace;
+
+    margin: 0;
+    padding: 0 .5rem;
+  }
+
+  .code-buttons {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    justify-content: flex-end;
+
+    button {
+      @extend .btn-dark;
+
+      background-color: rgba($dark, 0.8);
+      font-size: 0.5rem;
+    }
+  }
+}

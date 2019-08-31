@@ -6,12 +6,17 @@ import { SubscriptionsComponent } from './subscriptions/subscriptions.component'
 import { LogisticsComponent } from './logistics/logistics.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterWorkflowComponent } from './register-workflow/register-workflow.component';
+import { QrPrinterComponent } from './qr-printer/qr-printer.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'app',
     pathMatch: 'full'
+  },
+  {
+    path: 'print/qr',
+    component: QrPrinterComponent
   },
   {
     path: 'register',

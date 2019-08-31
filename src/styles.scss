@@ -5,6 +5,13 @@
 @import '~ngx-toastr/toastr';
 @import '~ngx-toastr/toastr-bs4-alert';
 
+html {
+  &.print {
+    overflow: -moz-hidden-unscrollable;
+	  overflow: hidden;
+  }
+}
+
 textarea:hover, 
 input:hover, 
 textarea:active, 
