@@ -29,6 +29,14 @@ const routes: Routes = [
       {
         path: 'packages',
         component: RegisterWorkflowComponent
+      },
+      {
+        path: 'profile',
+        component: RegisterWorkflowComponent
+      },
+      {
+        path: 'complete',
+        component: RegisterWorkflowComponent
       }
     ]
   },

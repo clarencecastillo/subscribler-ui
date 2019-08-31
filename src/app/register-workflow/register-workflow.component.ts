@@ -27,13 +27,8 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
   }
 
   resolveStep(url: string) {
-    if (url.startsWith('/register/packages')) {
-      this.carousel.select('packages');
-    }
-
-    if (url.startsWith('/register/account')) {
-      this.carousel.select('account');
-    }
+    const urlParts = url.split('/');
+    this.carousel.select(urlParts[urlParts.length - 1]);
   }
 
   submit() {

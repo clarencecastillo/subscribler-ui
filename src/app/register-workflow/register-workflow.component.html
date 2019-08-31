@@ -1,4 +1,4 @@
-<div class="flex-container bg-gradient-primary d-flex h-100">
+<div class="flex-container bg-gradient-primary d-flex">
   <div class="container py-5 m-auto">
     <ngb-carousel #carousel [wrap]="false" 
     [showNavigationArrows]="false" [interval]="0"
@@ -24,19 +24,27 @@
       <ng-template ngbSlide id="packages">
         <div class="slide-content max-height p-5">
           <h3 class="text-muted">STEP 2</h3>
-          <sbr-packages class="flex-grow-1 flex-shrink-1 d-block"></sbr-packages>
+          <sbr-packages class="flex-grow-1 flex-shrink-1"></sbr-packages>
           <div class="d-flex justify-content-between flex-grow-0 pt-5">
             <a class="btn btn-primary" routerLink="/register/account">Back</a>
-            <!-- <a class="btn btn-primary" routerLink="/register/packages">Next</a> -->
+            <a class="btn btn-primary" routerLink="/register/profile">Next</a>
           </div>
         </div>
       </ng-template>
-      <ng-template ngbSlide>
-        <h3 class="text-muted">STEP 3</h3>
-        <sbr-account></sbr-account>
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-primary" (click)="carousel.prev()">Back</button>
-          <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+      <ng-template ngbSlide id="profile">
+        <div class="slide-content max-height p-5">
+          <h3 class="text-muted">STEP 3</h3>
+          <sbr-profile class="flex-grow-1 flex-shrink-1 o-hidden"></sbr-profile>
+          <div class="d-flex justify-content-between flex-grow-0 pt-5">
+            <a class="btn btn-primary" routerLink="/register/packages">Back</a>
+            <a class="btn btn-primary" routerLink="/register/complete">Finish</a>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide id="complete">
+        <div class="slide-content p-5">
+          <h1 class="text-gray-900 mb-5">You're good to go!</h1>
+          <sbr-links></sbr-links>
         </div>
       </ng-template>
     </ngb-carousel>

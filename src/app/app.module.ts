@@ -30,6 +30,11 @@ import { EditItemComponent } from './edit-item/edit-item.component';
 import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ImageInputComponent } from './image-input/image-input.component';
+import { EditMerchantProfileComponent } from './edit-merchant-profile/edit-merchant-profile.component';
+import { ProfileComponent } from './profile/profile.component';
+import { LinksComponent } from './links/links.component';
+import { QrPosterComponent } from './qr-poster/qr-poster.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -50,7 +55,11 @@ const COMPONENTS = [
   CreatePackageComponent,
   EditPackageComponent,
   EditItemComponent,
-  ImageInputComponent
+  ImageInputComponent,
+  EditMerchantProfileComponent,
+  ProfileComponent,
+  LinksComponent,
+  QrPosterComponent
 ];
 
 const MODALS = [
@@ -73,7 +82,8 @@ const MODALS = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxFileDropModule
+    NgxFileDropModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

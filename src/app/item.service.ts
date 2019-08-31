@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Item } from 'src/models/item';
 import * as uuid from 'uuid/v4';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,10 @@ export class ItemService {
     // }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   public getItems(): Promise<Item[]> {
+    // return this.http.get<Item[]>(`${environment.serverHost}/items`).toPromise();
     return Promise.resolve(this.items);
   }
 

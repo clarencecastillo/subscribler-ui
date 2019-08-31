@@ -51,6 +51,7 @@ export class EditItemComponent implements OnInit, OnChanges {
       this.itemForm.get('description').setValue(this.item.description);
       this.itemForm.get('unit').setValue(this.item.unit);
       this.itemForm.get('imageUrl').setValue(this.item.imageUrl);
+      this.itemImage = this.item.imageUrl;
     }
   }
 

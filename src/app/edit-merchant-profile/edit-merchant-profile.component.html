@@ -1,0 +1,81 @@
+<form [formGroup]="profileForm">
+  <div class="row" formGroupName="account">
+    <div class="col form-group">
+      <h5 class="mb-4 text-dark border-bottom pb-2">User Details</h5>
+      <div class="row">
+        <div class="col-sm form-group">
+          <label for="account-first-name">First Name</label>
+          <input id="account-first-name" type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+        </div>
+        <div class="col-sm form-group">
+          <label for="account-last-name">Last Name</label>
+          <input id="account-last-namename" type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm form-group">
+          <label for="account-email">Email</label>
+          <input id="account-email" type="email" formControlName="email" class="form-control" placeholder="Email">
+        </div>
+        <div class="col-sm form-group">
+          <label for="account-phone-number">Phone Number</label>
+          <input id="account-phone-number" type="tel" formControlName="phoneNumber" class="form-control" placeholder="Phone Number">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" formGroupName="business">
+    <div class="col form-group">
+      <h5 class="mb-4 text-dark border-bottom pb-2">Business Details</h5>
+      <div class="row">
+        <div class="col form-group">
+          <label for="business-name">Business Name</label>
+          <input id="business-name" type="text" formControlName="name" class="form-control" placeholder="Business Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="business-address">Address</label>
+          <input id="business-address" type="text" formControlName="address" class="form-control" placeholder="Address">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="business-description">Description</label>
+          <textarea id="business-description" formControlName="description" class="form-control" placeholder="Business Name"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="business-type">Category</label>
+          <select id="business-type" formControlName="type" class="form-control">
+            <option *ngFor="let type of businessTypes" [value]="type">{{type | titlecase}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" formGroupName="bankAccount">
+    <div class="col form-group">
+      <h5 class="mb-4 text-dark border-bottom pb-2">Bank Account</h5>
+      <div class="row">
+        <div class="col form-group">
+          <label for="account-name">Account Name</label>
+          <input id="account-name" type="text" formControlName="name" class="form-control" placeholder="Account Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="account-number">Account Number</label>
+          <input id="account-number" type="text" formControlName="number" class="form-control" placeholder="Account Number">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="account-bank-name">Bank Name</label>
+          <input id="account-bank-name" type="text" formControlName="bankName" class="form-control" placeholder="Bank Name">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

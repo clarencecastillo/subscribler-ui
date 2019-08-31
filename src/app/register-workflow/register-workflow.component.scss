@@ -1,6 +1,10 @@
 :host {
   display: block;
   height: 100vh;
+
+  & > div:first-of-type {
+    min-height: 100%;
+  }
 }
 
 ngb-carousel {
@@ -8,11 +12,11 @@ ngb-carousel {
 }
 
 .slide-content {
-  max-height: calc(100vh - 6rem);
   display: flex;
   flex-direction: column;
 
   &.max-height {
+    max-height: calc(100vh - 6rem);
     height: calc(100vh - 6rem);
   }
 }

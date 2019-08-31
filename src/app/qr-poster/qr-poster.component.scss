@@ -1,0 +1,67 @@
+@import '../../styles';
+
+:host {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  max-width: 400px;
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  .shape {
+    @extend .bg-gradient-primary;
+
+    position: absolute;
+    height: 100%;
+    width: 300%;
+    bottom: -60%;
+    left: -100%;
+    border-radius: 50%;
+  }
+}
+
+.content {
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .content-top {
+    display: flex;
+    align-items: center;
+    height: 50%;
+  }
+
+  .content-bottom {
+    display: flex;
+    height: 50%;
+    width: 100%;
+  }
+
+
+
+  .qr-code-container {
+    width: 50%;
+    top: 0;
+    margin: auto;
+    position: absolute;
+    z-index: 2;
+    top: 60%;
+    margin-top: -25%;
+  
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
