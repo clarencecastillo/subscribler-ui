@@ -1,0 +1,40 @@
+
+.card-img-top {
+  height: 10rem; 
+  object-fit: cover;
+}
+
+.logistic-partner {
+  position: relative;
+
+  .selected-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease-in-out;
+    z-index: 2;
+
+    .backdrop {
+      background-color: rgba(black, 0.5);
+      width: 100%;
+      height: 100%;
+    }
+
+    fa-icon {
+      position: absolute;
+      margin: 1rem;
+      top: 0;
+      left: 0;
+    }
+
+    &.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+  }
+}

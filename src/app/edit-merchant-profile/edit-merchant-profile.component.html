@@ -53,6 +53,12 @@
           </select>
         </div>
       </div>
+      <div class="row">
+        <div class="col form-group">
+          <label for="logistics-partner">Preferred Logistics Partner</label>
+          <sbr-select-logistics id="logistics-partner" [value]="logisticsPartnerId" (valueChange)="profileForm.get('business').get('logisticsPartnerId').setValue($event)"></sbr-select-logistics>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row" formGroupName="bankAccount">

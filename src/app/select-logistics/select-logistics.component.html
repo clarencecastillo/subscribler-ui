@@ -1,0 +1,14 @@
+<div class="row px-2 py-3">
+  <button class="btn col-lg-3 p-2" *ngFor="let partner of logisticPartners" (click)="selectPartner(partner)">
+    <div class="logistic-partner card shadow border o-hidden">
+      <div class="selected-overlay" [class.visible]="value == partner.id">
+        <div class="backdrop"></div>
+        <fa-icon class="btn btn-circle btn-lg btn-primary" [icon]="selectedIcon"></fa-icon>
+      </div>
+      <img class="card-img-top" [src]="partner.imageUrl">
+      <div class="card-body">
+        <strong class="card-title">{{partner.name}}</strong>
+      </div> 
+    </div>
+  </button>
+</div>

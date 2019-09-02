@@ -1,0 +1,22 @@
+<table datatable [dtOptions]="dtOptions" class="table table-bordered dataTable">
+  <thead>
+    <tr role="row">
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Active Subscriptions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let subscriber of subscribers" role="row">
+      <td>{{subscriber.id}}</td>
+      <td>{{subscriber.firstName}}</td>
+      <td>{{subscriber.lastName}}</td>
+      <td>{{subscriber.email}}</td>
+      <td>{{subscriber.phoneNumber}}</td>
+      <td>{{subscriber.subscriptions.length}}</td>
+    </tr>
+  </tbody>
+</table>

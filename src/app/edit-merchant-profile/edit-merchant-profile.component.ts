@@ -16,6 +16,8 @@ export class EditMerchantProfileComponent implements OnInit {
     'Retail'
   ];
 
+  logisticsPartnerId: string;
+
   constructor(private formBuilder: FormBuilder) {
     this.profileForm = this.formBuilder.group({
       account: this.formBuilder.group({
@@ -28,7 +30,8 @@ export class EditMerchantProfileComponent implements OnInit {
         name: ['', [Validators.required]],
         type: [this.businessTypes[0], [Validators.required]],
         description: [''],
-        address: ['']
+        address: [''],
+        logisticsPartnerId: ['']
       }),
       bankAccount: this.formBuilder.group({
         name: ['', [Validators.required]],

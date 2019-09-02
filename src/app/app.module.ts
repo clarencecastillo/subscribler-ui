@@ -38,6 +38,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { QrPrinterComponent } from './qr-printer/qr-printer.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CodeComponent } from './code/code.component';
+import { StoreComponent } from './store/store.component';
+import { SelectLogisticsComponent } from './select-logistics/select-logistics.component';
+import { SubscribersComponent } from './subscribers/subscribers.component';
+import { DataTablesModule } from 'angular-datatables';
+import { BigNumberCardComponent } from './dashboard/big-number-card/big-number-card.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -63,7 +68,11 @@ const COMPONENTS = [
   ProfileComponent,
   LinksComponent,
   QrPosterComponent,
-  QrPrinterComponent
+  QrPrinterComponent,
+  CodeComponent,
+  StoreComponent,
+  SelectLogisticsComponent,
+  SubscribersComponent
 ];
 
 const MODALS = [
@@ -77,7 +86,7 @@ const MODALS = [
     AppComponent,
     ...COMPONENTS,
     ...MODALS,
-    CodeComponent
+    BigNumberCardComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +106,8 @@ const MODALS = [
     }),
     NgxFileDropModule,
     HttpClientModule,
-    ClipboardModule
+    ClipboardModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent],
