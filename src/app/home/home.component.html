@@ -2,11 +2,13 @@
   <sbr-navigation></sbr-navigation>
   <div class="d-flex flex-column bg-light-alt vh-100 w-100">
     <sbr-header></sbr-header>
-    <div class="container-fluid d-flex flex-column flex-grow-1 flex-shrink-1 pb-4 o-hidden">
-      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="container-fluid">
+      <div class="d-sm-flex align-items-center justify-content-between">
         <h1 class="h3 mb-0 text-gray-800">{{header}}</h1>
       </div>
-      <div class="flex-grow-1 flex-shrink-1 o-scroll">
+    </div>
+    <div class="d-flex flex-column flex-grow-1 flex-shrink-1 o-hidden">
+      <div class="flex-grow-1 flex-shrink-1 o-hidden p-4">
         <router-outlet></router-outlet>
       </div>
     </div>
