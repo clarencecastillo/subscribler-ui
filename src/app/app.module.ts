@@ -43,6 +43,9 @@ import { SelectLogisticsComponent } from './select-logistics/select-logistics.co
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { DataTablesModule } from 'angular-datatables';
 import { BigNumberCardComponent } from './dashboard/big-number-card/big-number-card.component';
+import { ChartsModule } from 'ng2-charts';
+import { SubscriptionsOverviewChartComponent } from './dashboard/subscriptions-overview-chart/subscriptions-overview-chart.component';
+import { RevenueSourcesChartComponent } from './dashboard/revenue-sources-chart/revenue-sources-chart.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -86,7 +89,9 @@ const MODALS = [
     AppComponent,
     ...COMPONENTS,
     ...MODALS,
-    BigNumberCardComponent
+    BigNumberCardComponent,
+    SubscriptionsOverviewChartComponent,
+    RevenueSourcesChartComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +112,8 @@ const MODALS = [
     NgxFileDropModule,
     HttpClientModule,
     ClipboardModule,
-    DataTablesModule
+    DataTablesModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

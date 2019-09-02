@@ -1,0 +1,19 @@
+<div class="chart-pie pt-4 pb-2">
+  <canvas baseChart
+    class="d-block"
+    width="982"
+    height="490"
+    [style.height.px]="245"
+    [style.width.px]="490"
+    [datasets]="data"
+    [labels]="labels"
+    [options]="options"
+    chartType="doughnut">
+  </canvas>
+</div>
+<div class="mt-4 text-center small">
+  <span class="mr-2" *ngFor="let label of labels; let i = index">
+    <fa-icon [icon]="legendIcon" [style.color]="data[0].backgroundColor[i]"></fa-icon>
+    {{label}}
+  </span>
+</div>
