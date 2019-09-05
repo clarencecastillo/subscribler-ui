@@ -1,11 +1,10 @@
 <div class="h-100">
   <canvas baseChart
+    *ngIf="showChart"
     class="d-block"
-    [style.height.%]="100"
-    [style.width.%]="100"
     [datasets]="data"
     [labels]="labels"
     [options]="options"
-    chartType="line">
+    chartType="bar">
   </canvas>
 </div>

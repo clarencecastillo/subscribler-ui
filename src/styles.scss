@@ -23,14 +23,10 @@ button:hover,
 label:focus,
 .btn:active,
 .btn.active,
-ngb-carousel:focus
-{
+ngb-carousel:focus,
+.ngb-dp-day:focus {
   outline: 0px !important;
   -webkit-appearance: none;
-}
-
-.shadow {
-  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
 }
 
 .brand-text {
@@ -97,3 +93,18 @@ ngb-carousel:focus
   overflow: scroll;
 }
 
+ngb-datepicker {
+  .ngb-dp-header {
+    background-color: transparent;
+
+    .ngb-dp-month-name {
+      background-color: transparent;
+    }
+  }
+
+  .ngb-dp-months {
+    .ngb-dp-week {
+      background-color: transparent !important;
+    }
+  }
+}

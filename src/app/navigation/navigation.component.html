@@ -5,7 +5,7 @@
   <hr class="sidebar-divider my-0">
   <li class="nav-item" *ngFor="let link of links" routerLinkActive="active">
     <a class="nav-link" [routerLink]="link.path">
-      <fa-icon [icon]="link.icon" class="mr-3"></fa-icon>
+      <fa-icon [icon]="link.icon" class="fa-fw px-2"></fa-icon>
       <span>{{link.text}}</span>
     </a>
   </li>

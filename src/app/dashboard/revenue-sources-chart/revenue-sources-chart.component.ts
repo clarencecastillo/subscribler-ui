@@ -48,10 +48,12 @@ export class RevenueSourcesChartComponent implements OnInit {
     cutoutPercentage: 80
   };
 
+  showChart = false;
 
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => this.showChart = true);
   }
 
 }

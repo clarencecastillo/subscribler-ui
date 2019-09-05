@@ -1,52 +1,76 @@
-<div class="row">
-  <div class="col-xl-3 col-md-6 mb-4">
-    <sbr-big-number-card
-      header="Earnings (Monthly)"
-      type="currency"
-      [value]="7850"
-      [icon]="earningsIcon">
-    </sbr-big-number-card>
+<div class="h-100 d-flex flex-column">
+  <div class="row">
+    <div class="col-xl-3 col-md-6 pb-4">
+      <sbr-big-number-card
+        header="Earnings (Monthly)"
+        type="currency"
+        [value]="7850"
+        [icon]="earningsIcon">
+      </sbr-big-number-card>
+    </div>
+    <div class="col-xl-3 col-md-6 pb-4">
+      <sbr-big-number-card
+        header="Subscribers"
+        [value]="583"
+        [icon]="subscribersIcon">
+      </sbr-big-number-card>
+    </div>
+    <div class="col-xl-3 col-md-6 pb-4">
+      <sbr-big-number-card
+        header="Subscriptions"
+        [value]="2341"
+        [icon]="subscriptionsIcon">
+      </sbr-big-number-card>
+    </div>
+    <div class="col-xl-3 col-md-6 pb-4">
+      <sbr-big-number-card
+        header="Deliveries (Monthly)"
+        [value]="345"
+        [icon]="parcelsDeliveriesIcon">
+      </sbr-big-number-card>
+    </div>
   </div>
-  <div class="col-xl-3 col-md-6 mb-4">
-    <sbr-big-number-card
-      header="Subscribers"
-      [value]="583"
-      [icon]="subscribersIcon">
-    </sbr-big-number-card>
-  </div>
-  <div class="col-xl-3 col-md-6 mb-4">
-    <sbr-big-number-card
-      header="Subscriptions"
-      [value]="2341"
-      [icon]="subscriptionsIcon">
-    </sbr-big-number-card>
-  </div>
-  <div class="col-xl-3 col-md-6 mb-4">
-    <sbr-big-number-card
-      header="Deliveries (Monthly)"
-      [value]="345"
-      [icon]="parcelsDeliveriesIcon">
-    </sbr-big-number-card>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xl-8 col-lg-7">
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Subscriptions Overview</h6>
+  <div class="row flex-grow-1 flex-shrink-1">
+    <div class="col-xl-8 col-lg-7 pb-4">
+      <div class="card shadow h-100">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Revenue Overview</h6>
+        </div>
+        <div class="card-body">
+          <sbr-revenue-overview-chart></sbr-revenue-overview-chart>
+        </div>
       </div>
-      <div class="card-body">
-        <sbr-subscriptions-overview-chart></sbr-subscriptions-overview-chart>
+    </div>
+    <div class="col-xl-4 col-lg-5 pb-4">
+      <div class="card shadow h-100">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+        </div>
+        <div class="card-body">
+          <sbr-revenue-sources-chart></sbr-revenue-sources-chart>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-xl-4 col-lg-5">
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+  <div class="row">
+    <div class="col-lg-6 pb-4">
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Pick Up Schedule</h6>
+        </div>
+        <div class="card-body">
+          <sbr-package-schedule></sbr-package-schedule>
+        </div>
       </div>
-      <div class="card-body">
-        <sbr-revenue-sources-chart></sbr-revenue-sources-chart>
+    </div>
+    <div class="col-lg-6 pb-4">
+      <div class="card shadow h-100">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Subscriptions Overview</h6>
+        </div>
+        <div class="card-body h-100">
+          <sbr-subscriptions-overview-chart></sbr-subscriptions-overview-chart>
+        </div>
       </div>
     </div>
   </div>

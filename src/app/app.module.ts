@@ -15,7 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterWorkflowComponent } from './register-workflow/register-workflow.component';
 import { PackageComponent } from './package/package.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './header/user/user.component';
 import { MessagesComponent } from './header/messages/messages.component';
@@ -25,7 +25,7 @@ import { EditPackageComponent } from './edit-package/edit-package.component';
 import { SelectItemModalComponent } from './select-item-modal/select-item-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, GlobalConfig } from 'ngx-toastr';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
@@ -46,6 +46,8 @@ import { BigNumberCardComponent } from './dashboard/big-number-card/big-number-c
 import { ChartsModule } from 'ng2-charts';
 import { SubscriptionsOverviewChartComponent } from './dashboard/subscriptions-overview-chart/subscriptions-overview-chart.component';
 import { RevenueSourcesChartComponent } from './dashboard/revenue-sources-chart/revenue-sources-chart.component';
+import { PackageScheduleComponent } from './dashboard/package-schedule/package-schedule.component';
+import { RevenueOverviewChartComponent } from './dashboard/revenue-overview-chart/revenue-overview-chart.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -75,7 +77,11 @@ const COMPONENTS = [
   CodeComponent,
   StoreComponent,
   SelectLogisticsComponent,
-  SubscribersComponent
+  SubscribersComponent,
+  BigNumberCardComponent,
+  SubscriptionsOverviewChartComponent,
+  RevenueSourcesChartComponent,
+  PackageScheduleComponent
 ];
 
 const MODALS = [
@@ -84,31 +90,32 @@ const MODALS = [
   EditItemModalComponent
 ];
 
+const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
+  positionClass: 'toast-bottom-right',
+  timeOut: 5000,
+  toastClass: 'alert shadow text-light',
+  iconClasses: {
+    error: 'bg-danger',
+    success: 'bg-success'
+  }
+};
+
 @NgModule({
   declarations: [
     AppComponent,
     ...COMPONENTS,
     ...MODALS,
-    BigNumberCardComponent,
-    SubscriptionsOverviewChartComponent,
-    RevenueSourcesChartComponent
+    RevenueOverviewChartComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
-      timeOut: 5000,
-      toastClass: 'alert shadow text-light',
-      iconClasses: {
-        error: 'bg-danger',
-        success: 'bg-success'
-      }
-    }),
+    ToastrModule.forRoot(TOASTR_GLOBAL_CONFIG),
     NgxFileDropModule,
     HttpClientModule,
     ClipboardModule,

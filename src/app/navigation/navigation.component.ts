@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faTachometerAlt, faBoxOpen, faUserFriends, IconDefinition, faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faTachometerAlt, faBoxOpen, faUserFriends, IconDefinition, faAddressCard, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sbr-navigation',
@@ -30,6 +30,8 @@ export class NavigationComponent implements OnInit {
       path: '/app/profile'
     }
   ];
+
+  toggleSidebarIcon = faChevronLeft;
 
   constructor() { }
 

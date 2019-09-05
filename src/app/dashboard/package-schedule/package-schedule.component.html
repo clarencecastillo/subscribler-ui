@@ -1,0 +1,43 @@
+<div class="d-flex">
+  <div class="mr-4">
+    <ng-template #daytemplate let-date="date" let-selected="selected" let-disabled="disabled" let-today="today">
+      <button class="btn btn-circle calendar-date btn-sm w-100 h-100"
+        [class.active]="selected"
+        [class.today]="today"
+        [disabled]="disabled">
+        <div class="d-block">
+          {{date.day}}
+        </div>
+      </button>
+    </ng-template>
+    <ngb-datepicker #datepicker
+      class="border-0"
+      navigation="arrows"
+      [dayTemplate]=daytemplate
+      [(ngModel)]="date"
+      [minDate]="minDate">
+    </ngb-datepicker>
+  </div>
+  <div class="flex-grow-1">
+    <table class="table table-sm">
+      <thead>
+        <th>Package</th>
+        <th>Count</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Package A</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <td>Package B</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Package C</td>
+          <td>24</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

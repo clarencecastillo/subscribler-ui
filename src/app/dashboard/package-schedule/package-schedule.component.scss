@@ -1,0 +1,39 @@
+@import '../../../styles.scss';
+
+:host {
+  --info: #{$primary};
+}
+
+.ngb-dp-week,
+.bg-light {
+  background: red !important;
+}
+
+.calendar-date {
+
+  &.today {
+    & > div {
+      border-bottom: 1px solid $primary;
+    }
+  }
+
+  &:not(:disabled):hover {
+    @extend .text-light;
+    background-color: $primary-var-2;
+    border-color: $primary-var-2;
+  }
+
+  &.active {
+    @extend .text-light;
+    background-color: $primary;
+  }
+
+  &:not(:disabled):hover,
+  &.active {
+    &.today {
+      & > div {
+        border-bottom: 1px solid $light;
+      }
+    }
+  }
+}
