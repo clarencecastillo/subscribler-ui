@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StorePackage } from 'src/models/store-package';
+import { StoreService } from '../store.service';
 
 @Component({
   selector: 'sbr-store',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoreComponent implements OnInit {
 
-  constructor() { }
+  popularPackages: StorePackage[] = [];
+  packages: StorePackage[] = [];
+
+  constructor(
+    private storeService: StoreService
+  ) { }
 
   ngOnInit() {
+    this.fetchPackages();
+  }
+
+  async fetchPackages() {
+    const storeData = await this.storeService.getStoreData();
+    this.popularPackages = storeData.popularPackages;
+    this.packages = storeData.packages;
   }
 
 }

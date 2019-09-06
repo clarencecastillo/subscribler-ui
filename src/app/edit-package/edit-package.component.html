@@ -1,25 +1,33 @@
 <form [formGroup]="packageForm" class="p-4">
   <div class="row">
-    <div class="col form-group">
+    <div class="col">
       <h5 class="mb-4 text-dark border-bottom pb-2">Package Details</h5>
       <div class="row">
         <div class="col form-group">
-          <label for="package-name">Package Name</label>
-          <input id="package-name" type="text" formControlName="name" class="form-control" placeholder="Package Name">
+          <div class="row">
+            <div class="col form-group">
+              <label for="package-name">Package Name</label>
+              <input id="package-name" type="text" formControlName="name" class="form-control" placeholder="Package Name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="package-description">Description</label>
+              <textarea id="package-description" type="text" formControlName="description" class="form-control" placeholder="Description"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="package-cycle">Cycle</label>
+              <select id="package-cycle" class="form-control" formControlName="cycle">
+                <option *ngFor="let cycle of cycles" [value]="cycle.symbol">{{cycle.frequency | titlecase}}</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row">
         <div class="col form-group">
-          <label for="package-description">Description</label>
-          <textarea id="package-description" type="text" formControlName="description" class="form-control" placeholder="Description"></textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col form-group">
-          <label for="package-cycle">Cycle</label>
-          <select id="package-cycle" class="form-control" formControlName="cycle">
-            <option *ngFor="let cycle of cycles" [value]="cycle.symbol">{{cycle.frequency | titlecase}}</option>
-          </select>
+          <label for="package-image">Package Image</label>
+          <sbr-image-input id="package-image" [(image)]="packageImage" (imageChange)="packageForm.get('imageUrl').setValue($event)"></sbr-image-input>
         </div>
       </div>
     </div>
@@ -76,16 +84,16 @@
       </div>
     </div>
   </div>
-  <div class="row" formArrayName="pricingOption">
+  <div class="row" formArrayName="subscriptionPlans">
     <div class="col form-group">
-      <h5 class="mb-4 text-dark border-bottom pb-2">Subscription Options</h5>
+      <h5 class="mb-4 text-dark border-bottom pb-2">Subscription Plans</h5>
 
-      <div class="card form-group" *ngFor="let option of packageForm.get('pricingOption').controls; let i = index" [formGroupName]="i">
+      <div class="card form-group" *ngFor="let option of packageForm.get('subscriptionPlans').controls; let i = index" [formGroupName]="i">
         <div class="card-header d-flex justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Option {{i + 1}}</h6>
-          <button type="button" class="close" (click)="deletePricingOption(i)" [disabled]="i == 0 && packageForm.get('pricingOption').length == 1">
-            <small [class.text-black-50]="i == 0 && packageForm.get('pricingOption').length == 1">
-              <fa-icon [icon]="deletePricingOptionIcon"></fa-icon>
+          <h6 class="m-0 font-weight-bold text-primary">{{packageForm.get('name').value}} Plan {{i + 1}}</h6>
+          <button type="button" class="close" (click)="deleteSubscriptionPlan(i)" [disabled]="i == 0 && packageForm.get('subscriptionPlans').length == 1">
+            <small [class.text-black-50]="i == 0 && packageForm.get('subscriptionPlans').length == 1">
+              <fa-icon [icon]="deleteSubscriptionPlanIcon"></fa-icon>
             </small>
           </button>
         </div>
@@ -114,8 +122,8 @@
         </div>
       </div>
       <div class="d-flex justify-content-end">
-        <button class="btn btn-primary" (click)="addPricingOption()">
-          Add Billing Option
+        <button class="btn btn-primary" (click)="addSubscriptionPlan()">
+          Add Subscription Plan
         </button>
       </div>
     </div>

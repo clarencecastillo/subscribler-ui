@@ -2,7 +2,7 @@
   (onFileLeave)="fileHover = false" (onFileDrop)="dropped($event); fileHover = false" multiple="false"
   dropZoneClassName="file-drop-zone {{fileHover ? 'file-hover' : ''}}" contentClassName="file-drop-zone-content">
   <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-    <div class="file-drop-zone-selector" (click)="openFileSelector()"
+    <div class="file-drop-zone-selector border" (click)="openFileSelector()"
       [class.no-image]="!image" [style.background-image]="image ? 'url(' + image + ')' : ''">
       <div class="overlay">
         <div class="backdrop"></div>

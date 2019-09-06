@@ -1,0 +1,56 @@
+@import '../../../styles.scss';
+
+.store-item-card {
+  overflow: hidden;
+  cursor: pointer;
+
+  .card-body {
+    padding: 0;
+    position: relative;
+  }
+
+  .store-item-image-container {
+    width: 100%;
+    height: 100%;
+
+    .store-item-img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .store-item-overlay {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+
+    .store-item-backdrop {
+      background: linear-gradient(transparent, rgba(black, 0.4));
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      transition: background 0.1s ease-in-out;
+    }
+
+    .store-item-content {
+      @extend .text-light;
+
+      padding: 1rem;
+      margin-top: auto;
+    }
+  }
+
+  &:hover {
+    .store-item-overlay {
+
+      .store-item-backdrop {
+        background-color: rgba(black, 0.5);
+      }
+    }
+  }
+}

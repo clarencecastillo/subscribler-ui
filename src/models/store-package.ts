@@ -1,13 +1,16 @@
-import { PackageItem } from './package-item';
 import { CycleSymbol } from './cycle';
+import { PackageItem } from './package-item';
 import { SubscriptionPlan } from './subscription-plan';
 
-export interface Package {
+export interface StorePackage {
   id: string;
   name: string;
   description: string;
   cycle: CycleSymbol;
   imageUrl: string;
   items: PackageItem[];
-  subscriptionPlans: SubscriptionPlan[];
+  subscription: {
+    startingPrice: number;
+    plans: SubscriptionPlan[];
+  };
 }

@@ -1,56 +1,72 @@
-<div class="flex-container">
-  <div class="card mb-5 shadow">
-    <div class="card-header">
-      <h6 class="m-0 font-weight-bold text-primary">QR Code</h6>
+<div class="row">
+  <div class="col pb-4">
+    <div class="card shadow">
+      <div class="card-header">
+        <h6 class="m-0 font-weight-bold text-primary">QR Code</h6>
+      </div>
+      <div class="card-body">
+        <p>Click on the poster below to print your Subscribler QR code.</p>
+        <div class="link-container">
+          <div class="link-content">
+            <a class="qr-poster-container bg-dark d-flex rounded o-hidden border" target="_blank" routerLink="/print/qr">
+              <div class="print-overlay">
+                <div class="w-100 text-center text-light">
+                  <fa-icon [icon]="printIcon" [style.font-size.rem]="6"></fa-icon>
+                </div>
+              </div>
+              <sbr-qr-poster class="m-auto"></sbr-qr-poster> 
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card-body">
-      <p>Click on the poster below to print your Subscribler QR code.</p>
-      <div class="link-container">
-        <div class="link-content">
-          <a class="qr-poster-container bg-dark d-flex rounded o-hidden border" target="_blank" routerLink="/print/qr">
-            <div class="print-overlay">
-              <div class="w-100 text-center text-light">
-                <fa-icon [icon]="printIcon" [style.font-size.rem]="6"></fa-icon>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col pb-4">
+        <div class="card shadow w-100">
+          <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">URL Link</h6>
+          </div>
+          <div class="card-body">
+            <p>Use the link below to direct your customers to your Subscribler page.</p>
+            <div class="link-container">
+              <div class="link-content">
+                <sbr-code name="URL" [code]="merchantPageUrl"></sbr-code>
               </div>
             </div>
-            <sbr-qr-poster class="m-auto"></sbr-qr-poster> 
-          </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card mb-5 shadow">
-    <div class="card-header">
-      <h6 class="m-0 font-weight-bold text-primary">URL Link</h6>
-    </div>
-    <div class="card-body">
-      <p>Use the link below to direct your customers to your Subscribler page.</p>
-      <div class="link-container">
-        <div class="link-content">
-          <sbr-code name="URL" [code]="merchantPageUrl"></sbr-code>
+    <div class="row">
+      <div class="col pb-4">
+        <div class="card shadow w-100">
+          <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">HTML Button</h6>
+          </div>
+          <div class="card-body">
+            <p>Paste the code below to add a Subscribler button to your website.</p>
+            <div class="link-container">
+              <div class="link-content">
+                <sbr-code name="codes" [code]="buttonLinkCode"></sbr-code>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card mb-5 shadow">
-    <div class="card-header">
-      <h6 class="m-0 font-weight-bold text-primary">HTML Button</h6>
-    </div>
-    <div class="card-body">
-      <p>Paste the code below to add a Subscribler button to your website.</p>
-      <div class="link-container">
-        <div class="link-content">
-          <sbr-code name="codes" [code]="buttonLinkCode"></sbr-code>
+    <div class="row">
+      <div class="col pb-4">
+        <div class="card shadow w-100">
+          <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">API Integration</h6>
+          </div>
+          <div class="card-body">
+            <p>Coming soon!</p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="card mb-5 shadow">
-    <div class="card-header">
-      <h6 class="m-0 font-weight-bold text-primary">API Integration</h6>
-    </div>
-    <div class="card-body">
-      <p>Coming soon!</p>
     </div>
   </div>
 </div>

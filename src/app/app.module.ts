@@ -48,6 +48,8 @@ import { SubscriptionsOverviewChartComponent } from './dashboard/subscriptions-o
 import { RevenueSourcesChartComponent } from './dashboard/revenue-sources-chart/revenue-sources-chart.component';
 import { PackageScheduleComponent } from './dashboard/package-schedule/package-schedule.component';
 import { RevenueOverviewChartComponent } from './dashboard/revenue-overview-chart/revenue-overview-chart.component';
+import { CyclePipe } from './cycle.pipe';
+import { StoreItemCardComponent } from './store/store-item-card/store-item-card.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -81,13 +83,18 @@ const COMPONENTS = [
   BigNumberCardComponent,
   SubscriptionsOverviewChartComponent,
   RevenueSourcesChartComponent,
-  PackageScheduleComponent
+  PackageScheduleComponent,
+  RevenueOverviewChartComponent,
 ];
 
 const MODALS = [
   SelectItemModalComponent,
   ConfirmModalComponent,
   EditItemModalComponent
+];
+
+const PIPES = [
+  CyclePipe
 ];
 
 const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
@@ -105,7 +112,8 @@ const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
     AppComponent,
     ...COMPONENTS,
     ...MODALS,
-    RevenueOverviewChartComponent
+    ...PIPES,
+    StoreItemCardComponent
   ],
   imports: [
     BrowserModule,

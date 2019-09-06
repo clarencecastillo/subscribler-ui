@@ -1,4 +1,4 @@
-<div class="flex-container bg-gradient-primary d-flex">
+<div class="bg-gradient-primary d-flex">
   <div class="container py-5 m-auto">
     <ngb-carousel #carousel [wrap]="false" 
     [showNavigationArrows]="false" [interval]="0"
@@ -36,7 +36,7 @@
         <div class="slide-content max-height p-5">
           <h3 class="text-muted">STEP 3</h3>
           <h1 class="text-gray-900 mb-5">Complete Your Profile</h1>
-          <sbr-profile class="flex-grow-1 flex-shrink-1 o-scroll"></sbr-profile>
+          <sbr-profile class="flex-grow-1 flex-shrink-1"></sbr-profile>
           <div class="d-flex justify-content-between flex-grow-0 pt-5">
             <a class="btn btn-primary" routerLink="/register/packages">Back</a>
             <a class="btn btn-primary" routerLink="/register/complete">Finish</a>
@@ -49,7 +49,7 @@
           <h1 class="text-gray-900 mb-5">You're good to go!</h1>
           <sbr-links></sbr-links>
           <div class="d-flex justify-content-end flex-grow-0 pt-5">
-            <a class="btn btn-primary mr-2">Visit Your Merchant Page</a>
+            <a class="btn btn-primary mr-2" routerLink="/store">Go to Store Page</a>
             <a class="btn btn-primary" routerLink="/app/dashboard">Go to Dashboard</a>
           </div>
         </div>

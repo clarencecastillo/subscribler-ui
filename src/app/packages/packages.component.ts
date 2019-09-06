@@ -18,7 +18,7 @@ export class PackagesComponent implements OnInit {
   deleteIcon = faTrash;
   noSelectedPackageIcon = faBoxOpen;
 
-  packages: Package[];
+  packages: Package[] = [];
   activePackageId: string;
 
   constructor(
@@ -28,8 +28,11 @@ export class PackagesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.packages = this.packageService.getPackages();
-    // this.activePackageId = this.packages[0].id;
+    this.fetchPackages();
+  }
+
+  async fetchPackages() {
+    this.packages = await this.packageService.getPackages();
   }
 
   createPackage() {

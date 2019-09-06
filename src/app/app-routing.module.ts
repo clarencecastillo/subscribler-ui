@@ -8,6 +8,7 @@ import { QrPrinterComponent } from './qr-printer/qr-printer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { StoreComponent } from './store/store.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
+import { LinksComponent } from './links/links.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,13 @@ const routes: Routes = [
         component: ProfileComponent,
         data: {
           header: 'Profile'
+        }
+      },
+      {
+        path: 'links',
+        component: LinksComponent,
+        data: {
+          header: 'Links'
         }
       }
     ]

@@ -8,9 +8,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectItemModalComponent } from '../select-item-modal/select-item-modal.component';
 import { ItemService } from '../item.service';
 import { Item } from 'src/models/item';
-import { PricingOption } from 'src/models/pricing-option';
 import { PackageItem } from 'src/models/package-item';
 import { filter } from 'rxjs/operators';
+import { SubscriptionPlan } from 'src/models/subscription-plan';
 
 @Component({
   selector: 'sbr-edit-package',
@@ -30,8 +30,9 @@ export class EditPackageComponent implements OnInit, OnChanges {
 
   removeItemIcon = faTimes;
   emptyItemsIcon = faTruckLoading;
-  deletePricingOptionIcon = faTimes;
+  deleteSubscriptionPlanIcon = faTimes;
 
+  packageImage: string;
   selectedItems: Item[] = [];
   loadChanges = false;
 
@@ -46,8 +47,9 @@ export class EditPackageComponent implements OnInit, OnChanges {
       name: [''],
       description: [''],
       cycle: ['', [Validators.required]],
+      imageUrl: [''],
       items: this.formBuilder.array([]),
-      pricingOption: this.formBuilder.array([], [Validators.minLength(1)]),
+      subscriptionPlans: this.formBuilder.array([], [Validators.minLength(1)]),
     });
 
     this.packageForm.valueChanges.pipe(
@@ -65,12 +67,13 @@ export class EditPackageComponent implements OnInit, OnChanges {
     if (changes.packageId) {
       this.loadChanges = true;
       this.package = this.packageService.getPackage(changes.packageId.currentValue);
+      this.packageImage = this.package.imageUrl;
       this.packageForm.patchValue({
         name: this.package.name,
         description: this.package.description,
         cycle: this.package.cycle
       });
-      this.setpricingOption(this.package.pricingOption);
+      this.setSubscriptionPlans(this.package.subscriptionPlans);
       await this.setPackageItems(this.package.items);
       this.loadChanges = false;
     }
@@ -82,22 +85,22 @@ export class EditPackageComponent implements OnInit, OnChanges {
     this.packageForm.setControl('items', this.formBuilder.array(value, [Validators.minLength(1)]));
   }
 
-  setpricingOption(pricingOption: PricingOption[]) {
-    const value = pricingOption.map(PricingOption => this.buildPricingOptionForm(PricingOption));
-    this.packageForm.setControl('pricingOption', this.formBuilder.array(value, [Validators.minLength(1)]));
+  setSubscriptionPlans(subscriptionPlans: SubscriptionPlan[]) {
+    const value = subscriptionPlans.map(subscriptionPlan => this.buildSubscriptionPlanForm(subscriptionPlan));
+    this.packageForm.setControl('subscriptionPlans', this.formBuilder.array(value, [Validators.minLength(1)]));
   }
 
-  buildPricingOptionForm(PricingOption?: PricingOption) {
+  buildSubscriptionPlanForm(subscriptionPlan?: SubscriptionPlan) {
     return this.formBuilder.group({
-      cycles: [PricingOption ? PricingOption.cycles : 1, [Validators.required]],
-      price: [PricingOption ? PricingOption.price : undefined, [Validators.required]],
-      description: [PricingOption ? PricingOption.description : '']
+      cycles: [subscriptionPlan ? subscriptionPlan.cycles : 1, [Validators.required]],
+      price: [subscriptionPlan ? subscriptionPlan.price : undefined, [Validators.required]],
+      description: [subscriptionPlan ? subscriptionPlan.description : '']
     });
   }
 
-  addPricingOption() {
-    const pricingOption = this.packageForm.get('pricingOption') as FormArray;
-    pricingOption.push(this.buildPricingOptionForm());
+  addSubscriptionPlan() {
+    const subscriptionPlan = this.packageForm.get('subscriptionPlans') as FormArray;
+    subscriptionPlan.push(this.buildSubscriptionPlanForm());
   }
 
   buildPackageItemForm(item: PackageItem) {
@@ -131,8 +134,8 @@ export class EditPackageComponent implements OnInit, OnChanges {
     }).catch(() => {});
   }
 
-  deletePricingOption(index: number) {
-    const pricingOption = this.packageForm.get('pricingOption') as FormArray;
-    pricingOption.removeAt(index);
+  deleteSubscriptionPlan(index: number) {
+    const subscriptionPlans = this.packageForm.get('subscriptionPlans') as FormArray;
+    subscriptionPlans.removeAt(index);
   }
 }

@@ -1,5 +1,10 @@
+import { stringLitArray } from 'src/utils';
+
+export const cycleSymbols = stringLitArray(['D', 'W', 'M', 'Y']);
+export type CycleSymbol = (typeof cycleSymbols)[number];
+
 export interface Cycle {
-  symbol: string;
+  symbol: CycleSymbol;
   frequency: string;
   unit: string;
   days: number;
