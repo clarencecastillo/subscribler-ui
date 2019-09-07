@@ -3,7 +3,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 
 const COLOR_REVENUE = 'rgb(238, 97, 54)';
-const COLOR_REVENUE_BACKGROUND = 'rgba(238, 97, 54, 0.1)';
+const COLOR_REVENUE_HOVER = 'rgb(230, 39, 0)';
 const COLOR_GRID_LINES = 'rgb(234, 236, 244)';
 const COLOR_TOOLTIPS_BACKGROUND = 'rgb(255, 255, 255)';
 const COLOR_TOOLTIPS_BORDER = '#dddfeb';
@@ -21,6 +21,7 @@ export class RevenueOverviewChartComponent implements OnInit {
     data: [4215, 4500, 4700, 4823, 4943, 5122, 5230, 5488, 5622, 5812, 5911, 5987],
     borderColor: COLOR_REVENUE,
     backgroundColor: COLOR_REVENUE,
+    hoverBackgroundColor: COLOR_REVENUE_HOVER,
     label: 'Revenue'
   }];
 

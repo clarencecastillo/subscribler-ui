@@ -49,8 +49,8 @@
           <h1 class="text-gray-900 mb-5">You're good to go!</h1>
           <sbr-links></sbr-links>
           <div class="d-flex justify-content-end flex-grow-0 pt-5">
-            <a class="btn btn-primary mr-2" routerLink="/store">Go to Store Page</a>
-            <a class="btn btn-primary" routerLink="/app/dashboard">Go to Dashboard</a>
+            <a class="btn btn-primary mr-2" [routerLink]="['/', 'store', '123']">Go to Store Page</a>
+            <a class="btn btn-primary" [routerLink]="['/', 'app', 'dashboard']">Go to Dashboard</a>
           </div>
         </div>
       </ng-template>

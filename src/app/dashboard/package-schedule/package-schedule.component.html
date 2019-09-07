@@ -15,27 +15,20 @@
       navigation="arrows"
       [dayTemplate]=daytemplate
       [(ngModel)]="date"
-      [minDate]="minDate">
+      [minDate]="minDate"
+      (select)="onDateSelect()">
     </ngb-datepicker>
   </div>
   <div class="flex-grow-1">
-    <table class="table table-sm">
+    <table class="table">
       <thead>
         <th>Package</th>
         <th>Count</th>
       </thead>
       <tbody>
-        <tr>
-          <td>Package A</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <td>Package B</td>
-          <td>4</td>
-        </tr>
-        <tr>
-          <td>Package C</td>
-          <td>24</td>
+        <tr *ngFor="let schedule of schedules">
+          <td>{{schedule.packageName}}</td>
+          <td>{{schedule.count}}</td>
         </tr>
       </tbody>
     </table>
