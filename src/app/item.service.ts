@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Item } from 'src/models/item';
 import * as uuid from 'uuid/v4';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

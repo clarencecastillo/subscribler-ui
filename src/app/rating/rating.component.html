@@ -1,0 +1,11 @@
+<div class="rating">
+  <ngb-rating [max]="max" [readonly]="true" [rate]="score" class="no-outline">
+    <ng-template let-fill="fill">
+      <div class="star-icon">
+        <fa-icon class="template" [icon]="ratingIcon"></fa-icon>
+        <fa-icon class="filled" [icon]="ratingIcon" [style.width.%]="fill"></fa-icon>
+      </div>
+    </ng-template>
+  </ngb-rating>
+  <small *ngIf="count"> ({{count}})</small>
+</div>

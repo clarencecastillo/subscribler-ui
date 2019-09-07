@@ -1,0 +1,39 @@
+<div class="card h-100">
+  <div class="card-img">
+    <img [src]="package.imageUrl" class="card-img-top">
+    <div class="context-overlay no-arrow" ngbDropdown container="body" placement="bottom-right">
+      <div class="backdrop no-outline" [routerLink]="['package', package.id]"></div>
+      <fa-icon class="btn btn-lg text-light cursor-pointer" [icon]="contextMenuIcon" ngbDropdownToggle></fa-icon>
+      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right shadow animated--grow-in show">
+        <button ngbDropdownItem>
+          <fa-icon [fixedWidth]="true" [icon]="wishlistIcon" class="text-black-50"></fa-icon>
+          Add to Wishlist
+        </button>
+        <button ngbDropdownItem>
+          <fa-icon [fixedWidth]="true" [icon]="reportIcon" class="text-black-50"></fa-icon>
+          Report
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body d-flex flex-column">
+    <div class="d-flex justify-content-between">
+      <a class="card-title text-secondary text-decoration-none" [routerLink]="['package', package.id]">{{package.name}}</a>
+      <a class="ml-4 p-0"
+        (click)="liked = !liked"
+        [routerLink]=""
+        [class.text-primary]="liked"
+        [class.text-secondary]="!liked">
+        <fa-icon [icon]="wishlistIcon"></fa-icon>
+      </a>
+    </div>
+    <div class="flex-grow-1 d-flex justify-content-between align-items-end">
+      <span [style.line-height]="1.2">
+        <small class="text-xs">Starting at</small><br>
+        <strong>SGD {{basicPlan.price | currency}}</strong>
+        <small> for {{basicPlan.cycles}} {{package.cycle | cycle : 'unit'}}(s)</small>
+      </span>
+      <sbr-rating [max]="5" [score]="package.rating.score" [count]="package.rating.count"></sbr-rating>
+    </div>
+  </div>
+</div>

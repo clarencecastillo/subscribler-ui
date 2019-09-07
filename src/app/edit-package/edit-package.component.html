@@ -100,6 +100,12 @@
         <div class="card-body">
           <div class="row">
             <div class="col form-group">
+              <label for="billing-name-{{i+1}}">Name</label>
+              <input id="billing-name-{{i+1}}" type="text" formControlName="name" class="form-control" placeholder="Name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
               <label for="billing-duration-{{i+1}}">Cycles</label>
               <input id="billing-duration-{{i+1}}" type="number" formControlName="cycles" class="form-control" placeholder="Duration">
             </div>

@@ -1,1 +1,98 @@
-<h1 class="display-4">Create Package</h1>
+<div class="pt-5">
+  <div class="row">
+    <div class="col-6 pb-4">
+      <img class="img-fluid rounded border mb-4" [src]="package.imageUrl">
+      <p>{{package.description}}</p>
+      <small class="d-block">
+        <span class="text-dark">Package Frequency: </span>{{package.cycle | cycle : 'frequency' | titlecase}}
+      </small>
+      <small class="d-block">
+        <span class="text-dark">ID: </span>{{package.id}}
+      </small>
+    </div>
+    <div class="col-6 pb-4">
+      <div class="row">
+        <div class="col pb-4">
+          <div class="mb-4">
+            <div class="d-flex justify-content-between">
+              <span>
+                <h4>{{package.name}}</h4>
+                <span>by <a [routerLink]="['/', 'store', package.store.id]">{{package.store.name}}</a></span>
+              </span>
+              <button class="btn btn-lg ml-4 no-outline"
+                (click)="liked = !liked"
+                [routerLink]=""
+                [class.text-primary]="liked"
+                [class.text-secondary]="!liked">
+                <fa-icon [icon]="wishlistIcon" [style.font-size.rem]="2"></fa-icon>
+              </button>
+            </div>
+          </div>
+          <sbr-rating [max]="5" [score]="package.rating.score" [count]="package.rating.count"></sbr-rating>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col pb-4">
+          <h5 class="text-dark border-bottom pb-2">What's Included</h5>
+          <table class="table table-borderless" *ngIf="package">
+            <tbody>
+              <tr *ngFor="let packageItem of package.items">
+                <td [style.line-height]="1.2">
+                  <strong class="d-block">{{packageItem.item.name}}</strong>
+                  <small>{{packageItem.item.description}}</small>
+                </td>
+                <th scope="row" class="text-center align-middle" [style.width.%]="25">{{packageItem.quantity}} {{packageItem.item.unit}}(s)</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col pb-4">
+      <h5 class="mb-4 text-dark border-bottom pb-2">Subscription Plans</h5>
+      <div class="row">
+        <div class="col pb-4" *ngFor="let plan of package.subscription.plans">
+          <div class="card shadow hvr-float w-100">
+            <div class="card-header text-center border-0 bg-{{package.subscription.mostPopularPlanId === plan.id ? 'primary' : 'white'}}">
+              <small class="text-light" [style.opacity]="package.subscription.mostPopularPlanId === plan.id ? 1 : 0">MOST POPULAR</small>
+            </div>
+            <div class="card-body">
+              <div class="text-center">
+                <div class="py-4" [style.line-height]="0.4">
+                  <h6 class="text-uppercase font-weight-bold text-primary">{{plan.name}}</h6>
+                  <small>SUBSCRIPTION</small>
+                </div>
+                <h4 class="py-5 font-weight-bold">SGD {{plan.price | currency}}</h4>
+                <span>for {{plan.cycles}} {{package.cycle | cycle : 'unit'}}(s)</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary btn-block">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col pb-4">
+      <h5 class="mb-4 text-dark border-bottom pb-2">Reviews</h5>
+      <table class="table table-borderless">
+        <tbody>
+          <tr *ngFor="let review of reviews">
+            <td>
+              <strong>{{review.author}}</strong>
+              <sbr-rating [max]="5" [score]="review.score"></sbr-rating>
+              <p class="py-2 font-italic">"{{review.comment}}"</p>
+            </td>
+            <td class="text-right">
+              <small>Posted {{review.timestamp | amTimeAgo}}</small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

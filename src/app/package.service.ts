@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Package } from 'src/models/package';
+import * as uuid from 'uuid/v4';
 
 @Injectable({
   providedIn: 'root'
@@ -33,25 +34,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: '33183f68-23dc-481a-9114-b13bac3c1166',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: '1b73589f-6783-449d-904f-50346a180561',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: '03b7566f-e6f4-41cf-b21a-4aef97339bdc',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: 'b75ef953-fa3f-4fdf-9658-33203e748746',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -84,25 +82,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: '3ef1b258-a57d-49c7-a7e6-d2039b1075e7',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: '3d202d5b-9748-4261-906c-4149ed101105',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: 'bf0a905e-7da6-4708-98a0-94e4462b4c6b',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: '5dd35f3b-a0dd-4648-a280-ba5ec6da6d07',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -127,25 +122,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: '078e429a-d09a-11e9-bb65-2a2ae2dbcce4',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: '078e45ba-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: '078e4790-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: '078e49a2-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -170,25 +162,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: 'ad3879c2-d09a-11e9-826f-2a2ae2dbcce4',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: 'ad387c9c-d09a-11e9-826f-2a2ae2dbcce4',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: 'ad387ff8-d09a-11e9-826f-2a2ae2dbcce4',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: 'ad388174-d09a-11e9-826f-2a2ae2dbcce4',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -213,25 +202,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: 'ad3882b4-d09a-11e9-826f-2a2ae2dbcce4',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: 'ad3889d0-d09a-11e9-826f-2a2ae2dbcce4',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: 'ad388b38-d09a-11e9-826f-2a2ae2dbcce4',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: 'ad388c64-d09a-11e9-826f-2a2ae2dbcce4',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -256,25 +242,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: 'ad388ec6-d09a-11e9-826f-2a2ae2dbcce4',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: 'd156a766-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: 'd156abda-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: 'd156ad56-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -299,25 +282,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: 'd156b09e-d09a-11e9-bb65-2a2ae2dbcce4',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: 'd156b38c-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: 'd156b4ea-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: 'd156b6ac-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -342,25 +322,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: 'd156b9e0-d09a-11e9-bb65-2a2ae2dbcce4',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: 'ee764fcc-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: 'ee765224-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: 'ee76581e-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -385,25 +362,22 @@ export class PackageService {
       ],
       subscriptionPlans: [
         {
-          id: 'ee765af8-d09a-11e9-bb65-2a2ae2dbcce4',
-          cycles: 1,
-          price: 12.45,
-          description: ''
-        },
-        {
           id: 'ee765c24-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Weekly',
           cycles: 7,
           price: 82.45,
           description: ''
         },
         {
           id: 'ee765d50-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Monthly',
           cycles: 31,
           price: 360.95,
           description: ''
         },
         {
           id: 'ee765e7c-d09a-11e9-bb65-2a2ae2dbcce4',
+          name: 'Annual',
           cycles: 365,
           price: 4199,
           description: ''
@@ -414,7 +388,7 @@ export class PackageService {
 
   constructor() { }
 
-  async getPackages(): Promise<Package[]> {
+  async getPackages(storeId: string): Promise<Package[]> {
     return Promise.resolve(this.packages);
   }
 
@@ -433,7 +407,8 @@ export class PackageService {
       items: [],
       subscriptionPlans: [
         {
-          id: '123',
+          id: uuid(),
+          name: '',
           cycles: 1,
           price: undefined,
           description: ''

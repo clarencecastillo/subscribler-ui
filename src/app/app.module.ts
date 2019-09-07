@@ -49,7 +49,12 @@ import { RevenueSourcesChartComponent } from './dashboard/revenue-sources-chart/
 import { PackageScheduleComponent } from './dashboard/package-schedule/package-schedule.component';
 import { RevenueOverviewChartComponent } from './dashboard/revenue-overview-chart/revenue-overview-chart.component';
 import { CyclePipe } from './cycle.pipe';
-import { StoreItemCardComponent } from './store/store-item-card/store-item-card.component';
+import { ViewPackageModalComponent } from './view-package-modal/view-package-modal.component';
+import { StorePackageCardComponent } from './store/store-package-card/store-package-card.component';
+import { RatingComponent } from './rating/rating.component';
+import { MerchantComponent } from './merchant/merchant.component';
+import { StoreHomeComponent } from './store-home/store-home.component';
+import { MomentModule } from 'ngx-moment';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -85,12 +90,14 @@ const COMPONENTS = [
   RevenueSourcesChartComponent,
   PackageScheduleComponent,
   RevenueOverviewChartComponent,
+  StorePackageCardComponent
 ];
 
 const MODALS = [
   SelectItemModalComponent,
   ConfirmModalComponent,
-  EditItemModalComponent
+  EditItemModalComponent,
+  ViewPackageModalComponent
 ];
 
 const PIPES = [
@@ -113,7 +120,9 @@ const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
     ...COMPONENTS,
     ...MODALS,
     ...PIPES,
-    StoreItemCardComponent
+    RatingComponent,
+    MerchantComponent,
+    StoreHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +137,8 @@ const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
     HttpClientModule,
     ClipboardModule,
     DataTablesModule,
-    ChartsModule
+    ChartsModule,
+    MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -9,6 +9,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { StoreComponent } from './store/store.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { LinksComponent } from './links/links.component';
+import { StoreHomeComponent } from './store-home/store-home.component';
+import { MerchantComponent } from './merchant/merchant.component';
+import { PackageComponent } from './package/package.component';
 
 const routes: Routes = [
   {
@@ -22,7 +25,22 @@ const routes: Routes = [
   },
   {
     path: 'store',
-    component: StoreComponent
+    component: StoreComponent,
+    children: [
+      {
+        path: '',
+        component: StoreHomeComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: ':store',
+        component: MerchantComponent
+      },
+      {
+        path: ':storeId/package/:packageId',
+        component: PackageComponent
+      }
+    ]
   },
   {
     path: 'register',

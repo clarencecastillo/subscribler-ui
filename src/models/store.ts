@@ -1,6 +1,6 @@
 import { StorePackage } from './store-package';
 
-export interface StoreResponse {
+export interface Store {
   name: string;
   description: string;
   popularPackages: StorePackage[];

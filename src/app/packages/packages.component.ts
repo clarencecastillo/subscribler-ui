@@ -32,7 +32,7 @@ export class PackagesComponent implements OnInit {
   }
 
   async fetchPackages() {
-    this.packages = await this.packageService.getPackages();
+    this.packages = await this.packageService.getPackages('123');
   }
 
   createPackage() {

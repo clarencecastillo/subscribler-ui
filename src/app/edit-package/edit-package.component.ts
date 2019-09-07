@@ -92,6 +92,7 @@ export class EditPackageComponent implements OnInit, OnChanges {
 
   buildSubscriptionPlanForm(subscriptionPlan?: SubscriptionPlan) {
     return this.formBuilder.group({
+      name: [subscriptionPlan ? subscriptionPlan.name : '', [Validators.required]],
       cycles: [subscriptionPlan ? subscriptionPlan.cycles : 1, [Validators.required]],
       price: [subscriptionPlan ? subscriptionPlan.price : undefined, [Validators.required]],
       description: [subscriptionPlan ? subscriptionPlan.description : '']

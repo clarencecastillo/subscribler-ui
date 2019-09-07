@@ -1,5 +1,5 @@
 import { CycleSymbol } from './cycle';
-import { PackageItem } from './package-item';
+import { StorePackageItem } from './store-package-item';
 import { SubscriptionPlan } from './subscription-plan';
 
 export interface StorePackage {
@@ -8,9 +8,18 @@ export interface StorePackage {
   description: string;
   cycle: CycleSymbol;
   imageUrl: string;
-  items: PackageItem[];
+  rating: {
+    score: number;
+    count: number;
+  };
   subscription: {
-    startingPrice: number;
+    basicPlanId: string;
+    mostPopularPlanId: string;
     plans: SubscriptionPlan[];
   };
+  store?: {
+    id: string;
+    name: string;
+  };
+  items?: StorePackageItem[];
 }

@@ -3,6 +3,7 @@
 @import '~startbootstrap-sb-admin-2/scss/sb-admin-2';
 @import '~ngx-toastr/toastr';
 @import '~ngx-toastr/toastr-bs4-alert';
+@import '~hover.css/scss/hover';
 
 html {
   &.print {
@@ -26,6 +27,12 @@ label:focus,
 ngb-carousel:focus,
 .ngb-dp-day:focus {
   outline: 0px !important;
+  -webkit-appearance: none;
+}
+
+.no-outline:focus {
+  outline: 0px !important;
+  box-shadow: none !important;
   -webkit-appearance: none;
 }
 
