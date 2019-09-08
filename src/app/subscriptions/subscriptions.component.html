@@ -1,1 +1,62 @@
-<h1 class="display-4">Subscriptions</h1>
+<div class="card o-hidden shadow">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Subscriptions</h6>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <th>#</th>
+        <th>Package</th>
+        <th>Status</th>
+        <th class="text-center">Auto-Renew</th>
+        <th>Expiration</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subscription of subscriptions; let i = index">
+          <td class="align-middle">{{ i + 1 }}</td>
+          <td>
+            <sbr-cycle-badge class="mr-2" [cycle]="subscription.package.cycle"></sbr-cycle-badge>
+            <a class="font-weight-bold text-decoration-none text-dark" [routerLink]="['/store', subscription.merchantId, 'package', subscription.package.id ]">
+              {{subscription.package.name}}
+            </a><br>
+            <div class="mt-2">
+              <small class="d-block">
+                <span class="text-dark">Plan: </span>{{subscription.plan.name}} Subscription
+              </small>
+              <small class="d-block">
+                <span class="text-dark">Ref ID: </span>{{subscription.id}}
+              </small>
+            </div>
+          </td>
+          <td class="align-middle">
+            <span class="badge badge-{{subscription.status === 'active' ? 'primary' : 'light'}} p-2 text-uppercase">{{subscription.status}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <ui-switch [(ngModel)]="subscription.autoRenew" class="pt-2" [disabled]="subscription.status === 'inactive'"></ui-switch>
+          </td>
+          <td class="align-middle">
+            {{ subscription.expiration | amDateFormat : 'D MMMM YYYY' }}
+          </td>
+          <td class="align-middle text-right">
+            <div class="no-arrow" ngbDropdown container="body" placement="bottom-right">
+              <fa-icon class="btn btn-lg" [icon]="contextMenuIcon" ngbDropdownToggle></fa-icon>
+              <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right shadow animated--grow-in show">
+                <a ngbDropdownItem [routerLink]="['/store', subscription.merchantId, 'package', subscription.package.id ]">
+                  View Package Page
+                </a>
+                <a ngbDropdownItem [routerLink]="['/store', subscription.merchantId]">
+                  View Merchant Page
+                </a>
+                <div class="dropdown-divider" *ngIf="subscription.status === 'active'"></div>
+                <a ngbDropdownItem class="text-danger" *ngIf="subscription.status === 'active'">
+                  Cancel
+                </a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -20,6 +20,9 @@ export class BigNumberCardComponent implements OnInit {
   @Input()
   icon: IconDefinition;
 
+  @Input()
+  color: 'primary' | 'secondary' | 'info' | 'success' = 'primary';
+
   constructor() { }
 
   ngOnInit() {

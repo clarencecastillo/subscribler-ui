@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'sbr-code',
@@ -14,13 +13,9 @@ export class CodeComponent implements OnInit {
   @Input()
   name: string;
 
-  constructor(private toastrService: ToastrService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  onCopyToClipboard() {
-    this.toastrService.success(`Copied ${this.name ? this.name + ' '  : ''}to clipboard!`);
   }
 
 }

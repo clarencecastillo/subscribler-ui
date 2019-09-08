@@ -18,14 +18,12 @@
               <div class="backdrop" (click)="selectItem(item)"></div>
               <fa-icon class="btn btn-lg text-light" [icon]="contextMenuIcon" ngbDropdownToggle></fa-icon>
               <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right shadow animated--grow-in show">
-                <button ngbDropdownItem (click)="presentEditItemModal(item)">
-                  <fa-icon [fixedWidth]="true" [icon]="editIcon" class="text-black-50"></fa-icon>
+                <a ngbDropdownItem (click)="presentEditItemModal(item)">
                   Edit
-                </button>
-                <button ngbDropdownItem (click)="presentConfirmDeleteItemModal(item)">
-                  <fa-icon [fixedWidth]="true" [icon]="deleteIcon" class="text-black-50"></fa-icon>
+                </a>
+                <a ngbDropdownItem (click)="presentConfirmDeleteItemModal(item)">
                   Delete
-                </button>
+                </a>
               </div>
             </div>
           </div>

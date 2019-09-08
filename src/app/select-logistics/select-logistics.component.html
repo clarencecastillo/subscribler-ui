@@ -1,6 +1,6 @@
 <div class="row">
-  <button class="btn col-xl-3 col-md-6 mb-4" *ngFor="let partner of logisticPartners" (click)="selectPartner(partner)">
-    <div class="logistic-partner card shadow border o-hidden">
+  <div class="col-xl-3 col-md-6 pb-4" *ngFor="let partner of logisticPartners" (click)="selectPartner(partner)">
+    <button class="btn logistic-partner card border o-hidden p-0">
       <div class="selected-overlay" [class.visible]="value == partner.id">
         <div class="backdrop"></div>
         <fa-icon class="btn btn-circle btn-lg btn-primary" [icon]="selectedIcon"></fa-icon>
@@ -9,6 +9,6 @@
       <div class="card-body">
         <strong class="card-title">{{partner.name}}</strong>
       </div> 
-    </div>
-  </button>
+    </button>
+  </div>
 </div>

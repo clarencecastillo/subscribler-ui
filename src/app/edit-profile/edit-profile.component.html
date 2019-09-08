@@ -1,0 +1,38 @@
+<div class="card h-100 o-hidden shadow">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="profileForm" class="p-4">
+      <h5 class="mb-4 text-dark border-bottom pb-2">User Details</h5>
+      <div class="row">
+        <div class="col-sm form-group">
+          <label for="account-first-name">First Name</label>
+          <input id="account-first-name" type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+        </div>
+        <div class="col-sm form-group">
+          <label for="account-last-name">Last Name</label>
+          <input id="account-last-namename" type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm form-group">
+          <label for="account-email">Email</label>
+          <input id="account-email" type="email" formControlName="email" class="form-control" placeholder="Email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm form-group">
+          <label for="account-phone-number">Phone Number</label>
+          <input id="account-phone-number" type="tel" formControlName="phoneNumber" class="form-control" placeholder="Phone Number">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm form-group">
+          <label for="account-address">Address</label>
+          <input id="account-address" type="tel" formControlName="address" class="form-control" placeholder="Address">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faTimes, faCheck, faPencilAlt, faTrash, faPlus, faEllipsisV, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCheck, faPlus, faEllipsisV, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Item } from 'src/models/item';
 import { ItemService } from '../item.service';
@@ -16,8 +16,6 @@ export class SelectItemModalComponent implements OnInit {
 
   closeIcon = faTimes;
   selectedIcon = faCheck;
-  editIcon = faPencilAlt;
-  deleteIcon = faTrash;
   addItemIcon = faPlus;
   contextMenuIcon = faEllipsisV;
   emptyListPlaceholderIcon = faArrowLeft;

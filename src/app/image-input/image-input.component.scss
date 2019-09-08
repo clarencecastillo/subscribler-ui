@@ -30,7 +30,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        color: $secondary;
+        color: $dark;
 
         .content {
           margin: auto;
@@ -52,7 +52,7 @@
       &.no-image {
         .overlay {
           opacity: 1;
-          border: 2px dashed rgba($secondary, 0.3);
+          border: 2px dashed rgba($dark, 0.3);
         }
 
         img {

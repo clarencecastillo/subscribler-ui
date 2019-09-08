@@ -12,27 +12,27 @@ export class NavigationComponent implements OnInit {
     {
       icon: faTachometerAlt,
       text: 'Dashboard',
-      path: '/app/dashboard'
+      path: '/admin/dashboard'
     },
     {
       icon: faBoxOpen,
       text: 'Packages',
-      path: '/app/packages'
+      path: '/admin/packages'
     },
     {
       icon: faUserFriends,
       text: 'Subscribers',
-      path: '/app/subscribers'
+      path: '/admin/subscribers'
     },
     {
       icon: faAddressCard,
       text: 'Profile',
-      path: '/app/profile'
+      path: '/admin/profile'
     },
     {
       icon: faBullhorn,
       text: 'Links',
-      path: '/app/links'
+      path: '/admin/links'
     }
   ];
 

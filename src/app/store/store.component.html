@@ -1,18 +1,20 @@
 <div class="bg-gradient-primary d-flex p-4">
   <div class="container">
+    <div class="store-header d-flex justify-content-between align-items-center py-5 px-2">
+      <div class="brand">
+        <a class="d-flex align-items-center justify-content-center text-decoration-none" [routerLink]="['/']">
+          <div class="brand-text text-light">Subscribler</div>
+        </a>
+      </div>
+      <div class="header-buttons">
+        <a class="text-light text-decoration-none mr-4" [routerLink]="['/', 'subscriptions']">My Subscriptions</a>
+        <a class="text-light text-decoration-none" [routerLink]="['/', 'account']">My Account</a>
+      </div>
+    </div>
     <div class="card shadow">
-      <div class="card-body px-5 py-4">
-        <div class="store-header d-flex justify-content-between align-items-center">
-          <div class="brand">
-            <a class="d-flex align-items-center justify-content-center text-decoration-none" [routerLink]="['/', 'store']">
-              <div class="brand-text">Subscribler</div>
-            </a>
-          </div>
-          <div class="header-buttons">
-            <button class="btn btn-sm text-primary">My Subscriptions</button>
-            <button class="btn btn-sm text-primary">Login</button>
-            <button class="btn btn-sm text-primary">Sign Up</button>
-          </div>
+      <div class="card-body p-5">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4" *ngIf="header">
+          <h1 class="h3 text-gray-800">{{header}}</h1>
         </div>
         <div class="pt-4">
           <router-outlet></router-outlet>

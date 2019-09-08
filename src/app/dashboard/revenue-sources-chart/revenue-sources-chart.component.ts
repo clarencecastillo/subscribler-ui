@@ -3,9 +3,9 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 
-const COLOR_PIE_1 = 'rgb(238, 97, 54)';
-const COLOR_PIE_2 = 'rgb(242, 166, 44)';
-const COLOR_PIE_3 = 'rgb(230, 39, 0)';
+const COLOR_PIE_1 = '#8E54E9';
+const COLOR_PIE_2 = '#4776E6';
+const COLOR_PIE_3 = '#60E1E0';
 const COLOR_HOVER_BORDER_COLOR = 'rgb(234, 236, 244)';
 const COLOR_TOOLTIPS_BACKGROUND = 'rgb(255, 255, 255)';
 const COLOR_TOOLTIPS_BORDER = '#dddfeb';

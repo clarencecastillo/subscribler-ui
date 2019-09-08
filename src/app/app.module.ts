@@ -55,6 +55,14 @@ import { RatingComponent } from './rating/rating.component';
 import { MerchantComponent } from './merchant/merchant.component';
 import { StoreHomeComponent } from './store-home/store-home.component';
 import { MomentModule } from 'ngx-moment';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { UiSwitchModule } from 'ngx-ui-switch';
+import { UiSwitchModuleConfig } from 'ngx-ui-switch/ui-switch/ui-switch.config';
+import { CycleBadgeComponent } from './cycle-badge/cycle-badge.component';
+import { LikeBtnComponent } from './like-btn/like-btn.component';
+import { EditStoreComponent } from './edit-store/edit-store.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditPaymentComponent } from './edit-payment/edit-payment.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -114,6 +122,13 @@ const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
   }
 };
 
+const UI_SWITCH_GLOBAL_CONFIG: UiSwitchModuleConfig = {
+  color: '#8E54E9',
+  switchColor: '#FFFFFF',
+  defaultBgColor: 'rgb(232, 236, 239)',
+  defaultBoColor: 'rgb(226, 230, 240)'
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -122,7 +137,12 @@ const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
     ...PIPES,
     RatingComponent,
     MerchantComponent,
-    StoreHomeComponent
+    StoreHomeComponent,
+    CycleBadgeComponent,
+    LikeBtnComponent,
+    EditStoreComponent,
+    EditProfileComponent,
+    EditPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +158,9 @@ const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
     ClipboardModule,
     DataTablesModule,
     ChartsModule,
-    MomentModule
+    MomentModule,
+    ScrollToModule.forRoot(),
+    UiSwitchModule.forRoot(UI_SWITCH_GLOBAL_CONFIG)
   ],
   providers: [],
   bootstrap: [AppComponent],

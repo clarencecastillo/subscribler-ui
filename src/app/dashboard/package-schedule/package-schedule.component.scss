@@ -4,23 +4,18 @@
   --info: #{$primary};
 }
 
-.ngb-dp-week,
-.bg-light {
-  background: red !important;
-}
-
 .calendar-date {
 
   &.today {
     & > div {
-      border-bottom: 1px solid $primary;
+      border-bottom: 2px solid $primary;
     }
   }
 
   &:not(:disabled):hover {
     @extend .text-light;
-    background-color: $primary-var-2;
-    border-color: $primary-var-2;
+    background-color: $secondary;
+    border-color: $secondary;
   }
 
   &.active {

@@ -9,38 +9,43 @@ import { ProfileComponent } from './profile/profile.component';
 import { StoreComponent } from './store/store.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { LinksComponent } from './links/links.component';
-import { StoreHomeComponent } from './store-home/store-home.component';
 import { MerchantComponent } from './merchant/merchant.component';
 import { PackageComponent } from './package/package.component';
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app',
-    pathMatch: 'full'
+    component: StoreComponent,
+    children: [
+      {
+        path: 'account',
+        component: AccountComponent,
+        data: {
+          header: 'My Account'
+        }
+      },
+      {
+        path: 'subscriptions',
+        component: SubscriptionsComponent,
+        data: {
+          header: 'My Subscriptions'
+        }
+      },
+      {
+        path: 'store/:storeId',
+        component: MerchantComponent
+      },
+      {
+        path: 'store/:storeId/package/:packageId',
+        component: PackageComponent
+      }
+    ]
   },
   {
     path: 'print/qr',
     component: QrPrinterComponent
-  },
-  {
-    path: 'store',
-    component: StoreComponent,
-    children: [
-      {
-        path: '',
-        component: StoreHomeComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: ':store',
-        component: MerchantComponent
-      },
-      {
-        path: ':storeId/package/:packageId',
-        component: PackageComponent
-      }
-    ]
   },
   {
     path: 'register',
@@ -70,7 +75,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'app',
+    path: 'admin',
     component: HomeComponent,
     children: [
       {

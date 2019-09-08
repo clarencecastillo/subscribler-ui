@@ -1,0 +1,72 @@
+<div class="card h-100 o-hidden shadow">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Store Details</h6>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="storeForm" class="p-4">
+      <div class="row">
+        <div class="col pb-4" formGroupName="business">
+          <h5 class="mb-4 text-dark border-bottom pb-2">Business</h5>
+          <div class="row">
+            <div class="col form-group">
+              <label for="business-name">Business Name</label>
+              <input id="business-name" type="text" formControlName="name" class="form-control" placeholder="Business Name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="business-address">Address</label>
+              <input id="business-address" type="text" formControlName="address" class="form-control" placeholder="Address">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="business-type">Category</label>
+              <select id="business-type" formControlName="type" class="form-control">
+                <option *ngFor="let type of businessTypes" [value]="type">{{type | titlecase}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="business-description">Description</label>
+              <textarea id="business-description" formControlName="description" class="form-control" placeholder="Business Name"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col form-group" formGroupName="bankAccount">
+          <h5 class="mb-4 text-dark border-bottom pb-2">Bank Account</h5>
+          <div class="row">
+            <div class="col form-group">
+              <label for="account-bank-name">Bank Name</label>
+              <input id="account-bank-name" type="text" formControlName="bankName" class="form-control" placeholder="Bank Name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="account-name">Account Name</label>
+              <input id="account-name" type="text" formControlName="name" class="form-control" placeholder="Account Name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="account-number">Account Number</label>
+              <input id="account-number" type="text" formControlName="number" class="form-control" placeholder="Account Number">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group" formGroupName="logistics">
+          <h5 class="mb-4 text-dark border-bottom pb-2">Logistics</h5>
+          <div class="row">
+            <div class="col form-group m-0">
+              <label for="logistics-partner">Preferred Partner</label>
+              <sbr-select-logistics id="logistics-partner" [value]="storeForm.get('logistics').get('partnerId').value" (valueChange)="storeForm.get('logistics').get('partnerId').setValue($event)"></sbr-select-logistics>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

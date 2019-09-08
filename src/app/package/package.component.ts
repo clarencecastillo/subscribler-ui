@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StorePackage } from 'src/models/store-package';
 import { StoreService } from '../store.service';
-import { faTruck, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faTruck } from '@fortawesome/free-solid-svg-icons';
 import { Review } from 'src/models/review';
 import * as moment from 'moment';
 
@@ -16,7 +16,6 @@ export class PackageComponent implements OnInit {
   package: StorePackage;
 
   deliverIcon = faTruck;
-  wishlistIcon = faHeart;
 
   reviews: Review[] = [
     {

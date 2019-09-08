@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StorePackage } from 'src/models/store-package';
-import { faHeart, faEllipsisV, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisV, faExclamationTriangle, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionPlan } from 'src/models/subscription-plan';
 
@@ -14,9 +14,9 @@ export class StorePackageCardComponent implements OnInit {
   @Input()
   package: StorePackage;
 
-  wishlistIcon = faHeart;
   contextMenuIcon = faEllipsisV;
   reportIcon = faExclamationTriangle;
+  cycleIcon = faTruck;
 
   store: string;
 

@@ -1,6 +1,13 @@
 .card-img {
   position: relative;
 
+  sbr-cycle-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+
   img {
     object-fit: cover;
     object-position: center;

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 
-const COLOR_REVENUE = 'rgb(238, 97, 54)';
-const COLOR_REVENUE_HOVER = 'rgb(230, 39, 0)';
+const COLOR_REVENUE = '#8E54E9';
+const COLOR_REVENUE_HOVER = 'rgb(122, 72, 201)';
 const COLOR_GRID_LINES = 'rgb(234, 236, 244)';
 const COLOR_TOOLTIPS_BACKGROUND = 'rgb(255, 255, 255)';
 const COLOR_TOOLTIPS_BORDER = '#dddfeb';

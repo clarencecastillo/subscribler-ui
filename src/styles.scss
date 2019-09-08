@@ -4,11 +4,23 @@
 @import '~ngx-toastr/toastr';
 @import '~ngx-toastr/toastr-bs4-alert';
 @import '~hover.css/scss/hover';
+@import '~ngx-ui-switch/ui-switch.component';
 
 html {
   &.print {
     overflow: -moz-hidden-unscrollable;
 	  overflow: hidden;
+  }
+}
+
+@keyframes zoom-fade {
+  0%   {
+    transform: scale(0.95);
+    opacity: 0
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1
   }
 }
 
@@ -43,9 +55,12 @@ ngb-carousel:focus,
 }
 
 .bg-gradient-primary {
-  background: $primary;
-  background: -webkit-linear-gradient(to bottom, $primary, $primary-var-1);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, $primary, $primary-var-1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* fallback for old browsers */
+  background: $secondary;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to top, $secondary, $primary);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to top, $secondary, $primary);
 }
 
 .cursor-pointer {
@@ -57,23 +72,12 @@ ngb-carousel:focus,
 }
 
 .modal-content {
-  animation-name: example;
+  animation-name: zoom-fade;
   animation-duration: 0.3s;
 
   .card-body {
     max-height: calc(75vh - 6rem);
     overflow-y: scroll;
-  }
-}
-
-@keyframes example {
-  0%   {
-    transform: scale(0.95);
-    opacity: 0
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1
   }
 }
 
@@ -115,4 +119,21 @@ ngb-datepicker {
       background-color: transparent !important;
     }
   }
+}
+
+.tooltip {
+
+  .arrow {
+    display: none;
+  }
+
+  .tooltip-inner {
+    animation-name: zoom-fade;
+    animation-duration: 0.3s;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+.switch-medium {
+  margin-top: 8px;
 }

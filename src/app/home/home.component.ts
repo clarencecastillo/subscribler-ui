@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
 
-      this.header = route.firstChild.snapshot.data['header'];
+      this.header = this.route.firstChild.snapshot.data.header;
     });
   }
 

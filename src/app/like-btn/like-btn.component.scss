@@ -1,0 +1,5 @@
+@import '../../styles.scss';
+
+:host > a {
+  color: $gray-500;
+}
