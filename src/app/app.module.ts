@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LogisticsComponent } from './logistics/logistics.component';
 import { PackagesComponent } from './packages/packages.component';
 import { RegisterComponent } from './register/register.component';
-import { ShopComponent } from './shop/shop.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -20,7 +19,6 @@ import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './header/user/user.component';
 import { MessagesComponent } from './header/messages/messages.component';
 import { NotificationsComponent } from './header/notifications/notifications.component';
-import { CreatePackageComponent } from './create-package/create-package.component';
 import { EditPackageComponent } from './edit-package/edit-package.component';
 import { SelectItemModalComponent } from './select-item-modal/select-item-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
@@ -30,7 +28,6 @@ import { EditItemComponent } from './edit-item/edit-item.component';
 import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ImageInputComponent } from './image-input/image-input.component';
-import { EditMerchantProfileComponent } from './edit-merchant-profile/edit-merchant-profile.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LinksComponent } from './links/links.component';
 import { QrPosterComponent } from './qr-poster/qr-poster.component';
@@ -49,11 +46,9 @@ import { RevenueSourcesChartComponent } from './dashboard/revenue-sources-chart/
 import { PackageScheduleComponent } from './dashboard/package-schedule/package-schedule.component';
 import { RevenueOverviewChartComponent } from './dashboard/revenue-overview-chart/revenue-overview-chart.component';
 import { CyclePipe } from './cycle.pipe';
-import { ViewPackageModalComponent } from './view-package-modal/view-package-modal.component';
 import { StorePackageCardComponent } from './store/store-package-card/store-package-card.component';
 import { RatingComponent } from './rating/rating.component';
 import { StoreComponent } from './store/store.component';
-import { StoreHomeComponent } from './store-home/store-home.component';
 import { MomentModule } from 'ngx-moment';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { UiSwitchModule } from 'ngx-ui-switch';
@@ -64,14 +59,12 @@ import { EditStoreComponent } from './edit-store/edit-store.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditPaymentComponent } from './edit-payment/edit-payment.component';
 import { EditLogisticsComponent } from './edit-logistics/edit-logistics.component';
-import { MerchantProfileComponent } from './merchant-profile/merchant-profile.component';
 
 const COMPONENTS = [
   RegisterComponent,
   LogisticsComponent,
   PackagesComponent,
   AccountComponent,
-  ShopComponent,
   SubscriptionsComponent,
   NavigationComponent,
   RegisterWorkflowComponent,
@@ -80,11 +73,9 @@ const COMPONENTS = [
   UserComponent,
   MessagesComponent,
   NotificationsComponent,
-  CreatePackageComponent,
   EditPackageComponent,
   EditItemComponent,
   ImageInputComponent,
-  EditMerchantProfileComponent,
   ProfileComponent,
   LinksComponent,
   QrPosterComponent,
@@ -103,21 +94,18 @@ const COMPONENTS = [
   DashboardComponent,
   RatingComponent,
   StoreComponent,
-  StoreHomeComponent,
   CycleBadgeComponent,
   LikeBtnComponent,
   EditStoreComponent,
   EditProfileComponent,
   EditPaymentComponent,
-  EditLogisticsComponent,
-  MerchantProfileComponent
+  EditLogisticsComponent
 ];
 
 const MODALS = [
   SelectItemModalComponent,
   ConfirmModalComponent,
-  EditItemModalComponent,
-  ViewPackageModalComponent
+  EditItemModalComponent
 ];
 
 const PIPES = [

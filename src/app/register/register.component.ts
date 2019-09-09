@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'sbr-register',
@@ -10,7 +11,10 @@ export class RegisterComponent implements OnInit {
 
   userRegistrationForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService
+  ) {
     this.userRegistrationForm = formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -18,22 +22,13 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]]
     });
-    // formBuilder.group({
-    //   user: ,
-    //   // business: formBuilder.group({
-    //   //   name: ['', [Validators.required]],
-    //   //   website: [''],
-    //   //   address: formBuilder.group({
-    //   //     addressLine1: ['', [Validators.required]],
-    //   //     addressLine2: [''],
-    //   //     postalCode: [''],
-    //   //     country: ['']
-    //   //   })
-    //   // })
-    // });
   }
 
   ngOnInit() {
+  }
+
+  submit() {
+    this.toastrService.success('Created merchant account');
   }
 
 }

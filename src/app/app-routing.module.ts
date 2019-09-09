@@ -22,8 +22,7 @@ const routes: Routes = [
         path: 'account',
         component: ProfileComponent,
         data: {
-          header: 'My Account',
-          userType: 'subscriber'
+          header: 'My Account'
         }
       },
       {
@@ -41,7 +40,10 @@ const routes: Routes = [
         path: 'store/:storeId/package/:packageId',
         component: PackageComponent
       }
-    ]
+    ],
+    data: {
+      userType: 'subscriber'
+    }
   },
   {
     path: 'print/qr',
@@ -72,7 +74,10 @@ const routes: Routes = [
         path: 'complete',
         component: RegisterWorkflowComponent
       }
-    ]
+    ],
+    data: {
+      userType: 'merchant'
+    }
   },
   {
     path: 'admin',
@@ -108,8 +113,7 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         data: {
-          header: 'Profile',
-          userType: 'merchant'
+          header: 'Profile'
         }
       },
       {
@@ -119,7 +123,10 @@ const routes: Routes = [
           header: 'Links'
         }
       }
-    ]
+    ],
+    data: {
+      userType: 'merchant'
+    }
   }
 ];
 

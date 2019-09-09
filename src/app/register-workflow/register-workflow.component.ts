@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, skip } from 'rxjs/operators';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'sbr-register-workflow',
@@ -13,10 +14,13 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
   @ViewChild(NgbCarousel, { static: false })
   carousel: NgbCarousel;
 
-  constructor(private router: Router) {
+  @ViewChild(ProfileComponent, { static: false })
+  profileComponent: ProfileComponent;
+
+  constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd), skip(1))
-    .subscribe((e: NavigationEnd) => this.resolveStep(e.urlAfterRedirects));
+      .pipe(filter(event => event instanceof NavigationEnd), skip(1))
+      .subscribe((e: NavigationEnd) => this.resolveStep(e.urlAfterRedirects));
   }
 
   ngOnInit(): void {
@@ -28,7 +32,12 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
 
   resolveStep(url: string) {
     const urlParts = url.split('/');
-    this.carousel.select(urlParts[urlParts.length - 1]);
+    const slideId = urlParts[urlParts.length - 1];
+    this.carousel.select(slideId);
+
+    if (slideId === 'profile') {
+      this.profileComponent.resolveUserType(this.route.snapshot);
+    }
   }
 
   submit() {
