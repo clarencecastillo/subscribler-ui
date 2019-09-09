@@ -1,24 +1,27 @@
-<div class="bg-gradient-primary d-flex p-4">
-  <div class="container">
-    <div class="store-header d-flex justify-content-between align-items-center py-5 px-2">
-      <div class="brand">
-        <a class="d-flex align-items-center justify-content-center text-decoration-none" [routerLink]="['/']">
-          <div class="brand-text text-light">Subscribler</div>
-        </a>
-      </div>
-      <div class="header-buttons">
-        <a class="text-light text-decoration-none mr-4" [routerLink]="['/', 'subscriptions']">My Subscriptions</a>
-        <a class="text-light text-decoration-none" [routerLink]="['/', 'account']">My Account</a>
+<div class="row">
+  <div class="col">
+    <div class="pt-5 pb-2 mb-4 border-top border-bottom">
+      <h1>{{name}}</h1>
+      <p>{{description}}</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col pb-4">
+    <h5 class="mb-4 text-dark border-bottom pb-2">Popular Packages</h5>
+    <div class="row">
+      <div class="col-md-12 col-lg-4 pb-4" *ngFor="let package of popularPackages">
+        <sbr-store-package-card class="d-block h-100" [package]="package"></sbr-store-package-card>
       </div>
     </div>
-    <div class="card shadow">
-      <div class="card-body p-5">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4" *ngIf="header">
-          <h1 class="h3 text-gray-800">{{header}}</h1>
-        </div>
-        <div class="pt-4">
-          <router-outlet></router-outlet>
-        </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col pb-4">
+    <h5 class="mb-4 text-dark border-bottom pb-2">All Packages</h5>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 pb-4" *ngFor="let package of packages">
+        <sbr-store-package-card class="d-block h-100" [package]="package"></sbr-store-package-card>
       </div>
     </div>
   </div>

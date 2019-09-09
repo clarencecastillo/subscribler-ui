@@ -4,12 +4,12 @@
     <img class="img-profile rounded-circle" [src]="user.imageUrl">
   </div>
   <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" ngbDropdownMenu>
-    <a ngbDropdownItem *ngFor="let link of userLinks">
+    <a ngbDropdownItem *ngFor="let link of userLinks" [routerLink]="link.path">
       <fa-icon [icon]="link.icon" [fixedWidth]="true" class="fa-sm mr-2 text-gray-400"></fa-icon>
       {{link.text}}
     </a>
     <div class="dropdown-divider"></div>
-    <a ngbDropdownItem>
+    <a ngbDropdownItem [routerLink]="logoutLink.path">
       <fa-icon [icon]="logoutLink.icon" [fixedWidth]="true" class="fa-sm mr-2 text-gray-400"></fa-icon>
       <span>{{logoutLink.text}}</span>
     </a>

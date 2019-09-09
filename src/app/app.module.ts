@@ -11,7 +11,7 @@ import { SubscriptionsComponent } from './subscriptions/subscriptions.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterWorkflowComponent } from './register-workflow/register-workflow.component';
 import { PackageComponent } from './package/package.component';
@@ -38,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { QrPrinterComponent } from './qr-printer/qr-printer.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CodeComponent } from './code/code.component';
-import { StoreComponent } from './store/store.component';
+import { HomeComponent } from './home/home.component';
 import { SelectLogisticsComponent } from './select-logistics/select-logistics.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { DataTablesModule } from 'angular-datatables';
@@ -52,7 +52,7 @@ import { CyclePipe } from './cycle.pipe';
 import { ViewPackageModalComponent } from './view-package-modal/view-package-modal.component';
 import { StorePackageCardComponent } from './store/store-package-card/store-package-card.component';
 import { RatingComponent } from './rating/rating.component';
-import { MerchantComponent } from './merchant/merchant.component';
+import { StoreComponent } from './store/store.component';
 import { StoreHomeComponent } from './store-home/store-home.component';
 import { MomentModule } from 'ngx-moment';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
@@ -63,6 +63,8 @@ import { LikeBtnComponent } from './like-btn/like-btn.component';
 import { EditStoreComponent } from './edit-store/edit-store.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditPaymentComponent } from './edit-payment/edit-payment.component';
+import { EditLogisticsComponent } from './edit-logistics/edit-logistics.component';
+import { MerchantProfileComponent } from './merchant-profile/merchant-profile.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -71,9 +73,7 @@ const COMPONENTS = [
   AccountComponent,
   ShopComponent,
   SubscriptionsComponent,
-  DashboardComponent,
   NavigationComponent,
-  HomeComponent,
   RegisterWorkflowComponent,
   PackageComponent,
   HeaderComponent,
@@ -90,7 +90,7 @@ const COMPONENTS = [
   QrPosterComponent,
   QrPrinterComponent,
   CodeComponent,
-  StoreComponent,
+  HomeComponent,
   SelectLogisticsComponent,
   SubscribersComponent,
   BigNumberCardComponent,
@@ -98,7 +98,19 @@ const COMPONENTS = [
   RevenueSourcesChartComponent,
   PackageScheduleComponent,
   RevenueOverviewChartComponent,
-  StorePackageCardComponent
+  StorePackageCardComponent,
+  AdminComponent,
+  DashboardComponent,
+  RatingComponent,
+  StoreComponent,
+  StoreHomeComponent,
+  CycleBadgeComponent,
+  LikeBtnComponent,
+  EditStoreComponent,
+  EditProfileComponent,
+  EditPaymentComponent,
+  EditLogisticsComponent,
+  MerchantProfileComponent
 ];
 
 const MODALS = [
@@ -134,15 +146,7 @@ const UI_SWITCH_GLOBAL_CONFIG: UiSwitchModuleConfig = {
     AppComponent,
     ...COMPONENTS,
     ...MODALS,
-    ...PIPES,
-    RatingComponent,
-    MerchantComponent,
-    StoreHomeComponent,
-    CycleBadgeComponent,
-    LikeBtnComponent,
-    EditStoreComponent,
-    EditProfileComponent,
-    EditPaymentComponent
+    ...PIPES
   ],
   imports: [
     BrowserModule,

@@ -19,19 +19,19 @@ export class EditStoreComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {
     this.storeForm = this.formBuilder.group({
       business: this.formBuilder.group({
-        name: ['', [Validators.required]],
+        name: ['Not Starbucks', [Validators.required]],
         type: [this.businessTypes[0], [Validators.required]],
-        description: [''],
-        address: [''],
-        logisticsPartnerId: ['']
+        description: ['Definitely not Starbucks.'],
       }),
       bankAccount: this.formBuilder.group({
-        name: ['', [Validators.required]],
-        number: ['', [Validators.required]],
-        bankName: ['']
+        name: ['Business Account', [Validators.required]],
+        number: ['9999999999999', [Validators.required]],
+        bankName: ['DBS']
       }),
-      logistics: this.formBuilder.group({
-        partnerId: ['', [Validators.required]]
+      address: this.formBuilder.group({
+        addressLine1: [''],
+        addressLine2: [''],
+        postalCode: ['']
       })
     });
   }

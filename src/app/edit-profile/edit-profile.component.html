@@ -4,33 +4,89 @@
   </div>
   <div class="card-body">
     <form [formGroup]="profileForm" class="p-4">
-      <h5 class="mb-4 text-dark border-bottom pb-2">User Details</h5>
       <div class="row">
-        <div class="col-sm form-group">
-          <label for="account-first-name">First Name</label>
-          <input id="account-first-name" type="text" formControlName="firstName" class="form-control" placeholder="First Name">
-        </div>
-        <div class="col-sm form-group">
-          <label for="account-last-name">Last Name</label>
-          <input id="account-last-namename" type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+        <div class="col pb-4">
+          <h5 class="mb-4 text-dark border-bottom pb-2">User Details</h5>
+          <div class="row">
+            <div class="col-sm form-group">
+              <label for="account-first-name">First Name</label>
+              <input id="account-first-name" type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+            </div>
+            <div class="col-sm form-group">
+              <label for="account-last-name">Last Name</label>
+              <input id="account-last-namename" type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm form-group">
+              <label for="account-email">Email</label>
+              <input id="account-email" type="email" formControlName="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="col-sm form-group">
+              <label for="account-phone-number">Phone Number</label>
+              <input id="account-phone-number" type="tel" formControlName="phoneNumber" class="form-control" placeholder="Phone Number">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm form-group">
-          <label for="account-email">Email</label>
-          <input id="account-email" type="email" formControlName="email" class="form-control" placeholder="Email">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm form-group">
-          <label for="account-phone-number">Phone Number</label>
-          <input id="account-phone-number" type="tel" formControlName="phoneNumber" class="form-control" placeholder="Phone Number">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm form-group">
-          <label for="account-address">Address</label>
-          <input id="account-address" type="tel" formControlName="address" class="form-control" placeholder="Address">
+      <div class="row" formArrayName="deliveryAddresses">
+        <div class="col pb-4">
+          <h5 class="mb-4 text-dark border-bottom pb-2">Delivery Addresses</h5>
+          <div class="card form-group" *ngFor="let address of profileForm.get('deliveryAddresses').controls; let i = index" [formGroupName]="i">
+            <div class="card-header d-flex justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">Address {{i + 1}}</h6>
+              <button type="button" class="close" (click)="deleteDeliveryAddress(i)" [disabled]="i == 0 && profileForm.get('deliveryAddresses').length == 1">
+                <small [class.text-black-50]="i == 0 && profileForm.get('deliveryAddresses').length == 1">
+                  <fa-icon [icon]="deleteDeliveryAddressIcon"></fa-icon>
+                </small>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="row">
+                    <div class="col-sm form-group">
+                      <label for="address-address-line-1-{{i+1}}">Address Line 1</label>
+                      <input id="address-address-line-1-{{i+1}}" type="text" [formControl]="address.get('address').get('addressLine1')" class="form-control" placeholder="Address Line 1">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm form-group">
+                      <label for="address-address-line-2-{{i+1}}">Address Line 2</label>
+                      <input id="address-address-line-2-{{i+1}}" type="text" [formControl]="address.get('address').get('addressLine2')" class="form-control" placeholder="Address Line 2">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="row">
+                    <div class="col-sm form-group">
+                      <label for="address-label-{{i+1}}">Label</label>
+                      <select id="address-label-{{i+1}}" class="form-control" formControlName="label">
+                        <option *ngFor="let label of addressLabels" [value]="label">{{ label | titlecase }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm form-group">
+                      <label for="address-postal-code-{{i+1}}">Postal Code</label>
+                      <input id="address-postal-code-{{i+1}}" type="text" [formControl]="address.get('address').get('postalCode')" class="form-control" placeholder="Postal Code">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col form-group">
+                  <label for="address-note-{{i+1}}">Notes</label>
+                  <textarea id="address-note-{{i+1}}" type="text" formControlName="note" class="form-control" placeholder="Notes"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" (click)="addDeliveryAddress()">
+              Add Address
+            </button>
+          </div>
         </div>
       </div>
     </form>

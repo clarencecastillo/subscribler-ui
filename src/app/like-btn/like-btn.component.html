@@ -1,6 +1,6 @@
 <ng-template #notlikedtooltip>Add this package to your wishlist.</ng-template>
 <ng-template #likedtooltip>Remove this package from your wishlist.</ng-template>
-<a class="btn no-outline p-0" (click)="liked = !liked" [routerLink]="" [class.text-primary]="liked"
+<a class="btn no-outline p-0" (click)="toggleLiked()" [routerLink]="" [class.text-primary]="liked"
   [ngbTooltip]="liked ? likedtooltip : notlikedtooltip" placement="left" container="body" [openDelay]="1000">
   <fa-icon [icon]="likeIcon" [style.font-size.rem]="size === 'lg' ? 2 : 1"></fa-icon>
 </a>

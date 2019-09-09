@@ -2,28 +2,28 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PackagesComponent } from './packages/packages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
 import { RegisterWorkflowComponent } from './register-workflow/register-workflow.component';
 import { QrPrinterComponent } from './qr-printer/qr-printer.component';
-import { ProfileComponent } from './profile/profile.component';
-import { StoreComponent } from './store/store.component';
+import { HomeComponent } from './home/home.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { LinksComponent } from './links/links.component';
-import { MerchantComponent } from './merchant/merchant.component';
+import { StoreComponent } from './store/store.component';
 import { PackageComponent } from './package/package.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
-import { AccountComponent } from './account/account.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: StoreComponent,
+    component: HomeComponent,
     children: [
       {
         path: 'account',
-        component: AccountComponent,
+        component: ProfileComponent,
         data: {
-          header: 'My Account'
+          header: 'My Account',
+          userType: 'subscriber'
         }
       },
       {
@@ -35,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'store/:storeId',
-        component: MerchantComponent
+        component: StoreComponent
       },
       {
         path: 'store/:storeId/package/:packageId',
@@ -76,7 +76,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: HomeComponent,
+    component: AdminComponent,
     children: [
       {
         path: '',
@@ -108,7 +108,8 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         data: {
-          header: 'Profile'
+          header: 'Profile',
+          userType: 'merchant'
         }
       },
       {
@@ -123,7 +124,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -85,10 +85,10 @@
     </div>
   </div>
   <div class="row" formArrayName="subscriptionPlans">
-    <div class="col form-group">
+    <div class="col">
       <h5 class="mb-4 text-dark border-bottom pb-2">Subscription Plans</h5>
 
-      <div class="card form-group" *ngFor="let option of packageForm.get('subscriptionPlans').controls; let i = index" [formGroupName]="i">
+      <div class="card form-group" *ngFor="let plan of packageForm.get('subscriptionPlans').controls; let i = index" [formGroupName]="i">
         <div class="card-header d-flex justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">{{packageForm.get('name').value}} Plan {{i + 1}}</h6>
           <button type="button" class="close" (click)="deleteSubscriptionPlan(i)" [disabled]="i == 0 && packageForm.get('subscriptionPlans').length == 1">

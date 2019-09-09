@@ -100,8 +100,8 @@ export class EditPackageComponent implements OnInit, OnChanges {
   }
 
   addSubscriptionPlan() {
-    const subscriptionPlan = this.packageForm.get('subscriptionPlans') as FormArray;
-    subscriptionPlan.push(this.buildSubscriptionPlanForm());
+    const subscriptionPlans = this.packageForm.get('subscriptionPlans') as FormArray;
+    subscriptionPlans.push(this.buildSubscriptionPlanForm());
   }
 
   buildPackageItemForm(item: PackageItem) {

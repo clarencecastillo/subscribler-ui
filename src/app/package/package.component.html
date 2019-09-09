@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-lg-6 pb-4">
-    <img class="img-fluid rounded border mb-4" [src]="package.imageUrl">
+    <div class="img-container">
+      <img class="img-fluid rounded border mb-4" [src]="package.imageUrl">
+      <sbr-cycle-badge class="m-2" [cycle]="package.cycle" size="lg"></sbr-cycle-badge>
+    </div>
     <p>{{package.description}}</p>
     <small class="d-block">
       <span class="text-dark">Package Frequency: </span>{{package.cycle | cycle : 'frequency' | titlecase}}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { StorePackage } from 'src/models/store-package';
+import { StoreService } from '../store.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'sbr-store',
@@ -9,15 +10,29 @@ import { filter } from 'rxjs/operators';
 })
 export class StoreComponent implements OnInit {
 
-  header: string;
+  name: string;
+  description: string;
+  popularPackages: StorePackage[] = [];
+  packages: StorePackage[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      this.header = this.route.firstChild.snapshot.data.header;
+  constructor(
+    private storeService: StoreService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(params => {
+      this.fetchPackages(params.storeId);
     });
   }
 
   ngOnInit() {
+  }
+
+  async fetchPackages(storeId: string) {
+    const store = await this.storeService.getStore(storeId);
+    this.name = store.name;
+    this.description = store.description;
+    this.popularPackages = store.popularPackages;
+    this.packages = store.packages;
   }
 
 }

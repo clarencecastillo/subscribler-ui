@@ -48,6 +48,13 @@ ngb-carousel:focus,
   -webkit-appearance: none;
 }
 
+.user-select-none {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 .brand-text {
   font-weight: 800;
   letter-spacing: 0.05rem;

@@ -12,6 +12,9 @@ export class CycleBadgeComponent implements OnInit {
   @Input()
   cycle: Cycle;
 
+  @Input()
+  size: 'md' | 'lg' = 'md';
+
   cycleIcon = faTruck;
 
   constructor() { }

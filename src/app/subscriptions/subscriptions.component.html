@@ -39,7 +39,7 @@
             {{ subscription.expiration | amDateFormat : 'D MMMM YYYY' }}
           </td>
           <td class="align-middle text-right">
-            <div class="no-arrow" ngbDropdown container="body" placement="bottom-right">
+            <div class="no-arrow cursor-pointer" ngbDropdown container="body" placement="bottom-right">
               <fa-icon class="btn btn-lg" [icon]="contextMenuIcon" ngbDropdownToggle></fa-icon>
               <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right shadow animated--grow-in show">
                 <a ngbDropdownItem [routerLink]="['/store', subscription.merchantId, 'package', subscription.package.id ]">

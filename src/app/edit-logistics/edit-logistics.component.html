@@ -1,0 +1,54 @@
+<div class="card h-100 o-hidden shadow">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Logistics</h6>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="logisticsForm" class="p-4">
+      <div class="row">
+        <div class="col pb-4" formGroupName="partner">
+          <h5 class="mb-4 text-dark border-bottom pb-2">Delivery Partner</h5>
+          <div class="row">
+            <div class="col form-group m-0">
+              <label for="logistics-partner">Preferred Partner</label>
+              <sbr-select-logistics id="logistics-partner" [value]="logisticsForm.get('partner').get('id').value" (valueChange)="logisticsForm.get('partner').get('id').setValue($event)"></sbr-select-logistics>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col form-group" formGroupName="pickUpAddress">
+          <h5 class="mb-4 text-dark border-bottom pb-2">Pick Up Address</h5>
+          <div class="row">
+            <div class="col form-group pl-3">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="logistics-copy-business-address"
+                  formControlName="useBusinessAddress" (change)="togglePickUpAddressDisabled()">
+                <label class="custom-control-label" for="logistics-copy-business-address">Use the same address as my business address</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8 form-group">
+              <div class="row">
+                <div class="col-sm form-group">
+                  <label for="logistics-address-line-1-{{i+1}}">Address Line 1</label>
+                  <input id="logistics-address-line-1-{{i+1}}" type="text" formControlName="addressLine1" class="form-control" placeholder="Address Line 1">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm form-group">
+                  <label for="logistics-address-line-2-{{i+1}}">Address Line 2</label>
+                  <input id="logistics-address-line-2-{{i+1}}" type="text" formControlName="addressLine2" class="form-control" placeholder="Address Line 2">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 form-group">
+              <label for="logistics-postal-code-{{i+1}}">Postal Code</label>
+              <input id="logistics-postal-code-{{i+1}}" type="text" formControlName="postalCode" class="form-control" placeholder="Postal Code">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

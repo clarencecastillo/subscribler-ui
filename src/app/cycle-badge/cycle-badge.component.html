@@ -1,5 +1,6 @@
 <ng-template #cycletooltip>This package recurs on a {{cycle | cycle : 'frequency'}} basis.</ng-template>
-<span class="badge badge-primary text-uppercase text-xs" [ngbTooltip]="cycletooltip" placement="right" container="body" [openDelay]="1000">
+<span class="badge badge-primary text-uppercase user-select-none" [ngbTooltip]="cycletooltip"
+  placement="right" container="body" [openDelay]="1000" [class.text-xs]="size === 'md'">
   <fa-icon class="mr-1" [icon]="cycleIcon"></fa-icon>
   {{cycle | cycle : 'frequency'}}
 </span>

@@ -1,6 +1,6 @@
 <div class="card h-100">
   <div class="card-img">
-    <img [src]="package.imageUrl" class="card-img-top">
+    <img [src]="'../../../assets/images/' + package.id + '.jpg'" class="card-img-top">
     <sbr-cycle-badge class="m-2" [cycle]="package.cycle"></sbr-cycle-badge>
     <div class="context-overlay no-arrow" ngbDropdown container="body" placement="bottom-right">
       <div class="backdrop no-outline" [routerLink]="['package', package.id]"></div>
