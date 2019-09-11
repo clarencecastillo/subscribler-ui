@@ -59,6 +59,8 @@ import { EditStoreComponent } from './edit-store/edit-store.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditPaymentComponent } from './edit-payment/edit-payment.component';
 import { EditLogisticsComponent } from './edit-logistics/edit-logistics.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -99,7 +101,9 @@ const COMPONENTS = [
   EditStoreComponent,
   EditProfileComponent,
   EditPaymentComponent,
-  EditLogisticsComponent
+  EditLogisticsComponent,
+  DatepickerComponent,
+  CheckoutComponent
 ];
 
 const MODALS = [
@@ -154,7 +158,9 @@ const UI_SWITCH_GLOBAL_CONFIG: UiSwitchModuleConfig = {
     ScrollToModule.forRoot(),
     UiSwitchModule.forRoot(UI_SWITCH_GLOBAL_CONFIG)
   ],
-  providers: [],
+  providers: [
+    ...PIPES
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     ...MODALS

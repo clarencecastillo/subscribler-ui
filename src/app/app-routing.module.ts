@@ -12,6 +12,8 @@ import { StoreComponent } from './store/store.component';
 import { PackageComponent } from './package/package.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+
 
 const routes: Routes = [
   {
@@ -39,10 +41,24 @@ const routes: Routes = [
       {
         path: 'store/:storeId/package/:packageId',
         component: PackageComponent
+      },
+      {
+        path: 'store/:storeId/package/:packageId/checkout/:planId',
+        component: CheckoutComponent,
+        data: {
+          header: 'Checkout'
+        }
+      },
+      {
+        path: 'store/:storeId/package/:packageId/checkout',
+        component: CheckoutComponent,
+        data: {
+          header: 'Checkout'
+        }
       }
     ],
     data: {
-      userType: 'subscriber'
+      userId: '1722564c-d093-4722-8788-b1d0a403a5d1'
     }
   },
   {
@@ -76,7 +92,7 @@ const routes: Routes = [
       }
     ],
     data: {
-      userType: 'merchant'
+      userId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87'
     }
   },
   {
@@ -125,7 +141,7 @@ const routes: Routes = [
       }
     ],
     data: {
-      userType: 'merchant'
+      userId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87'
     }
   }
 ];

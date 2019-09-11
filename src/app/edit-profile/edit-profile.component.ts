@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { DeliveryAddress, deliveryAddressLabels, DeliveryAddressLabel } from 'src/models/delivery-address';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/models/user';
 
 @Component({
   selector: 'sbr-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit, OnChanges {
+
+  @Input()
+  user: User;
 
   profileForm: FormGroup;
 
@@ -18,10 +22,10 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.profileForm = this.formBuilder.group({
-      firstName: ['Clarence', [Validators.required]],
-      lastName: ['Castillo', [Validators.required]],
-      email: ['hello@clarencecastillo.me', [Validators.required]],
-      phoneNumber: ['99991111'],
+      firstName: [, [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      phoneNumber: [''],
       deliveryAddresses: this.formBuilder.array(
         [this.buildDeliveryAddressForm()],
         [Validators.minLength(1)]
@@ -31,6 +35,21 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if (simpleChanges.user && simpleChanges.user.currentValue) {
+      this.profileForm.get('firstName').setValue(this.user.firstName);
+      this.profileForm.get('lastName').setValue(this.user.lastName);
+      this.profileForm.get('email').setValue(this.user.email);
+      this.profileForm.get('phoneNumber').setValue(this.user.phoneNumber);
+      this.setDeliveryAddresses(this.user.deliveryAddresses);
+    }
+  }
+
+  async setDeliveryAddresses(addresses: DeliveryAddress[]) {
+    const value = addresses.map(address => this.buildDeliveryAddressForm(address));
+    this.profileForm.setControl('deliveryAddresses', this.formBuilder.array(value, [Validators.minLength(1)]));
   }
 
   buildDeliveryAddressForm(deliveryAddress?: DeliveryAddress) {

@@ -1,14 +1,14 @@
-<div class="row" *ngIf="userType === 'subscriber'">
+<div class="row" *ngIf="user?.type === 'subscriber'">
   <div class="col pb-4">
-    <sbr-edit-profile></sbr-edit-profile>
+    <sbr-edit-profile [user]="user"></sbr-edit-profile>
   </div>
 </div>
-<div class="row" *ngIf="userType === 'merchant'">
+<div class="row" *ngIf="user?.type === 'merchant'">
   <div class="col pb-4">
     <sbr-edit-store></sbr-edit-store>
   </div>
 </div>
-<div class="row" *ngIf="userType === 'merchant'">
+<div class="row" *ngIf="user?.type === 'merchant'">
   <div class="col pb-4">
     <sbr-edit-logistics></sbr-edit-logistics>
   </div>

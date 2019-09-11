@@ -36,7 +36,7 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
     this.carousel.select(slideId);
 
     if (slideId === 'profile') {
-      this.profileComponent.resolveUserType(this.route.snapshot);
+      this.profileComponent.resolveUser(this.route.snapshot);
     }
   }
 

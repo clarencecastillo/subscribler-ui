@@ -1,0 +1,35 @@
+@import 'styles';
+
+:host {
+  display: flex;
+  --info: #{$primary};
+}
+
+.calendar-date {
+
+  &.today {
+    & > div {
+      border-bottom: 2px solid $primary;
+    }
+  }
+
+  &:not(:disabled):hover {
+    @extend .text-light;
+    background-color: $secondary;
+    border-color: $secondary;
+  }
+
+  &.active {
+    @extend .text-light;
+    background-color: $primary;
+  }
+
+  &:not(:disabled):hover,
+  &.active {
+    &.today {
+      & > div {
+        border-bottom: 1px solid $light;
+      }
+    }
+  }
+}

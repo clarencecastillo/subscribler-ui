@@ -1,0 +1,11 @@
+<ng-template #daytemplate let-date="date" let-selected="selected" let-disabled="disabled" let-today="today">
+  <button class="btn btn-circle calendar-date btn-sm w-100 h-100"
+    [class.active]="selected" [class.today]="today" [disabled]="disabled">
+    <div class="d-block">
+      {{date.day}}
+    </div>
+  </button>
+</ng-template>
+<ngb-datepicker #datepicker navigation="arrows" [dayTemplate]=daytemplate [(ngModel)]="date" 
+  [minDate]="minDateStruct" [maxDate]="maxDateStruct" (select)="dateChange.next(date)" class="border-0 m-auto">
+</ngb-datepicker>
