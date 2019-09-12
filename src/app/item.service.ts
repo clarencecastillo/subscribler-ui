@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Item } from 'src/models/item';
 import * as uuid from 'uuid/v4';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -114,46 +116,45 @@ export class ItemService {
       imageUrl: 'http://localhost:4200/assets/images/7f927f9a-d09a-11e9-bb65-2a2ae2dbcce4.jpg'
     }
   ];
-
+  
   constructor(private http: HttpClient) { }
 
   public getItems(merchantId: string): Promise<Item[]> {
-    return Promise.resolve(this.items.filter(item => item.merchantId === merchantId));
+    return this.http.get<Item[]>(`${environment.serverHost}/merchants/3/items`).toPromise();
   }
 
-  public getItem(itemId: string): Promise<Item> {
-    return Promise.resolve(this.items.find(item => item.id === itemId));
+  public getItem(merchantId: string, itemId: string): Promise<Item> {
+    return this.http.get<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`).toPromise();
   }
 
-  public getItemsById(itemIds: string[]): Promise<Item[]> {
-    return Promise.resolve(itemIds.map(itemId => this.items.find(item => item.id === itemId)));
+  public getItemsById(merchantId: string, itemIds: string[]): Promise<Item[]> {
+    const items: Item[] = [];
+    itemIds.forEach(itemId => {
+      var res = this.http.get<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`)
+      res.subscribe(i => items.push(i));
+    }
+  );
+    return of(items).toPromise();
   }
 
   public createItem(merchantId: string, item: NewItem): Promise<string> {
-    const id = uuid();
-    this.items.push({
-      id,
-      merchantId,
-      ...item
-    });
-    return Promise.resolve(id);
+    var res = this.http.post<Item>(`${environment.serverHost}/merchants/3/items`,item)
+    var id: string;
+    res.subscribe(newItem => {id = newItem.id})
+    return of(id).toPromise();
   }
 
-  public updateItem(itemId: string, update: NewItem): Promise<void> {
-    const item = this.items.find(i => i.id === itemId);
+  public updateItem(merchantId: string, itemId: string, update: NewItem): Promise<void> {
+    const item = this.http.put<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`, update);
     if (!item) {
       return Promise.reject();
     }
-
-    Object.keys(update).forEach(key => {
-      item[key] = update[key];
-    });
-
     return Promise.resolve();
   }
 
-  public deleteItem(itemId: string): Promise<void> {
-    this.items.splice(this.items.findIndex(item => item.id === itemId), 1);
+  public deleteItem(merchantId: string, itemId: string): Promise<void> {
+    this.http.delete<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`);
+    //TODO: take care of when the item does not exist
     return Promise.resolve();
   }
 

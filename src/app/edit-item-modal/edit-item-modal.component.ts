@@ -5,6 +5,7 @@ import { Item } from 'src/models/item';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { EditItemComponent } from '../edit-item/edit-item.component';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-edit-item-modal',
@@ -26,11 +27,12 @@ export class EditItemModalComponent implements OnInit {
   constructor(
     private modal: NgbActiveModal,
     private itemService: ItemService,
-    private toastrService: ToastrService
-  ) { }
+    private toastrService: ToastrService,
+    private authService: AuthService
+  ) { const userId = this.authService.getUserId();}
 
   async fetchItem(itemId: string) {
-    this.item = await this.itemService.getItem(itemId);
+    this.item = await this.itemService.getItem(this.authService.getUserId(), itemId);
   }
 
   ngOnInit() {
