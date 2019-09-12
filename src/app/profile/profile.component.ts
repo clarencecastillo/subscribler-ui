@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { User } from 'src/models/user';
-import { filter } from 'rxjs/operators';
-import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
+import { Store } from 'src/models/store';
+import { StoreService } from '../store.service';
 
 @Component({
   selector: 'sbr-profile',
@@ -12,20 +12,27 @@ import { UserService } from '../user.service';
 export class ProfileComponent implements OnInit {
 
   user: User;
+  store: Store;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private userService: UserService
+    private authService: AuthService,
+    private storeService: StoreService
   ) {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      this.resolveUser(this.route.snapshot);
+
+    this.fetchUser().then(() => {
+      if (this.user.type === 'merchant') {
+        this.fetchStore();
+      }
     });
+
   }
 
-  public async resolveUser(snapshot: ActivatedRouteSnapshot) {
-    const userId = snapshot.data.userId || snapshot.parent.data.userId;
-    this.user = await this.userService.getUser(userId);
+  async fetchUser() {
+    this.user = await this.authService.getUser();
+  }
+
+  async fetchStore() {
+    this.store = await this.storeService.getStore(this.user.id);
   }
 
   ngOnInit() {

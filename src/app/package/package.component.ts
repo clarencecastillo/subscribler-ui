@@ -43,12 +43,12 @@ export class PackageComponent implements OnInit {
     private storeService: StoreService
   ) {
     this.route.params.subscribe(params => {
-      this.fetchPackage(params.packageId);
+      this.fetchPackage(params.merchantId, params.packageId);
     });
   }
 
-  async fetchPackage(packageId: string) {
-    this.package = await this.storeService.getPackage(packageId);
+  async fetchPackage(merchantId: string, packageId: string) {
+    this.package = await this.storeService.getPackage(merchantId, packageId);
   }
 
   ngOnInit() {

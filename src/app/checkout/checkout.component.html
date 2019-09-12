@@ -4,9 +4,9 @@
       <div class="row sticky-top p-4">
         <div class="col">
           <div class="pb-4">
-            <a class="text-dark h4 text-decoration-none" [routerLink]="['/', 'store', package.store.id, 'package', package.id]">{{package.name}}</a>
+            <a class="text-dark h4 text-decoration-none" [routerLink]="['/', 'store', package.merchantId, 'package', package.id]">{{package.name}}</a>
             <br>
-            <span>by <a [routerLink]="['/', 'store', package.store.id]">{{package.store.name}}</a></span>
+            <span>by <a [routerLink]="['/', 'store', package.merchantId]">{{package.merchantName}}</a></span>
           </div>
           <div class="img-container pb-4">
             <img class="img-fluid rounded border" [src]="package.imageUrl">
@@ -90,6 +90,6 @@
     </div>
   </div>
   <div class="d-flex justify-content-end">
-    <button class="btn btn-primary">Continue</button>
+    <button class="btn btn-primary" [disabled]="!subscriptionForm.valid">Make Payment</button>
   </div>
 </form>

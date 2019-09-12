@@ -9,7 +9,7 @@ import { Store } from 'src/models/store';
 })
 export class StoreService {
 
-  packages: StorePackage[];
+  stores: Store[];
 
   constructor(
     private packageService: PackageService,
@@ -18,13 +18,48 @@ export class StoreService {
 
   private async buildDummyDataIfNotExists() {
 
-    if (this.packages) {
+    if (this.stores) {
       return;
     }
 
-    this.packages = await this.packageService.getPackages('')
-      .then(packages => Promise.all(packages.map<Promise<StorePackage>>(async p => ({
+    const partialStores: Pick<Store, 'merchantId' | 'business' | 'address' | 'bankAccount' | 'logistics'>[] = [
+      {
+        merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
+        business: {
+          name: 'Not Starbucks',
+          description: 'This store is not Starbucks.',
+          type: 'Food and Beverage'
+        },
+        address: {
+          addressLine1: '',
+          addressLine2: '',
+          postalCode: '',
+        },
+        bankAccount: {
+          name: '',
+          number: '',
+          bankName: ''
+        },
+        logistics: {
+          partner: {
+            id: 'ninjavan'
+          },
+          pickUpAddress: {
+            addressLine1: '',
+            addressLine2: '',
+            postalCode: '',
+            useBusinessAddress: true
+          }
+        }
+      }
+    ];
+
+    const storePromises = Promise.all(partialStores.map<Promise<Store>>(async store => {
+
+      const packages = await Promise.all((await this.packageService.getPackages(store.merchantId)).map<Promise<StorePackage>>(async p => ({
         id: p.id,
+        merchantId: p.merchantId,
+        merchantName: store.business.name,
         name: p.name,
         description: p.description,
         cycle: p.cycle,
@@ -42,26 +77,24 @@ export class StoreService {
           item: await this.itemService.getItem(item.itemId),
           quantity: item.quantity
         })))
-      }))));
-  }
+      })));
 
-  public async getStore(storeId: string): Promise<Store> {
-    return this.buildDummyDataIfNotExists().then(() => ({
-      name: 'Not Starbucks',
-      description: 'Definitely not Starbucks.',
-      popularPackages: this.packages.slice(0, 3),
-      packages: this.packages
+      return {
+        ...store,
+        packages,
+        popularPackages: packages.slice(0, 3),
+      };
     }));
+
+    this.stores = await storePromises;
   }
 
-  public async getPackage(packageId: string): Promise<StorePackage> {
+  public async getStore(merchantId: string): Promise<Store> {
     return this.buildDummyDataIfNotExists()
-      .then(() => ({
-        ...this.packages.find(p => p.id === packageId),
-        store: {
-          id: '3',
-          name: 'Not Starbucks'
-        }
-      }));
+      .then(() => this.stores.find(store => store.merchantId === merchantId));
+  }
+
+  public async getPackage(merchantId: string, packageId: string): Promise<StorePackage> {
+    return this.getStore(merchantId).then(store => store.packages.find(p => p.id === packageId));
   }
 }

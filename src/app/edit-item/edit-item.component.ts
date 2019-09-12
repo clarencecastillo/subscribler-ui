@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Item } from 'src/models/item';
-import { ItemService, ItemDetails } from '../item.service';
+import { ItemService, NewItem } from '../item.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-edit-item',
@@ -32,8 +33,10 @@ export class EditItemComponent implements OnInit, OnChanges {
 
   constructor(
     private itemService: ItemService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {
+
     this.itemForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: [''],
@@ -55,13 +58,14 @@ export class EditItemComponent implements OnInit, OnChanges {
     }
   }
 
-  public save(): Promise<void | string> {
-    const formValue: ItemDetails = this.itemForm.value;
+  public async save(): Promise<void | string> {
+    const formValue: NewItem = this.itemForm.value;
     if (this.item) {
       return this.itemService.updateItem(this.item.id, formValue);
     }
 
-    return this.itemService.createItem(formValue);
+    const userId = this.authService.getUserId();
+    return this.itemService.createItem(userId, formValue);
   }
 
 }

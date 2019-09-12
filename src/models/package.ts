@@ -4,6 +4,7 @@ import { SubscriptionPlan } from './subscription-plan';
 
 export interface Package {
   id: string;
+  merchantId: string;
   name: string;
   description: string;
   cycle: CycleSymbol;

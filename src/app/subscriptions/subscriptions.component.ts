@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'src/models/subscription';
 import { SubscriptionService } from '../subscription.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-subscriptions',
@@ -18,13 +17,11 @@ export class SubscriptionsComponent implements OnInit {
 
   constructor(
     private subscriptionService: SubscriptionService,
-    private router: Router,
-    private route: ActivatedRoute
+    private authService: AuthService
   ) {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      const userId = this.route.snapshot.parent.data.userId;
-      this.fetchSubscriptions(userId);
-    });
+
+    const userId = this.authService.getUserId();
+    this.fetchSubscriptions(userId);
   }
 
   async fetchSubscriptions(userId: string) {

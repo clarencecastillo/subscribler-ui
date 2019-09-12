@@ -10,9 +10,10 @@ export class PackageService {
   packages: Package[] = [
     {
       id: 'b018400d-a81a-4a7e-8d1c-3dae05d062f6',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Breakfast Pancakes with Coffee',
       description: 'Slice into three golden brown and perfectly round discs of fluffy, buttery pancakes. Top it off with a drizzle of maple syrup or strawberry jam.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1ogm-vz5NEGJ1FCAKG0ZVkDqYXLJN2e_S=w1842-h1732-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/b018400d-a81a-4a7e-8d1c-3dae05d062f6.jpg',
       cycle: 'D',
       items: [
         {
@@ -58,9 +59,10 @@ export class PackageService {
     },
     {
       id: 'f35c3a92-1197-4889-b084-977c1f4dba3b',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Peanut Butter & Jelly Toast with Coffee',
       description: 'An irresistible spin on a breakfast classic – your favorite toast now comes cloaked in crushed biscuit.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1GSrHK9CH2fM7nyFtNFcwEdl2P9F6UWQw=w3360-h1830-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/f35c3a92-1197-4889-b084-977c1f4dba3b.jpg',
       cycle: 'D',
       items: [
         {
@@ -106,9 +108,10 @@ export class PackageService {
     },
     {
       id: 'c5fd2f6f-3ba3-4fe9-bbc9-8435d76a46c3',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Four Cheese Toast with Coffee',
       description: 'Melty mozzarella, white cheddar, gruyere and parmesan cheese are layered on toasty bread to create this cheesy breakfast goodness.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1jDKVvV-v7DPKoadolKjVthFphpKd835r=w722-h1700-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/c5fd2f6f-3ba3-4fe9-bbc9-8435d76a46c3.jpg',
       cycle: 'D',
       items: [
         {
@@ -146,9 +149,10 @@ export class PackageService {
     },
     {
       id: '078e4aec-d09a-11e9-bb65-2a2ae2dbcce4',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Turkey Ham & Omelette Sandwich with Coffee',
       description: 'A delicious reason to get out of bed - turkey ham, egg omelette and cream cheese between two soft buns.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1AGvzzWu8JCf6Kf6TlV7zDIheDJxFnJKK=w1842-h1700-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/078e4aec-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
       cycle: 'D',
       items: [
         {
@@ -186,9 +190,10 @@ export class PackageService {
     },
     {
       id: '7f928620-d09a-11e9-bb65-2a2ae2dbcce4',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Egg Mayo Multigrain Croissant with Coffee',
       description: 'Bite into a soft, flaky multigrain croissant that is overflowing with flavorful egg mayo and cheese.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1uy1x-nxQ_GBUPw53dCgG4MDA6GAV_sgM=w1204-h1798-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/7f928620-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
       cycle: 'D',
       items: [
         {
@@ -226,9 +231,10 @@ export class PackageService {
     },
     {
       id: 'ad388d9a-d09a-11e9-826f-2a2ae2dbcce4',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Chicken Ham & Cheese Panwich with Coffee',
       description: 'Two breakfast favorites unite in one scrumptious panwich. Black pepper chicken ham and egg sits between two fluffy buttery pancakes.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1wcXOqkXoGoaV5OdinNMtID5_PDgaDOKC=w1204-h1798-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/ad388d9a-d09a-11e9-826f-2a2ae2dbcce4.jpg',
       cycle: 'D',
       items: [
         {
@@ -266,9 +272,10 @@ export class PackageService {
     },
     {
       id: 'd156af5e-d09a-11e9-bb65-2a2ae2dbcce4',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Egg White, Roasted Pepper, Mushroom & Cheddar Wrap with Coffee',
       description: 'A soft tortilla wrap filled with sautéed mushrooms, caramelized pepper and egg white.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1pXYOt5TUkXiGoSOPJMnCmA0bInlWOza2=w1204-h1798-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/d156af5e-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
       cycle: 'D',
       items: [
         {
@@ -306,9 +313,10 @@ export class PackageService {
     },
     {
       id: 'd156b7d8-d09a-11e9-bb65-2a2ae2dbcce4',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Turkey Ham, Egg White and Cheddar Sandwich with Coffee',
       description: 'A fluffy egg white patty served simply with turkey ham and aged cheddar cheese in a lightly toasted wholegrain bun. A breakfast classic.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1o6dr6Iputbh1L7tacGdjNebNUrQGfFFE=w1204-h1798-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/d156b7d8-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
       cycle: 'D',
       items: [
         {
@@ -346,9 +354,10 @@ export class PackageService {
     },
     {
       id: 'ee7659b8-d09a-11e9-bb65-2a2ae2dbcce4',
+      merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
       name: 'Rosemary Chicken & Emmental Cheese Croissant with Coffee',
       description: 'This buttery flaky croissant is filled with chicken mayo and aromatic rosemary with emmental cheese, coupled with celery bits for that extra crunch in every bite.',
-      imageUrl: 'https://lh3.google.com/u/0/d/1yf7eygFRf8bkNo5qYHVH-I6LHPIebXQb=w1204-h1798-iv1',
+      imageUrl: 'http://localhost:4200/assets/images/ee7659b8-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
       cycle: 'D',
       items: [
         {
@@ -388,18 +397,18 @@ export class PackageService {
 
   constructor() { }
 
-  async getPackages(storeId: string): Promise<Package[]> {
-    return Promise.resolve(this.packages);
+  async getPackages(merchantId: string): Promise<Package[]> {
+    return Promise.resolve(this.packages.filter(p => p.merchantId === merchantId));
   }
 
   getPackage(packageId: string) {
     return this.packages.find(p => p.id === packageId);
   }
 
-  createPackage(): string {
-    const packageId = 'package' + this.packages.length + 1;
+  createPackage(merchantId: string): Package {
     this.packages.push({
-      id: 'package' + this.packages.length + 1,
+      id: uuid(),
+      merchantId,
       name: '',
       description: '',
       cycle: 'D',
@@ -415,7 +424,7 @@ export class PackageService {
         }
       ]
     });
-    return packageId;
+    return this.packages[this.packages.length - 1];
   }
 
   updatePackage(packageId: string, update: PackageDetails): Promise<void> {

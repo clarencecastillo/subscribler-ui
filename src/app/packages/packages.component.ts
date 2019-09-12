@@ -5,6 +5,7 @@ import { Package } from 'src/models/package';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-packages',
@@ -23,26 +24,31 @@ export class PackagesComponent implements OnInit {
   constructor(
     private packageService: PackageService,
     private modalService: NgbModal,
-    private toastrService: ToastrService
-  ) { }
-
-  ngOnInit() {
+    private toastrService: ToastrService,
+    private authService: AuthService
+  ) {
     this.fetchPackages();
   }
 
-  async fetchPackages() {
-    this.packages = await this.packageService.getPackages('123');
+  ngOnInit() {
+
   }
 
-  createPackage() {
-    const packageId = this.packageService.createPackage();
-    this.activePackageId = packageId;
+  async fetchPackages() {
+    this.packages = await this.packageService.getPackages(this.authService.getUserId());
+  }
+
+  async createPackage() {
+    const p = this.packageService.createPackage(this.authService.getUserId());
+    this.packages.push(p);
+    this.activePackageId = p.id;
   }
 
   deletePackage(p: Package) {
     this.packageService.deletePackage(p.id).then(() => {
       this.toastrService.success(`Package ${p.name} was deleted successfully`);
 
+      this.packages = this.packages.filter(pp => pp.id !== p.id);
       if (this.activePackageId === p.id) {
         this.activePackageId = undefined;
       }

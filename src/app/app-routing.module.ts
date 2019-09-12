@@ -13,6 +13,7 @@ import { PackageComponent } from './package/package.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,11 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
+      {
+        path: '',
+        component: LandingComponent,
+        pathMatch: 'full'
+      },
       {
         path: 'account',
         component: ProfileComponent,
@@ -35,22 +41,22 @@ const routes: Routes = [
         }
       },
       {
-        path: 'store/:storeId',
+        path: 'store/:merchantId',
         component: StoreComponent
       },
       {
-        path: 'store/:storeId/package/:packageId',
+        path: 'store/:merchantId/package/:packageId',
         component: PackageComponent
       },
       {
-        path: 'store/:storeId/package/:packageId/checkout/:planId',
+        path: 'store/:merchantId/package/:packageId/checkout/:planId',
         component: CheckoutComponent,
         data: {
           header: 'Checkout'
         }
       },
       {
-        path: 'store/:storeId/package/:packageId/checkout',
+        path: 'store/:merchantId/package/:packageId/checkout',
         component: CheckoutComponent,
         data: {
           header: 'Checkout'

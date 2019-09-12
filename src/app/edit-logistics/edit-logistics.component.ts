@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Logistics } from 'src/models/logistics';
+import { Store } from 'src/models/store';
 
 @Component({
   selector: 'sbr-edit-logistics',
   templateUrl: './edit-logistics.component.html',
   styleUrls: ['./edit-logistics.component.scss']
 })
-export class EditLogisticsComponent implements OnInit {
+export class EditLogisticsComponent implements OnInit, OnChanges {
+
+  @Input()
+  store: Store;
 
   logisticsForm: FormGroup;
 
@@ -26,6 +31,17 @@ export class EditLogisticsComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if (simpleChanges.store && simpleChanges.store.currentValue) {
+      this.logisticsForm.setValue(this.store.logistics);
+      if (this.store.logistics.pickUpAddress.useBusinessAddress) {
+        this.logisticsForm.get('pickUpAddress').get('addressLine1').setValue(this.store.address.addressLine1);
+        this.logisticsForm.get('pickUpAddress').get('addressLine2').setValue(this.store.address.addressLine2);
+        this.logisticsForm.get('pickUpAddress').get('postalCode').setValue(this.store.address.postalCode);
+      }
+    }
+  }
 
   togglePickUpAddressDisabled(disable?: boolean) {
 

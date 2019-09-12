@@ -16,7 +16,7 @@ export class SelectLogisticsComponent implements OnInit {
 
   logisticPartners = [
     {
-      id: 'ninavan',
+      id: 'ninjavan',
       name: 'Ninja Van',
       imageUrl: 'https://www.ninjavan.co/cover.png'
     },

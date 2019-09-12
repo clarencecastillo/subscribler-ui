@@ -61,6 +61,9 @@ import { EditPaymentComponent } from './edit-payment/edit-payment.component';
 import { EditLogisticsComponent } from './edit-logistics/edit-logistics.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentModalComponent } from './payment-modal/payment-modal.component';
+import { LoginComponent } from './login/login.component';
+import { LandingComponent } from './landing/landing.component';
 
 const COMPONENTS = [
   RegisterComponent,
@@ -109,7 +112,8 @@ const COMPONENTS = [
 const MODALS = [
   SelectItemModalComponent,
   ConfirmModalComponent,
-  EditItemModalComponent
+  EditItemModalComponent,
+  PaymentModalComponent
 ];
 
 const PIPES = [
@@ -138,7 +142,9 @@ const UI_SWITCH_GLOBAL_CONFIG: UiSwitchModuleConfig = {
     AppComponent,
     ...COMPONENTS,
     ...MODALS,
-    ...PIPES
+    ...PIPES,
+    LoginComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

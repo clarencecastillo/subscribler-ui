@@ -1,6 +1,6 @@
 <div ngbDropdown class="no-arrow">
   <div ngbDropdownToggle class="nav-link cursor-pointer">
-    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.name}}</span>
+    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.firstName}} {{user.lastName}}</span>
     <img class="img-profile rounded-circle" [src]="user.imageUrl">
   </div>
   <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" ngbDropdownMenu>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-  <button class="btn btn-primary" [routerLink]="['/', 'store', '123']">
+  <button class="btn btn-primary" [routerLink]="['/', 'store', user?.id]">
     <fa-icon class="mr-2" [icon]="storeIcon"></fa-icon>
     Go to Your Store Page
   </button>
@@ -12,7 +12,7 @@
     </li>
     <div class="topbar-divider d-none d-sm-block"></div>
     <li class="nav-item d-inline-block">
-      <sbr-user></sbr-user>
+      <sbr-user [user]="user"></sbr-user>
     </li>
   </ul>
 </nav>

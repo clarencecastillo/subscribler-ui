@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { StoreService } from '../store.service';
 import { StorePackage } from 'src/models/store-package';
 import { DeliveryAddress } from 'src/models/delivery-address';
 import { UserService } from '../user.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { filter } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faHome, faBuilding, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import * as moment from 'moment';
 import { CyclePipe } from '../cycle.pipe';
+import { AuthService } from '../auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'sbr-checkout',
@@ -36,43 +36,41 @@ export class CheckoutComponent implements OnInit {
     private storeService: StoreService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private cyclePipe: CyclePipe
+    private cyclePipe: CyclePipe,
+    private authService: AuthService
   ) {
 
     this.subscriptionForm = this.formBuilder.group({
-      subscriberId: [''],
-      merchantId: [''],
-      packageId: [''],
-      planId: [''],
-      deliveryAddressId: [''],
-      startDate: [this.minStartDate]
+      subscriberId: ['', [Validators.required]],
+      merchantId: ['', [Validators.required]],
+      packageId: ['', [Validators.required]],
+      planId: ['', [Validators.required]],
+      deliveryAddressId: ['', [Validators.required]],
+      startDate: [this.minStartDate, [Validators.required]]
     });
 
     this.route.params.subscribe(async params => {
-      this.subscriptionForm.get('merchantId').setValue(params.storeId);
+      this.subscriptionForm.get('merchantId').setValue(params.merchantId);
       this.subscriptionForm.get('packageId').setValue(params.packageId);
       this.subscriptionForm.get('planId').setValue(params.planId);
-      await this.fetchPackage(params.packageId);
+      await this.fetchPackage(params.merchantId, params.packageId);
     });
 
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      const userId = this.route.snapshot.parent.data.userId;
-      this.subscriptionForm.get('subscriberId').setValue(userId);
-      this.fetchDeliveryAddresses(userId);
-    });
+    const userId = this.authService.getUserId();
+    this.subscriptionForm.get('subscriberId').setValue(userId);
+    this.fetchDeliveryAddresses(userId);
 
     this.subscriptionForm.valueChanges.subscribe(value => {
       if (this.package && value.planId && value.startDate) {
         const selectedPlan = this.package.subscription.plans.find(plan => plan.id === value.planId);
-        const planDays = cyclePipe.transform(this.package.cycle, 'days') as number;
+        const planDays = this.cyclePipe.transform(this.package.cycle, 'days') as number;
         this.expiryDate = moment(value.startDate).add(selectedPlan.cycles * planDays, 'days');
       }
     });
   }
 
-  async fetchPackage(packageId: string) {
-    this.package = await this.storeService.getPackage(packageId);
+  async fetchPackage(merchantId: string, packageId: string) {
+    this.package = await this.storeService.getPackage(merchantId, packageId);
   }
 
   async fetchDeliveryAddresses(userId: string) {

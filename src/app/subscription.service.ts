@@ -56,6 +56,6 @@ export class SubscriptionService {
   constructor() { }
 
   public getSubscriptions(subscriberId: string): Promise<Subscription[]> {
-    return Promise.resolve(this.subscriptions);
+    return Promise.resolve(this.subscriptions.filter(subscription => subscription.subscriberId === subscriberId));
   }
 }

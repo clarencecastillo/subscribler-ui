@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faSignOutAlt, IconDefinition, faUser, faCogs, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/models/user';
 
@@ -9,11 +9,8 @@ import { User } from 'src/models/user';
 })
 export class UserComponent implements OnInit {
 
-  user: Partial<User> = {
-    firstName: 'Abhijeet',
-    lastName: 'Joshi',
-    imageUrl: 'https://media.licdn.com/dms/image/C4D03AQFpVvpLBKewrg/profile-displayphoto-shrink_200_200/0?e=1571270400&v=beta&t=dpJ6f4L7qfqRJeSHEXBtnRZpcHDqU5fqtMx06q9ztSs'
-  };
+  @Input()
+  user: User;
 
   userLinks: UserLink[] = [
     {

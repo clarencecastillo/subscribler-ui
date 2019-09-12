@@ -5,11 +5,11 @@
 </div>
 <div class="row" *ngIf="user?.type === 'merchant'">
   <div class="col pb-4">
-    <sbr-edit-store></sbr-edit-store>
+    <sbr-edit-store [store]="store"></sbr-edit-store>
   </div>
 </div>
 <div class="row" *ngIf="user?.type === 'merchant'">
   <div class="col pb-4">
-    <sbr-edit-logistics></sbr-edit-logistics>
+    <sbr-edit-logistics [store]="store"></sbr-edit-logistics>
   </div>
 </div>

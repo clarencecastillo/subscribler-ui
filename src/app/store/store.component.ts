@@ -20,17 +20,17 @@ export class StoreComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
-      this.fetchPackages(params.storeId);
+      this.fetchPackages(params.merchantId);
     });
   }
 
   ngOnInit() {
   }
 
-  async fetchPackages(storeId: string) {
-    const store = await this.storeService.getStore(storeId);
-    this.name = store.name;
-    this.description = store.description;
+  async fetchPackages(merchantId: string) {
+    const store = await this.storeService.getStore(merchantId);
+    this.name = store.business.name;
+    this.description = store.business.description;
     this.popularPackages = store.popularPackages;
     this.packages = store.packages;
   }

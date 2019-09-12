@@ -6,6 +6,7 @@ import { ItemService } from '../item.service';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { EditItemModalComponent } from '../edit-item-modal/edit-item-modal.component';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-select-item-modal',
@@ -13,6 +14,7 @@ import { EditItemModalComponent } from '../edit-item-modal/edit-item-modal.compo
   styleUrls: ['./select-item-modal.component.scss']
 })
 export class SelectItemModalComponent implements OnInit {
+
 
   closeIcon = faTimes;
   selectedIcon = faCheck;
@@ -27,9 +29,11 @@ export class SelectItemModalComponent implements OnInit {
     private modal: NgbActiveModal,
     private itemService: ItemService,
     private modalService: NgbModal,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private authService: AuthService
   ) {
-    this.itemService.getItems().then(items => {
+    const userId = this.authService.getUserId();
+    this.itemService.getItems(userId).then(items => {
       this.items = items;
     });
   }
