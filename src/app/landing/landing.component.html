@@ -1,4 +1,4 @@
-<div class="row p-4">
+<div class="row p-4" *ngIf="!user">
   <div class="col-7 pr-5 border-right">
     <ngb-carousel [interval]="10000" [showNavigationArrows]="false" [showNavigationIndicators]="false">
       <ng-template ngbSlide *ngFor="let img of illustrations">
@@ -28,6 +28,43 @@
         <div class="pt-4 text-center">
           <button class="btn btn-link text-gray-600" (click)="registerMode = true">Don't have an account? Sign Up!</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row p-4">
+  <div class="col">
+    <h5 class="mb-4 text-dark border-bottom pb-2">Most Popular</h5>
+    <div class="row">
+      <div class="col-md-12 col-lg-4 pb-4 pointer-events-none" *ngFor="let package of popularPackages">
+        <sbr-store-package-card class="d-block h-100" [package]="package"></sbr-store-package-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row p-4">
+  <div class="col">
+    <h5 class="mb-4 text-dark border-bottom pb-2">By Category</h5>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 pb-4" *ngFor="let category of categories">
+        <div class="btn btn-light card">
+          <div class="card-body d-flex align-items-center">
+            <div class="text-center m-auto text-gray-400">
+              <fa-icon [icon]="category.icon" [style.font-size.rem]="4"></fa-icon>
+              <h6 class="text-dark text-uppercase">{{category.name}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row p-4">
+  <div class="col">
+    <h5 class="mb-4 text-dark border-bottom pb-2">Just For You</h5>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 pb-4 pointer-events-none" *ngFor="let package of recommendedPackages">
+        <sbr-store-package-card class="d-block h-100" [package]="package"></sbr-store-package-card>
       </div>
     </div>
   </div>

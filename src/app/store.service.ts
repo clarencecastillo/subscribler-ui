@@ -4,6 +4,9 @@ import { ItemService } from './item.service';
 import { PackageService } from './package.service';
 import { Store } from 'src/models/store';
 import { AuthService } from './auth.service';
+import * as uuid from 'uuid/v4';
+import * as _ from 'lodash';
+import * as faker from 'faker';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +29,7 @@ export class StoreService {
 
     const partialStores: Pick<Store, 'merchantId' | 'business' | 'address' | 'bankAccount' | 'logistics'>[] = [
       {
-        merchantId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87',
+        merchantId: '9',
         business: {
           name: 'Not Starbucks',
           description: 'This store is not Starbucks.',
@@ -97,6 +100,58 @@ export class StoreService {
   }
 
   public async getPackage(merchantId: string, packageId: string): Promise<StorePackage> {
+    if (merchantId === '999') {
+      return this.fakePackages.find(p => p.id === packageId);
+    }
+
     return this.getStore(merchantId).then(store => store.packages.find(p => p.id === packageId));
+  }
+
+  private generatePackage(): StorePackage {
+    const basicPlanId = uuid();
+    return {
+      id: uuid(),
+      merchantId: '999',
+      merchantName: 'Random Shop',
+      name: faker.commerce.productName(),
+      description: faker.commerce.product(),
+      cycle: 'M',
+      imageUrl: _.sample([
+        'http://localhost:4200/assets/images/0e886426-d289-4446-a6b7-96229188ae71.jpg',
+        'http://localhost:4200/assets/images/4eb138ec-ac9b-467b-b4cf-019319ce04e1.jpg',
+        'http://localhost:4200/assets/images/6cc22d02-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
+        'http://localhost:4200/assets/images/6cc22fc8-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
+        'http://localhost:4200/assets/images/6cc23388-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
+        'http://localhost:4200/assets/images/6cc23694-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
+        'http://localhost:4200/assets/images/7f927f9a-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
+        'http://localhost:4200/assets/images/7f928620-d09a-11e9-bb65-2a2ae2dbcce4.jpg',
+        'http://localhost:4200/assets/images/40db326c-aa8b-4297-9dc7-0d366320e6a7.jpg',
+        'http://localhost:4200/assets/images/61ec68e1-f8cd-41c6-8c4c-d3accacc823d.jpg',
+        'http://localhost:4200/assets/images/078e4aec-d09a-11e9-bb65-2a2ae2dbcce4.jpg'
+      ]),
+      rating: {
+        score: _.random(1, 5, false),
+        count: _.random(100, false)
+      },
+      subscription: {
+        basicPlanId,
+        mostPopularPlanId: basicPlanId,
+        plans: [
+          {
+            id: basicPlanId,
+            name: 'Basic Plan',
+            cycles: 1,
+            price: _.random(3, 50),
+            description: ''
+          }
+        ]
+      },
+      items: []
+    };
+  }
+
+  public async generateRandomPackages(n: number): Promise<StorePackage[]> {
+    const newPackages = _.range(n).map(() => this.generatePackage());
+    return Promise.resolve(newPackages);
   }
 }
