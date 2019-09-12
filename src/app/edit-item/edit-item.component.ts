@@ -60,11 +60,11 @@ export class EditItemComponent implements OnInit, OnChanges {
 
   public async save(): Promise<void | string> {
     const formValue: NewItem = this.itemForm.value;
+    const userId = this.authService.getUserId();
     if (this.item) {
-      return this.itemService.updateItem(this.item.id, formValue);
+      return this.itemService.updateItem(userId, this.item.id, formValue);
     }
 
-    const userId = this.authService.getUserId();
     return this.itemService.createItem(userId, formValue);
   }
 

@@ -58,7 +58,7 @@ export class SelectItemModalComponent implements OnInit {
   }
 
   async deleteItem(item: Item) {
-    this.itemService.deleteItem(item.id).then(() => {
+    this.itemService.deleteItem(this.authService.getUserId(), item.id).then(() => {
       this.toastrService.success(`Item ${item.name} was deleted successfully`);
     }).catch(error => {
       this.toastrService.error(`Failed to delete item: ${error}`);

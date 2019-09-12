@@ -11,6 +11,7 @@ import { Item } from 'src/models/item';
 import { PackageItem } from 'src/models/package-item';
 import { filter } from 'rxjs/operators';
 import { SubscriptionPlan } from 'src/models/subscription-plan';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-edit-package',
@@ -40,7 +41,8 @@ export class EditPackageComponent implements OnInit, OnChanges {
     private packageService: PackageService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private authService: AuthService
   ) {
 
     this.packageForm = this.formBuilder.group({
@@ -80,7 +82,7 @@ export class EditPackageComponent implements OnInit, OnChanges {
   }
 
   async setPackageItems(items: PackageItem[]) {
-    this.selectedItems = await this.itemService.getItemsById(items.map(item => item.itemId));
+    this.selectedItems = await this.itemService.getItemsById(this.authService.getUserId(),items.map(item => item.itemId));
     const value = items.map(item => this.buildPackageItemForm(item));
     this.packageForm.setControl('items', this.formBuilder.array(value, [Validators.minLength(1)]));
   }
@@ -130,7 +132,7 @@ export class EditPackageComponent implements OnInit, OnChanges {
     });
 
     modal.result.then(async (itemIds: string[]) => {
-      const items = await this.itemService.getItemsById(itemIds);
+      const items = await this.itemService.getItemsById(this.authService.getUserId(),itemIds);
       items.forEach(item => this.addPackageItem(item, 1));
     }).catch(() => {});
   }

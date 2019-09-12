@@ -3,6 +3,7 @@ import { StorePackage } from 'src/models/store-package';
 import { ItemService } from './item.service';
 import { PackageService } from './package.service';
 import { Store } from 'src/models/store';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class StoreService {
 
   constructor(
     private packageService: PackageService,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private authService: AuthService
   ) { }
 
   private async buildDummyDataIfNotExists() {
@@ -74,7 +76,7 @@ export class StoreService {
           plans: p.subscriptionPlans
         },
         items: await Promise.all(p.items.map(async item => ({
-          item: await this.itemService.getItem(item.itemId),
+          item: await this.itemService.getItem(this.authService.getUserId(), item.itemId),
           quantity: item.quantity
         })))
       })));
