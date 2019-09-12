@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AccountComponent } from './account/account.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogisticsComponent } from './logistics/logistics.component';
@@ -64,12 +63,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
+import { MerchantAuthGuard } from './merchant-auth.guard';
+import { AccountComponent } from './account/account.component';
+import { AuthGuard } from './auth.guard';
 
 const COMPONENTS = [
   RegisterComponent,
   LogisticsComponent,
   PackagesComponent,
-  AccountComponent,
   SubscriptionsComponent,
   NavigationComponent,
   RegisterWorkflowComponent,
@@ -106,7 +107,9 @@ const COMPONENTS = [
   EditPaymentComponent,
   EditLogisticsComponent,
   DatepickerComponent,
-  CheckoutComponent
+  CheckoutComponent,
+  LoginComponent,
+  LandingComponent
 ];
 
 const MODALS = [
@@ -118,6 +121,11 @@ const MODALS = [
 
 const PIPES = [
   CyclePipe
+];
+
+const AUTH_GUARDS = [
+  MerchantAuthGuard,
+  AuthGuard
 ];
 
 const TOASTR_GLOBAL_CONFIG: Partial<GlobalConfig> = {
@@ -143,8 +151,7 @@ const UI_SWITCH_GLOBAL_CONFIG: UiSwitchModuleConfig = {
     ...COMPONENTS,
     ...MODALS,
     ...PIPES,
-    LoginComponent,
-    LandingComponent
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -165,7 +172,8 @@ const UI_SWITCH_GLOBAL_CONFIG: UiSwitchModuleConfig = {
     UiSwitchModule.forRoot(UI_SWITCH_GLOBAL_CONFIG)
   ],
   providers: [
-    ...PIPES
+    ...PIPES,
+    ...AUTH_GUARDS
   ],
   bootstrap: [AppComponent],
   entryComponents: [

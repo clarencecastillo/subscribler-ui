@@ -35,7 +35,8 @@ export class PackagesComponent implements OnInit {
   }
 
   async fetchPackages() {
-    this.packages = await this.packageService.getPackages(this.authService.getUserId());
+    const userId = this.authService.getUserId();
+    this.packages = userId ? await this.packageService.getPackages(userId) : [];
   }
 
   async createPackage() {

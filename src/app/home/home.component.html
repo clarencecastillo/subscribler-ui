@@ -2,14 +2,30 @@
   <div class="container">
     <div class="store-header d-flex justify-content-between align-items-center py-5 px-2">
       <div class="brand">
-        <a class="d-flex align-items-center justify-content-center text-decoration-none" [routerLink]="['/']">
+        <a class="d-flex align-items-center justify-content-center text-decoration-none pl-4" [routerLink]="['/']">
           <div class="brand-text text-light">Subscribler</div>
         </a>
       </div>
       <div class="header-buttons">
-        <a class="text-light text-decoration-none mr-4" [routerLink]="['/', 'register']">Be a Merchant</a>
-        <a class="text-light text-decoration-none mr-4" [routerLink]="['/', 'subscriptions']">My Subscriptions</a>
-        <a class="text-light text-decoration-none" [routerLink]="['/', 'account']">My Account</a>
+        <a class="text-light text-decoration-none pr-4" [routerLink]="['/', 'admin']" *ngIf="user?.type === 'merchant'">Dashboard</a>
+        <a class="text-light text-decoration-none pr-4" [routerLink]="['/', 'store', user?.id]" *ngIf="user?.type === 'merchant'">My Store</a>
+        <a class="text-light text-decoration-none pr-4" [routerLink]="['/', 'register']" *ngIf="!user">Be a Merchant</a>
+        <a class="text-light text-decoration-none pr-4" [routerLink]="['/', 'subscriptions']" *ngIf="user?.type === 'subscriber'">My Subscriptions</a>
+        <a class="text-light text-decoration-none pr-4 cursor-pointer" *ngIf="user" ngbDropdown ngbDropdownToggle container="body">
+          {{user.firstName}} {{user.lastName}}
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" ngbDropdownMenu>
+            <a ngbDropdownItem [routerLink]="['/', 'account']">
+              <fa-icon [icon]="accountIcon" [fixedWidth]="true" class="fa-sm mr-2 text-gray-400"></fa-icon>
+              <span>My Account</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem (click)="logout()">
+              <fa-icon [icon]="logoutIcon" [fixedWidth]="true" class="fa-sm mr-2 text-gray-400"></fa-icon>
+              <span>Logout</span>
+            </a>
+          </div>
+        </a>
+        <a class="text-light text-decoration-none pr-4" [routerLink]="['/']" *ngIf="!user">Login</a>
       </div>
     </div>
     <div class="card shadow">

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/models/user';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Store } from 'src/models/store';
 import { StoreService } from '../store.service';
@@ -11,7 +10,6 @@ import { StoreService } from '../store.service';
 })
 export class ProfileComponent implements OnInit {
 
-  user: User;
   store: Store;
 
   constructor(
@@ -19,20 +17,12 @@ export class ProfileComponent implements OnInit {
     private storeService: StoreService
   ) {
 
-    this.fetchUser().then(() => {
-      if (this.user.type === 'merchant') {
-        this.fetchStore();
-      }
-    });
-
-  }
-
-  async fetchUser() {
-    this.user = await this.authService.getUser();
+    this.fetchStore();
   }
 
   async fetchStore() {
-    this.store = await this.storeService.getStore(this.user.id);
+    const userId = this.authService.getUserId();
+    this.store = await this.storeService.getStore(userId);
   }
 
   ngOnInit() {

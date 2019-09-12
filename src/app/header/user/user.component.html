@@ -9,9 +9,9 @@
       {{link.text}}
     </a>
     <div class="dropdown-divider"></div>
-    <a ngbDropdownItem [routerLink]="logoutLink.path">
-      <fa-icon [icon]="logoutLink.icon" [fixedWidth]="true" class="fa-sm mr-2 text-gray-400"></fa-icon>
-      <span>{{logoutLink.text}}</span>
+    <a ngbDropdownItem (click)="logout()">
+      <fa-icon [icon]="logoutIcon" [fixedWidth]="true" class="fa-sm mr-2 text-gray-400"></fa-icon>
+      <span>Logout</span>
     </a>
   </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/models/user';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-account',
@@ -7,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(
+    private authService: AuthService
+  ) {
+
+    this.fetchUser();
+
+  }
+
+  async fetchUser() {
+    this.user = this.authService.getUser();
+  }
 
   ngOnInit() {
   }

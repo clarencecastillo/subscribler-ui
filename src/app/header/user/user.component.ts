@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faSignOutAlt, IconDefinition, faUser, faCogs, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/models/user';
+import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sbr-user',
@@ -30,15 +32,19 @@ export class UserComponent implements OnInit {
     }
   ];
 
-  logoutLink: UserLink = {
-    text: 'Logout',
-    icon: faSignOutAlt,
-    path: undefined
-  };
+  logoutIcon = faSignOutAlt;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }

@@ -23,8 +23,8 @@
     </div>
     <div class="row" *ngIf="!registerMode">
       <div class="col">
-        <sbr-login></sbr-login>
-        <button class="btn btn-primary btn-block mt-4">Login</button>
+        <sbr-login #loginComponent></sbr-login>
+        <button class="btn btn-primary btn-block mt-4" (click)="login()" [disabled]="!loginComponent.loginForm.valid">Login</button>
         <div class="pt-4 text-center">
           <button class="btn btn-link text-gray-600" (click)="registerMode = true">Don't have an account? Sign Up!</button>
         </div>

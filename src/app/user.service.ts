@@ -55,10 +55,6 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  createUser(user: NewUser) {
-    return this.http.post(`${environment.serverHost}/merchants`, user).toPromise();
-  }
-
   getUser(userId: string): Promise<User> {
     return Promise.resolve(this.users.find(user => user.id === userId));
   }
@@ -66,12 +62,4 @@ export class UserService {
   getDeliveryAddresses(userId: string): Promise<DeliveryAddress[]> {
     return Promise.resolve(this.users.find(user => user.id === userId).deliveryAddresses);
   }
-}
-
-export interface NewUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
 }

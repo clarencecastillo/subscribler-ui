@@ -26,8 +26,8 @@ export class NavigationComponent implements OnInit {
     },
     {
       icon: faAddressCard,
-      text: 'Profile',
-      path: '/admin/profile'
+      text: 'Store',
+      path: '/admin/store'
     },
     {
       icon: faBullhorn,

@@ -13,10 +13,10 @@
             <div class="col-lg-7 p-5">
               <h3 class="text-muted">STEP 1</h3>
               <h1 class="text-gray-900 mb-5">Create Account</h1>
-              <sbr-register #register></sbr-register>
+              <sbr-register #registerComponent></sbr-register>
               <div class="d-flex justify-content-between mt-5">
                 <a routerLink="/">Already have an account? Login!</a>
-                <a class="btn btn-primary" routerLink="/register/packages" (click)="register.register()">Next</a>
+                <button class="btn btn-primary" (click)="registerUser()" [disabled]="registerComponent.registerForm.invalid">Next</button>
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
         <div class="slide-content max-height p-5">
           <h3 class="text-muted">STEP 2</h3>
           <h1 class="text-gray-900 mb-5">Set-up Packages</h1>
-          <sbr-packages class="flex-grow-1 flex-shrink-1"></sbr-packages>
+          <sbr-packages *ngIf="merchantId" class="flex-grow-1 flex-shrink-1"></sbr-packages>
           <div class="d-flex justify-content-end flex-grow-0 pt-5">
             <a class="btn btn-primary" routerLink="/register/profile">Next</a>
           </div>
@@ -36,7 +36,7 @@
         <div class="slide-content p-5">
           <h3 class="text-muted">STEP 3</h3>
           <h1 class="text-gray-900 mb-5">Set-up Your Store Profile</h1>
-          <sbr-profile class="flex-grow-1 flex-shrink-1"></sbr-profile>
+          <sbr-profile *ngIf="merchantId" class="flex-grow-1 flex-shrink-1"></sbr-profile>
           <div class="d-flex justify-content-between flex-grow-0 pt-5">
             <a class="btn btn-primary" routerLink="/register/packages">Back</a>
             <a class="btn btn-primary" routerLink="/register/complete">Finish</a>

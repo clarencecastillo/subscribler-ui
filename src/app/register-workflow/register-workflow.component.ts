@@ -3,8 +3,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter, skip } from 'rxjs/operators';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from '../profile/profile.component';
-import { AuthService } from '../auth.service';
 import { RegisterComponent } from '../register/register.component';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-register-workflow',
@@ -26,18 +27,23 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
+    private toastrService: ToastrService,
     private authService: AuthService
   ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd), skip(1))
       .subscribe((e: NavigationEnd) => this.resolveStep(e.urlAfterRedirects));
-
     this.merchantId = this.authService.getUserId();
   }
 
   registerUser() {
-    this.registerComponent.register();
-    this.router.navigate(['packages']);
+    this.registerComponent.register('merchant')
+      .then(user => {
+        this.merchantId = user.id;
+        this.toastrService.success('Created account successfully!');
+        this.router.navigate(['/', 'register', 'packages']);
+      })
+      .catch(() => this.toastrService.error('Failed to create account'));
   }
 
   ngOnInit(): void {
@@ -51,10 +57,6 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
     const urlParts = url.split('/');
     const slideId = urlParts[urlParts.length - 1];
     this.carousel.select(slideId);
-  }
-
-  submit() {
-    console.log('submit');
   }
 
 }

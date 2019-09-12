@@ -14,7 +14,9 @@ import { SubscriptionsComponent } from './subscriptions/subscriptions.component'
 import { ProfileComponent } from './profile/profile.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LandingComponent } from './landing/landing.component';
-
+import { MerchantAuthGuard } from './merchant-auth.guard';
+import { AccountComponent } from './account/account.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -28,17 +30,19 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: ProfileComponent,
+        component: AccountComponent,
         data: {
           header: 'My Account'
-        }
+        },
+        canActivate: [AuthGuard]
       },
       {
         path: 'subscriptions',
         component: SubscriptionsComponent,
         data: {
           header: 'My Subscriptions'
-        }
+        },
+        canActivate: [AuthGuard]
       },
       {
         path: 'store/:merchantId',
@@ -53,19 +57,18 @@ const routes: Routes = [
         component: CheckoutComponent,
         data: {
           header: 'Checkout'
-        }
+        },
+        canActivate: [AuthGuard]
       },
       {
         path: 'store/:merchantId/package/:packageId/checkout',
         component: CheckoutComponent,
         data: {
           header: 'Checkout'
-        }
+        },
+        canActivate: [AuthGuard]
       }
-    ],
-    data: {
-      userId: '1722564c-d093-4722-8788-b1d0a403a5d1'
-    }
+    ]
   },
   {
     path: 'print/qr',
@@ -86,24 +89,26 @@ const routes: Routes = [
       },
       {
         path: 'packages',
-        component: RegisterWorkflowComponent
+        component: RegisterWorkflowComponent,
+        canActivate: [MerchantAuthGuard]
       },
       {
         path: 'profile',
-        component: RegisterWorkflowComponent
+        component: RegisterWorkflowComponent,
+        canActivate: [MerchantAuthGuard]
       },
       {
         path: 'complete',
-        component: RegisterWorkflowComponent
+        component: RegisterWorkflowComponent,
+        canActivate: [MerchantAuthGuard]
       }
-    ],
-    data: {
-      userId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87'
-    }
+    ]
   },
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [MerchantAuthGuard],
+    canActivateChild: [MerchantAuthGuard],
     children: [
       {
         path: '',
@@ -132,10 +137,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'profile',
+        path: 'store',
         component: ProfileComponent,
         data: {
-          header: 'Profile'
+          header: 'Store Settings'
         }
       },
       {
@@ -145,10 +150,7 @@ const routes: Routes = [
           header: 'Links'
         }
       }
-    ],
-    data: {
-      userId: 'fb8ce97d-2c03-432d-9090-75bf1e629f87'
-    }
+    ]
   }
 ];
 

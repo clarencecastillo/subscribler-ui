@@ -20,11 +20,11 @@ export class SubscriptionsComponent implements OnInit {
     private authService: AuthService
   ) {
 
-    const userId = this.authService.getUserId();
-    this.fetchSubscriptions(userId);
+    this.fetchSubscriptions();
   }
 
-  async fetchSubscriptions(userId: string) {
+  async fetchSubscriptions() {
+    const userId = this.authService.getUserId();
     this.subscriptions = await this.subscriptionService.getSubscriptions(userId);
   }
 
