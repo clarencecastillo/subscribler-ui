@@ -4,7 +4,7 @@ import { filter, skip } from 'rxjs/operators';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from '../auth.service';
-import { User } from 'src/models/user';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'sbr-register-workflow',
@@ -19,6 +19,9 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
   @ViewChild(ProfileComponent, { static: false })
   profileComponent: ProfileComponent;
 
+  @ViewChild(RegisterComponent, { static: false })
+  registerComponent: RegisterComponent;
+
   merchantId: string;
 
   constructor(
@@ -30,6 +33,11 @@ export class RegisterWorkflowComponent implements OnInit, AfterViewInit {
       .subscribe((e: NavigationEnd) => this.resolveStep(e.urlAfterRedirects));
 
     this.merchantId = this.authService.getUserId();
+  }
+
+  registerUser() {
+    this.registerComponent.register();
+    this.router.navigate(['packages']);
   }
 
   ngOnInit(): void {

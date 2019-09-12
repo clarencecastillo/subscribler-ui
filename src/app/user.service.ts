@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DeliveryAddress } from 'src/models/delivery-address';
-import { User, UserType } from 'src/models/user';
+import { User } from 'src/models/user';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +53,11 @@ export class UserService {
     }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  createUser(user: NewUser) {
+    return this.http.post(`${environment.serverHost}/merchants`, user).toPromise();
+  }
 
   getUser(userId: string): Promise<User> {
     return Promise.resolve(this.users.find(user => user.id === userId));
@@ -60,4 +66,12 @@ export class UserService {
   getDeliveryAddresses(userId: string): Promise<DeliveryAddress[]> {
     return Promise.resolve(this.users.find(user => user.id === userId).deliveryAddresses);
   }
+}
+
+export interface NewUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
 }

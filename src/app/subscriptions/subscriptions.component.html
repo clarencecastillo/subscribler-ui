@@ -36,7 +36,7 @@
             <ui-switch [(ngModel)]="subscription.autoRenew" class="pt-2" [disabled]="subscription.status === 'inactive'"></ui-switch>
           </td>
           <td class="align-middle">
-            {{ subscription.expiration | amDateFormat : 'D MMMM YYYY' }}
+            {{ subscription.expirationDate | amDateFormat : 'D MMMM YYYY' }}
           </td>
           <td class="align-middle text-right">
             <div class="no-arrow cursor-pointer" ngbDropdown container="body" placement="bottom-right">
