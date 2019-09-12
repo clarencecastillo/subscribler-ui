@@ -44,12 +44,12 @@ export class EditItemModalComponent implements OnInit {
   }
 
   save() {
-    this.editItemComponent.save().then(() => {
+    this.editItemComponent.save().then(item => {
       this.toastrService.success(`Item ${this.itemId ? 'updated' : 'created'} successfully`);
+      this.modal.close(item);
     }).catch(error => {
       this.toastrService.error(`Failed to save item: ${error}`);
     });
-    this.modal.close();
   }
 
 }

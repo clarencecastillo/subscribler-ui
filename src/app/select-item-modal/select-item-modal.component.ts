@@ -32,10 +32,7 @@ export class SelectItemModalComponent implements OnInit {
     private toastrService: ToastrService,
     private authService: AuthService
   ) {
-    const userId = this.authService.getUserId();
-    this.itemService.getItems(userId).then(items => {
-      this.items = items;
-    });
+    this.fetchItems();
   }
 
   ngOnInit() {
@@ -43,6 +40,11 @@ export class SelectItemModalComponent implements OnInit {
 
   close() {
     this.modal.dismiss();
+  }
+
+  async fetchItems() {
+    const userId = this.authService.getUserId();
+    this.items = await this.itemService.getItems(userId);
   }
 
   selectItem(item: Item) {
@@ -60,6 +62,7 @@ export class SelectItemModalComponent implements OnInit {
   async deleteItem(item: Item) {
     this.itemService.deleteItem(this.authService.getUserId(), item.id).then(() => {
       this.toastrService.success(`Item ${item.name} was deleted successfully`);
+      this.fetchItems();
     }).catch(error => {
       this.toastrService.error(`Failed to delete item: ${error}`);
     });
@@ -81,6 +84,7 @@ export class SelectItemModalComponent implements OnInit {
     });
     const editItemModalComponent: EditItemModalComponent = modal.componentInstance;
     editItemModalComponent.itemId = item ? item.id : undefined;
+    modal.result.then(() => this.fetchItems()).catch(error => {});
   }
 
 }

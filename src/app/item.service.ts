@@ -120,42 +120,30 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   public getItems(merchantId: string): Promise<Item[]> {
-    return this.http.get<Item[]>(`${environment.serverHost}/merchants/3/items`).toPromise();
+    return this.http.get<Item[]>(`${environment.serverHost}/merchants/${merchantId}/items`).toPromise();
   }
 
   public getItem(merchantId: string, itemId: string): Promise<Item> {
-    return this.http.get<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`).toPromise();
+    return this.http.get<Item>(`${environment.serverHost}/merchants/${merchantId}/items/${itemId}`).toPromise();
   }
 
   public getItemsById(merchantId: string, itemIds: string[]): Promise<Item[]> {
-    const items: Item[] = [];
-    itemIds.forEach(itemId => {
-      var res = this.http.get<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`)
-      res.subscribe(i => items.push(i));
-    }
-  );
-    return of(items).toPromise();
+    const promises = itemIds
+      .map(itemId => `${environment.serverHost}/merchants/${merchantId}/items/${itemId}`)
+      .map(url => this.http.get<Item>(url).toPromise());
+    return Promise.all(promises);
   }
 
-  public createItem(merchantId: string, item: NewItem): Promise<string> {
-    var res = this.http.post<Item>(`${environment.serverHost}/merchants/3/items`,item)
-    var id: string;
-    res.subscribe(newItem => {id = newItem.id})
-    return of(id).toPromise();
+  public createItem(merchantId: string, item: NewItem): Promise<Item> {
+    return this.http.post<Item>(`${environment.serverHost}/merchants/${merchantId}/items`, item).toPromise();
   }
 
-  public updateItem(merchantId: string, itemId: string, update: NewItem): Promise<void> {
-    const item = this.http.put<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`, update);
-    if (!item) {
-      return Promise.reject();
-    }
-    return Promise.resolve();
+  public async updateItem(merchantId: string, itemId: string, update: NewItem): Promise<Item> {
+    return this.http.put<Item>(`${environment.serverHost}/merchants/${merchantId}/items/${itemId}`, update).toPromise();
   }
 
-  public deleteItem(merchantId: string, itemId: string): Promise<void> {
-    this.http.delete<Item>(`${environment.serverHost}/merchants/3/items/${itemId}`);
-    //TODO: take care of when the item does not exist
-    return Promise.resolve();
+  public deleteItem(merchantId: string, itemId: string): Promise<Item> {
+    return this.http.delete<Item>(`${environment.serverHost}/merchants/${merchantId}/items/${itemId}`).toPromise();
   }
 
 }
