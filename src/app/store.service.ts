@@ -85,7 +85,7 @@ export class StoreService {
       },
       subscription: inputPackage.subscriptionPlans && inputPackage.subscriptionPlans.length > 0 ? {
         basicPlanId: inputPackage.subscriptionPlans[0].id,
-        mostPopularPlanId: inputPackage.subscriptionPlans[0].id,
+        mostPopularPlanId: inputPackage.subscriptionPlans[inputPackage.subscriptionPlans.length - 1].id,
         plans: inputPackage.subscriptionPlans,
       } : {
         basicPlanId: undefined,
