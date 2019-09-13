@@ -13,7 +13,7 @@ export class PackageService {
 
   constructor(private http: HttpClient, private cyclePipe: CyclePipe) {}
 
-  private getCyclePeriod(cyclePeriod: number) {
+  public getCyclePeriod(cyclePeriod: number) {
     return {
       1: 'D',
       7: 'W',
@@ -22,7 +22,7 @@ export class PackageService {
     }[cyclePeriod] || 'D';
   }
 
-  private mapPackage(merchantId: string, backEndPackage: BackEndPackage): Package {
+  public mapPackage(merchantId: string, backEndPackage: BackEndPackage): Package {
     return {
       id: backEndPackage.id,
       name: backEndPackage.name || '',
@@ -35,7 +35,7 @@ export class PackageService {
     };
   }
 
-  private toBackEndPackage(inPackage: PackageDetails): BackEndPackage {
+  public toBackEndPackage(inPackage: PackageDetails): BackEndPackage {
     return {
       id: '',
       name: inPackage.name,
@@ -74,7 +74,7 @@ export class PackageService {
 
 export type PackageDetails = Pick<Package, 'name' | 'description' | 'cycle' | 'items' | 'subscriptionPlans' | 'imageUrl'>;
 
-interface BackEndPackage {
+export interface BackEndPackage {
   id: string;
   name: string;
   description: string;

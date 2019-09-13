@@ -4,7 +4,7 @@ import { ItemService } from './item.service';
 import { Package } from 'src/models/package';
 import { Business } from 'src/models/business';
 import { BankAccount } from 'src/models/bank-account';
-import { PackageService } from './package.service';
+import { PackageService, BackEndPackage } from './package.service';
 import { Store } from 'src/models/store';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
@@ -74,7 +74,7 @@ export class StoreService {
     return {
       id: inputPackage.id,
       merchantId: inputPackage.merchantId,
-      merchantName: backEndStore !== null ? backEndStore.name : this.mockBusiness.name,
+      merchantName: backEndStore.business !== null ? backEndStore.business.name : this.mockBusiness.name,
       name: inputPackage.name,
       description: inputPackage.description,
       cycle: inputPackage.cycle,
@@ -96,94 +96,24 @@ export class StoreService {
     }
   }
 
-  private async mapStoreToMerchant(merchantId: string, backEndStore: BackEndStore): Promise<Store> {
+  private async mapMerchantToStore(merchantId: string, backEndStore: BackEndStore): Promise<Store> {
+    const storePackages = await Promise.all(backEndStore.packageList.map(async p => await this.mapPackageToStorePackage(this.packageService.mapPackage(merchantId,p), backEndStore)));
     return {
-      merchantId: backEndStore.id,
+      merchantId: merchantId,
       business: backEndStore.business || this.mockBusiness(),
-      bankAccount: backEndStore.bankAccount,
+      bankAccount: backEndStore.bankAccount !== null ? 
+      {name: backEndStore.bankAccount.name, number: backEndStore.bankAccount.accountNumber, bankName: backEndStore.bankAccount.bankName}
+      : {name :  "DBS", number : "123", bankName: "DBS"},
       address: await this.getAddressFromBackend(backEndStore.address || ' \n \n \n '),
-      packages: await Promise.all(backEndStore.packageList.map(async p => await this.mapPackageToStorePackage(p, backEndStore))),
-      popularPackages: (await Promise.all(backEndStore.packageList.map(async p => await this.mapPackageToStorePackage(p, backEndStore)))).slice(3),
+      packages: storePackages,
+      popularPackages: storePackages.slice(0, 3),
       logistics: this.mockLogistics()
     };
   }
 
-  private async buildDummyDataIfNotExists() {
-
-    if (this.stores) {
-      return;
-    }
-
-    const partialStores: Pick<Store, 'merchantId' | 'business' | 'address' | 'bankAccount' | 'logistics'>[] = [
-      {
-        merchantId: '9',
-        business: {
-          name: 'Not Starbucks',
-          description: 'This store is not Starbucks.',
-          type: 'Food and Beverage'
-        },
-        address: {
-          addressLine1: '',
-          addressLine2: '',
-          postalCode: '',
-        },
-        bankAccount: {
-          name: '',
-          number: '',
-          bankName: ''
-        },
-        logistics: {
-          partner: {
-            id: 'ninjavan'
-          },
-          pickUpAddress: {
-            addressLine1: '',
-            addressLine2: '',
-            postalCode: '',
-            useBusinessAddress: true
-          }
-        }
-      }
-    ];
-
-    const storePromises = Promise.all(partialStores.map<Promise<Store>>(async store => {
-
-      const packages = await Promise.all((await this.packageService.getPackages(store.merchantId)).map<Promise<StorePackage>>(async p => ({
-        id: p.id,
-        merchantId: p.merchantId,
-        merchantName: store.business.name,
-        name: p.name,
-        description: p.description,
-        cycle: p.cycle,
-        imageUrl: p.imageUrl,
-        rating: {
-          score: Math.floor((Math.random() * 5) + 3),
-          count: Math.floor((Math.random() * 100) + 1)
-        },
-        subscription: {
-          basicPlanId: p.subscriptionPlans[0].id,
-          mostPopularPlanId: p.subscriptionPlans[p.subscriptionPlans.length - 2].id,
-          plans: p.subscriptionPlans
-        },
-        items: await Promise.all(p.items.map(async item => ({
-          item: await this.itemService.getItem(this.authService.getUserId(), item.itemId),
-          quantity: item.quantity
-        })))
-      })));
-
-      return {
-        ...store,
-        packages,
-        popularPackages: packages.slice(0, 3),
-      };
-    }));
-
-    this.stores = await storePromises;
-  }
-
   public async getStore(merchantId: string): Promise<Store> {
     return this.http.get<BackEndStore>(`${environment.serverHost}/merchants/${merchantId}`).toPromise().
-    then(store => this.mapStoreToMerchant(merchantId, store));
+    then(async store => await this.mapMerchantToStore(merchantId, store));
   }
 
   public async getPackage(merchantId: string, packageId: string): Promise<StorePackage> {
@@ -245,7 +175,7 @@ interface BackEndStore {
   description: string;
   cyclePeriod: number;
   imageUrl: string;
-  packageList: Package[];
+  packageList: BackEndPackage[];
   itemList: Item[];
   business: Business;
   bankAccount: BankAccount;

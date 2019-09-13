@@ -1,6 +1,6 @@
 export interface BankAccount {
     name: string;
-    number: string;
+    accountNumber: string;
     bankName: string;
   }
   
