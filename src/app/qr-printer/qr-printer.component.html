@@ -1,2 +1,2 @@
-<sbr-qr-poster *ngIf="!image" id="qr"></sbr-qr-poster>
+<sbr-qr-poster *ngIf="!image" id="qr" [qrPosterUrl]="qrPosterUrl"></sbr-qr-poster>
 <img *ngIf="image" [src]="image" (load)="qrReady()">
