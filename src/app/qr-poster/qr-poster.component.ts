@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'sbr-qr-poster',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrPosterComponent implements OnInit {
 
-  constructor() { }
+  qrPosterUrl: string;
+
+  constructor(private authService: AuthService) {
+    const merchantId = this.authService.getUserId();
+    const storePage = encodeURIComponent(encodeURIComponent(`http://localhost:4200/store/${merchantId}`));
+    this.qrPosterUrl = `${environment.serverHost}/merchants/${merchantId}/qrcode/${storePage}`;
+  }
 
   ngOnInit() {
   }
