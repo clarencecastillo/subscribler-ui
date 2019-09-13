@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorePackage } from 'src/models/store-package';
 import { StoreService } from '../store.service';
 import { faTruck } from '@fortawesome/free-solid-svg-icons';
 import { Review } from 'src/models/review';
 import * as moment from 'moment';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-package',
@@ -40,7 +41,9 @@ export class PackageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private storeService: StoreService
+    private router: Router,
+    private storeService: StoreService,
+    private authService: AuthService
   ) {
     this.route.params.subscribe(params => {
       this.fetchPackage(params.merchantId, params.packageId);
@@ -52,6 +55,13 @@ export class PackageComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  goToCheckoutPage(planId: string) {
+    const user = this.authService.getUser();
+    if (user.type === 'subscriber') {
+      this.router.navigate(['/', 'store', this.package.merchantId, 'package', this.package.id, 'checkout', planId]);
+    }
   }
 
 }

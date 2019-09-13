@@ -11,7 +11,7 @@ export class UserService {
 
   users: User[] = [
     {
-      id: '1722564c-d093-4722-8788-b1d0a403a5d1',
+      id: '25',
       firstName: 'Donald',
       lastName: 'Trump',
       email: 'donald@mymail.com',
@@ -42,7 +42,7 @@ export class UserService {
       ]
     },
     {
-      id: '9',
+      id: '2',
       firstName: 'Jinping',
       lastName: 'Xi',
       email: 'jinping@mymail.com',

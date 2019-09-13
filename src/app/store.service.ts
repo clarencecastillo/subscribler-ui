@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
 import { StorePackage } from 'src/models/store-package';
 import { ItemService } from './item.service';
-import { PackageService } from './package.service';
+import { Package } from 'src/models/package';
+import { Business } from 'src/models/business';
+import { BankAccount } from 'src/models/bank-account';
+import { PackageService, BackEndPackage } from './package.service';
 import { Store } from 'src/models/store';
 import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
 import * as faker from 'faker';
+import { Item } from 'src/models/item';
+import { Address } from 'src/models/address';
+import { Logistics } from 'src/models/logistics';
+import { PackageItem } from 'src/models/package-item';
+import { StorePackageItem } from 'src/models/store-package-item';
 
 @Injectable({
   providedIn: 'root'
@@ -18,85 +28,92 @@ export class StoreService {
   constructor(
     private packageService: PackageService,
     private itemService: ItemService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) { }
 
-  private async buildDummyDataIfNotExists() {
-
-    if (this.stores) {
-      return;
-    }
-
-    const partialStores: Pick<Store, 'merchantId' | 'business' | 'address' | 'bankAccount' | 'logistics'>[] = [
-      {
-        merchantId: '9',
-        business: {
-          name: 'Not Starbucks',
-          description: 'This store is not Starbucks.',
-          type: 'Food and Beverage'
-        },
-        address: {
-          addressLine1: '',
-          addressLine2: '',
-          postalCode: '',
-        },
-        bankAccount: {
-          name: '',
-          number: '',
-          bankName: ''
-        },
-        logistics: {
-          partner: {
-            id: 'ninjavan'
-          },
-          pickUpAddress: {
-            addressLine1: '',
-            addressLine2: '',
-            postalCode: '',
-            useBusinessAddress: true
-          }
-        }
-      }
-    ];
-
-    const storePromises = Promise.all(partialStores.map<Promise<Store>>(async store => {
-
-      const packages = await Promise.all((await this.packageService.getPackages(store.merchantId)).map<Promise<StorePackage>>(async p => ({
-        id: p.id,
-        merchantId: p.merchantId,
-        merchantName: store.business.name,
-        name: p.name,
-        description: p.description,
-        cycle: p.cycle,
-        imageUrl: p.imageUrl,
-        rating: {
-          score: Math.floor((Math.random() * 5) + 3),
-          count: Math.floor((Math.random() * 100) + 1)
-        },
-        subscription: {
-          basicPlanId: p.subscriptionPlans[0].id,
-          mostPopularPlanId: p.subscriptionPlans[p.subscriptionPlans.length - 2].id,
-          plans: p.subscriptionPlans
-        },
-        items: await Promise.all(p.items.map(async item => ({
-          item: await this.itemService.getItem(this.authService.getUserId(), item.itemId),
-          quantity: item.quantity
-        })))
-      })));
-
+  getAddressFromBackend(backendAddress: string): Address {
+    const splitAddr = backendAddress.split('\n')
       return {
-        ...store,
-        packages,
-        popularPackages: packages.slice(0, 3),
-      };
-    }));
+        addressLine1: splitAddr[0],
+        addressLine2: splitAddr[1],
+        postalCode: splitAddr[2]
+    }
+  }
 
-    this.stores = await storePromises;
+  mockLogistics(): Logistics {
+    return {
+      partner: {
+        id: 'ninjavan'
+      },
+      pickUpAddress: {
+        addressLine1: '',
+        addressLine2: '',
+        postalCode: '',
+        useBusinessAddress: true
+      }
+    }
+  }
+
+  mockBusiness(): Business {
+    return {
+      name: 'Not Starbucks',
+      description: 'This store is not Starbucks.',
+      type: 'Food and Beverage'
+    }
+  }
+
+  async mapPackageItemToStorePackageItem(packageItem: PackageItem, merchantId: string): Promise<StorePackageItem> {
+    return {
+      item: await this.itemService.getItem(merchantId, packageItem.itemId),
+      quantity: packageItem.quantity
+    }
+  }
+
+  async mapPackageToStorePackage(inputPackage: Package, backEndStore: BackEndStore): Promise<StorePackage> {
+    return {
+      id: inputPackage.id,
+      merchantId: inputPackage.merchantId,
+      merchantName: backEndStore.business !== null ? backEndStore.business.name : this.mockBusiness().name,
+      name: inputPackage.name,
+      description: inputPackage.description,
+      cycle: inputPackage.cycle,
+      imageUrl: inputPackage.imageUrl,
+      rating: {
+        score: Math.floor((Math.random() * 5) + 3),
+        count: Math.floor((Math.random() * 100) + 1)
+      },
+      subscription: inputPackage.subscriptionPlans && inputPackage.subscriptionPlans.length > 0 ? {
+        basicPlanId: inputPackage.subscriptionPlans[0].id,
+        mostPopularPlanId: inputPackage.subscriptionPlans[inputPackage.subscriptionPlans.length > 1 ? 1 : 0].id,
+        plans: inputPackage.subscriptionPlans,
+      } : {
+        basicPlanId: undefined,
+        mostPopularPlanId: undefined,
+        plans: []
+      },
+      items: inputPackage.items !== null ? await Promise.all(inputPackage.items.map(async item => await this.mapPackageItemToStorePackageItem(item, inputPackage.merchantId))) : []
+    };
+  }
+
+  private async mapMerchantToStore(merchantId: string, backEndStore: BackEndStore): Promise<Store> {
+    const storePackages = await Promise.all(backEndStore.packageList.map(async p => await this.mapPackageToStorePackage(this.packageService.mapPackage(merchantId,p), backEndStore)));
+    return {
+      merchantId: merchantId,
+      business: backEndStore.business || this.mockBusiness(),
+      bankAccount: backEndStore.bankAccount !== null ? 
+      {name: backEndStore.bankAccount.name, number: backEndStore.bankAccount.accountNumber, bankName: backEndStore.bankAccount.bankName}
+      : {name :  "DBS", number : "123", bankName: "DBS"},
+      address: await this.getAddressFromBackend(backEndStore.address || ' \n \n \n '),
+      packages: storePackages,
+      popularPackages: storePackages.slice(0, 3),
+      logistics: this.mockLogistics()
+    };
   }
 
   public async getStore(merchantId: string): Promise<Store> {
-    return this.buildDummyDataIfNotExists()
-      .then(() => this.stores.find(store => store.merchantId === merchantId));
+    return this.http.get<BackEndStore>(`${environment.serverHost}/merchants/${merchantId}`).toPromise().
+    then(async store => await this.mapMerchantToStore(merchantId, store));
   }
 
   public async getPackage(merchantId: string, packageId: string): Promise<StorePackage> {
@@ -150,4 +167,23 @@ export class StoreService {
     const newPackages = _.range(n).map(() => this.generatePackage());
     return Promise.resolve(newPackages);
   }
+
+  public async getEmbeddedButton(merchantId: string, url: string) {
+    return this.http.get(`${environment.serverHost}/merchants/${merchantId}/embed/${encodeURIComponent(url)}`, {
+      responseType: 'text'
+    }).toPromise();
+  }
+}
+
+interface BackEndStore {
+  id: string;
+  name: string;
+  description: string;
+  cyclePeriod: number;
+  imageUrl: string;
+  packageList: BackEndPackage[];
+  itemList: Item[];
+  business: Business;
+  bankAccount: BankAccount;
+  address: string;
 }

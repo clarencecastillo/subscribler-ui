@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'sbr-qr-poster',
@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrPosterComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  qrPosterUrl: string;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

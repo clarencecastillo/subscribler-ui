@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import html2canvas from 'html2canvas';
+import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'sbr-qr-printer',
@@ -8,7 +10,13 @@ import html2canvas from 'html2canvas';
 })
 export class QrPrinterComponent implements OnInit {
 
-  constructor() { }
+  qrPosterUrl: string;
+
+  constructor(private authService: AuthService) {
+    const merchantId = this.authService.getUserId();
+    const storePage = encodeURIComponent(encodeURIComponent(`http://localhost:4200/store/${merchantId}`));
+    this.qrPosterUrl = `${environment.serverHost}/merchants/${merchantId}/qrcode/${storePage}`;
+  }
 
   image: string;
 
