@@ -1,25 +1,30 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { PackageService } from '../package.service';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { cycles, Cycle } from 'src/models/cycle';
-import { Package } from 'src/models/package';
-import { faTimes, faTruckLoading } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SelectItemModalComponent } from '../select-item-modal/select-item-modal.component';
-import { ItemService } from '../item.service';
-import { Item } from 'src/models/item';
-import { PackageItem } from 'src/models/package-item';
-import { filter } from 'rxjs/operators';
-import { SubscriptionPlan } from 'src/models/subscription-plan';
-import { AuthService } from '../auth.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from "@angular/core";
+import { PackageService } from "../package.service";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import { cycles, Cycle } from "src/models/cycle";
+import { Package } from "src/models/package";
+import { faTimes, faTruckLoading } from "@fortawesome/free-solid-svg-icons";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { SelectItemModalComponent } from "../select-item-modal/select-item-modal.component";
+import { ItemService } from "../item.service";
+import { Item } from "src/models/item";
+import { PackageItem } from "src/models/package-item";
+import { filter } from "rxjs/operators";
+import { SubscriptionPlan } from "src/models/subscription-plan";
+import { AuthService } from "../auth.service";
 
 @Component({
-  selector: 'sbr-edit-package',
-  templateUrl: './edit-package.component.html',
-  styleUrls: ['./edit-package.component.scss']
+  selector: "sbr-edit-package",
+  templateUrl: "./edit-package.component.html",
+  styleUrls: ["./edit-package.component.scss"]
 })
 export class EditPackageComponent implements OnInit, OnChanges {
-
   @Input()
   packageId: string;
 
@@ -44,31 +49,35 @@ export class EditPackageComponent implements OnInit, OnChanges {
     private itemService: ItemService,
     private authService: AuthService
   ) {
-
     this.packageForm = this.formBuilder.group({
-      name: [''],
-      description: [''],
-      cycle: ['', [Validators.required]],
-      imageUrl: [''],
+      name: [""],
+      description: [""],
+      cycle: ["", [Validators.required]],
+      imageUrl: [""],
       items: this.formBuilder.array([]),
-      subscriptionPlans: this.formBuilder.array([], [Validators.minLength(1)]),
+      subscriptionPlans: this.formBuilder.array([], [Validators.minLength(1)])
     });
 
-    this.packageForm.valueChanges.pipe(
-      filter(() => !this.loadChanges)
-    ).subscribe(event => {
-      this.packageService.updatePackage(this.packageId, this.packageForm.value);
-    });
+    this.packageForm.valueChanges
+      .pipe(filter(() => !this.loadChanges))
+      .subscribe(event => {
+        this.packageService.updatePackage(
+          this.authService.getUserId(),
+          this.packageId,
+          this.packageForm.value
+        );
+      });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.packageId) {
       this.loadChanges = true;
-      this.package = this.packageService.getPackage(changes.packageId.currentValue);
+      this.package = await this.packageService.getPackage(
+        this.authService.getUserId(),
+        changes.packageId.currentValue
+      );
       this.packageImage = this.package.imageUrl;
       this.packageForm.patchValue({
         name: this.package.name,
@@ -82,27 +91,49 @@ export class EditPackageComponent implements OnInit, OnChanges {
   }
 
   async setPackageItems(items: PackageItem[]) {
-    this.selectedItems = await this.itemService.getItemsById(this.authService.getUserId(),items.map(item => item.itemId));
+    this.selectedItems = await this.itemService.getItemsById(
+      this.authService.getUserId(),
+      items.map(item => item.itemId)
+    );
     const value = items.map(item => this.buildPackageItemForm(item));
-    this.packageForm.setControl('items', this.formBuilder.array(value, [Validators.minLength(1)]));
+    this.packageForm.setControl(
+      "items",
+      this.formBuilder.array(value, [Validators.minLength(1)])
+    );
   }
 
   setSubscriptionPlans(subscriptionPlans: SubscriptionPlan[]) {
-    const value = subscriptionPlans.map(subscriptionPlan => this.buildSubscriptionPlanForm(subscriptionPlan));
-    this.packageForm.setControl('subscriptionPlans', this.formBuilder.array(value, [Validators.minLength(1)]));
+    const value = subscriptionPlans.map(subscriptionPlan =>
+      this.buildSubscriptionPlanForm(subscriptionPlan)
+    );
+    this.packageForm.setControl(
+      "subscriptionPlans",
+      this.formBuilder.array(value, [Validators.minLength(1)])
+    );
   }
 
   buildSubscriptionPlanForm(subscriptionPlan?: SubscriptionPlan) {
     return this.formBuilder.group({
-      name: [subscriptionPlan ? subscriptionPlan.name : '', [Validators.required]],
-      cycles: [subscriptionPlan ? subscriptionPlan.cycles : 1, [Validators.required]],
-      price: [subscriptionPlan ? subscriptionPlan.price : undefined, [Validators.required]],
-      description: [subscriptionPlan ? subscriptionPlan.description : '']
+      name: [
+        subscriptionPlan ? subscriptionPlan.name : "",
+        [Validators.required]
+      ],
+      cycles: [
+        subscriptionPlan ? subscriptionPlan.cycles : 1,
+        [Validators.required]
+      ],
+      price: [
+        subscriptionPlan ? subscriptionPlan.price : undefined,
+        [Validators.required]
+      ],
+      description: [subscriptionPlan ? subscriptionPlan.description : ""]
     });
   }
 
   addSubscriptionPlan() {
-    const subscriptionPlans = this.packageForm.get('subscriptionPlans') as FormArray;
+    const subscriptionPlans = this.packageForm.get(
+      "subscriptionPlans"
+    ) as FormArray;
     subscriptionPlans.push(this.buildSubscriptionPlanForm());
   }
 
@@ -115,30 +146,37 @@ export class EditPackageComponent implements OnInit, OnChanges {
 
   addPackageItem(item: Item, quantity: number) {
     this.selectedItems.push(item);
-    const items = this.packageForm.get('items') as FormArray;
+    const items = this.packageForm.get("items") as FormArray;
     items.push(this.buildPackageItemForm({ itemId: item.id, quantity }));
   }
 
   removeItem(index: number) {
     this.selectedItems.splice(index, 1);
-    const items = this.packageForm.get('items') as FormArray;
+    const items = this.packageForm.get("items") as FormArray;
     items.removeAt(index);
   }
 
   presentSelectItemModal() {
     const modal = this.modalService.open(SelectItemModalComponent, {
       centered: true,
-      size: 'xl'
+      size: "xl"
     });
 
-    modal.result.then(async (itemIds: string[]) => {
-      const items = await this.itemService.getItemsById(this.authService.getUserId(),itemIds);
-      items.forEach(item => this.addPackageItem(item, 1));
-    }).catch(() => {});
+    modal.result
+      .then(async (itemIds: string[]) => {
+        const items = await this.itemService.getItemsById(
+          this.authService.getUserId(),
+          itemIds
+        );
+        items.forEach(item => this.addPackageItem(item, 1));
+      })
+      .catch(() => {});
   }
 
   deleteSubscriptionPlan(index: number) {
-    const subscriptionPlans = this.packageForm.get('subscriptionPlans') as FormArray;
+    const subscriptionPlans = this.packageForm.get(
+      "subscriptionPlans"
+    ) as FormArray;
     subscriptionPlans.removeAt(index);
   }
 }
