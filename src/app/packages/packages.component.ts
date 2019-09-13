@@ -1,20 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  faPlus,
-  faAngleDown,
-  faBoxOpen
-} from "@fortawesome/free-solid-svg-icons";
-import { PackageService } from "../package.service";
-import { Package } from "src/models/package";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { ConfirmModalComponent } from "../confirm-modal/confirm-modal.component";
-import { ToastrService } from "ngx-toastr";
-import { AuthService } from "../auth.service";
+import { Component, OnInit } from '@angular/core';
+import { faPlus, faAngleDown, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
+import { PackageService } from '../package.service';
+import { Package } from 'src/models/package';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
 
 @Component({
-  selector: "sbr-packages",
-  templateUrl: "./packages.component.html",
-  styleUrls: ["./packages.component.scss"]
+  selector: 'sbr-packages',
+  templateUrl: './packages.component.html',
+  styleUrls: ['./packages.component.scss']
 })
 export class PackagesComponent implements OnInit {
   newPackageIcon = faPlus;
@@ -49,13 +45,10 @@ export class PackagesComponent implements OnInit {
   }
 
   deletePackage(p: Package) {
-    this.packageService
-      .deletePackage(p.merchantId, p.id)
+    this.packageService.deletePackage(p.merchantId, p.id)
       .then(async () => {
         await this.fetchPackages();
-        this.toastrService.success(
-          `Package ${p.name} was deleted successfully`
-        );
+        this.toastrService.success(`Package ${p.name} was deleted successfully`);
 
         if (this.activePackageId === p.id) {
           this.activePackageId = undefined;
@@ -70,10 +63,8 @@ export class PackagesComponent implements OnInit {
     const modal = this.modalService.open(ConfirmModalComponent, {
       centered: true
     });
-    const confirmModalComponent: ConfirmModalComponent =
-      modal.componentInstance;
-    confirmModalComponent.prompt =
-      "Are you sure you want to delete this package?";
+    const confirmModalComponent: ConfirmModalComponent = modal.componentInstance;
+    confirmModalComponent.prompt = 'Are you sure you want to delete this package?';
     modal.result.then(() => this.deletePackage(p)).catch(() => {});
   }
 }
