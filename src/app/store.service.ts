@@ -167,6 +167,12 @@ export class StoreService {
     const newPackages = _.range(n).map(() => this.generatePackage());
     return Promise.resolve(newPackages);
   }
+
+  public async getEmbeddedButton(merchantId: string, url: string) {
+    return this.http.get(`${environment.serverHost}/merchants/${merchantId}/embed/${encodeURIComponent(url)}`, {
+      responseType: 'text'
+    }).toPromise();
+  }
 }
 
 interface BackEndStore {
