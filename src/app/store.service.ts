@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
 import { StorePackage } from 'src/models/store-package';
 import { ItemService } from './item.service';
+import { Package } from 'src/models/package';
+import { Business } from 'src/models/business';
+import { BankAccount } from 'src/models/bank-account';
 import { PackageService } from './package.service';
 import { Store } from 'src/models/store';
 import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
 import * as faker from 'faker';
+import { Item } from 'src/models/item';
+import { Address } from 'src/models/address';
+import { Logistics } from 'src/models/logistics';
+import { PackageItem } from 'src/models/package-item';
+import { StorePackageItem } from 'src/models/store-package-item';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +28,81 @@ export class StoreService {
   constructor(
     private packageService: PackageService,
     private itemService: ItemService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) { }
+
+  getAddressFromBackend(backendAddress: string): Address {
+    const splitAddr = backendAddress.split('\n')
+      return {
+        addressLine1: splitAddr[0],
+        addressLine2: splitAddr[1],
+        postalCode: splitAddr[2]
+    }
+  }
+
+  mockLogistics(): Logistics {
+    return {
+      partner: {
+        id: 'ninjavan'
+      },
+      pickUpAddress: {
+        addressLine1: '',
+        addressLine2: '',
+        postalCode: '',
+        useBusinessAddress: true
+      }
+    }
+  }
+
+  mockBusiness(): Business {
+    return {
+      name: 'Not Starbucks',
+      description: 'This store is not Starbucks.',
+      type: 'Food and Beverage'
+    }
+  }
+
+  async mapPackageItemToStorePackageItem(packageItem: PackageItem, merchantId: string): Promise<StorePackageItem> {
+    return {
+      item: await this.itemService.getItem(merchantId, packageItem.itemId),
+      quantity: packageItem.quantity
+    }
+  }
+
+  async mapPackageToStorePackage(inputPackage: Package, backEndStore: BackEndStore): Promise<StorePackage> {
+    return {
+      id: inputPackage.id,
+      merchantId: inputPackage.merchantId,
+      merchantName: backEndStore !== null ? backEndStore.name : this.mockBusiness.name,
+      name: inputPackage.name,
+      description: inputPackage.description,
+      cycle: inputPackage.cycle,
+      imageUrl: inputPackage.imageUrl,
+      rating: {
+        score: Math.floor((Math.random() * 5) + 3),
+        count: Math.floor((Math.random() * 100) + 1)
+      },
+      subscription: inputPackage.subscriptionPlans && inputPackage.subscriptionPlans.length > 1 ? {
+        basicPlanId: inputPackage.subscriptionPlans[0].id,
+        mostPopularPlanId: inputPackage.subscriptionPlans[1].id,
+        plans: inputPackage.subscriptionPlans,
+      } : null,
+      items: inputPackage.items !== null ? await Promise.all(inputPackage.items.map(async item => await this.mapPackageItemToStorePackageItem(item, inputPackage.merchantId))) : null
+    }
+  }
+
+  private async mapStoreToMerchant(merchantId: string, backEndStore: BackEndStore): Promise<Store> {
+    return {
+      merchantId: backEndStore.id,
+      business: backEndStore.business || this.mockBusiness(),
+      bankAccount: backEndStore.bankAccount,
+      address: await this.getAddressFromBackend(backEndStore.address || ' \n \n \n '),
+      packages: await Promise.all(backEndStore.packageList.map(async p => await this.mapPackageToStorePackage(p, backEndStore))),
+      popularPackages: (await Promise.all(backEndStore.packageList.map(async p => await this.mapPackageToStorePackage(p, backEndStore)))).slice(3),
+      logistics: this.mockLogistics()
+    };
+  }
 
   private async buildDummyDataIfNotExists() {
 
@@ -95,8 +178,8 @@ export class StoreService {
   }
 
   public async getStore(merchantId: string): Promise<Store> {
-    return this.buildDummyDataIfNotExists()
-      .then(() => this.stores.find(store => store.merchantId === merchantId));
+    return this.http.get<BackEndStore>(`${environment.serverHost}/merchants/${merchantId}`).toPromise().
+    then(store => this.mapStoreToMerchant(merchantId, store));
   }
 
   public async getPackage(merchantId: string, packageId: string): Promise<StorePackage> {
@@ -150,4 +233,17 @@ export class StoreService {
     const newPackages = _.range(n).map(() => this.generatePackage());
     return Promise.resolve(newPackages);
   }
+}
+
+interface BackEndStore {
+  id: string;
+  name: string;
+  description: string;
+  cyclePeriod: number;
+  imageUrl: string;
+  packageList: Package[];
+  itemList: Item[];
+  business: Business;
+  bankAccount: BankAccount;
+  address: string;
 }
