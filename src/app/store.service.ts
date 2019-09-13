@@ -74,7 +74,7 @@ export class StoreService {
     return {
       id: inputPackage.id,
       merchantId: inputPackage.merchantId,
-      merchantName: backEndStore.business !== null ? backEndStore.business.name : this.mockBusiness.name,
+      merchantName: backEndStore.business !== null ? backEndStore.business.name : this.mockBusiness().name,
       name: inputPackage.name,
       description: inputPackage.description,
       cycle: inputPackage.cycle,
