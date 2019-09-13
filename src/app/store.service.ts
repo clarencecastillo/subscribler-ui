@@ -100,10 +100,6 @@ export class StoreService {
   }
 
   public async getPackage(merchantId: string, packageId: string): Promise<StorePackage> {
-    if (merchantId === '999') {
-      return this.fakePackages.find(p => p.id === packageId);
-    }
-
     return this.getStore(merchantId).then(store => store.packages.find(p => p.id === packageId));
   }
 
