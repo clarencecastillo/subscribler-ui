@@ -48,27 +48,27 @@ export class PackageService {
   }
 
   public async getPackages(merchantId: string): Promise<Package[]> {
-    return this.http.get<BackEndPackage[]>(`${environment.serverHost}/merchants/12/packages`).toPromise()
+    return this.http.get<BackEndPackage[]>(`${environment.serverHost}/merchants/${merchantId}/packages`).toPromise()
       .then(resPackages => resPackages.map(resPackage => this.mapPackage(merchantId, resPackage)));
   }
 
   public async getPackage(merchantId: string, packageId: string): Promise<Package> {
-    return this.http.get<BackEndPackage>(`${environment.serverHost}/merchants/12/packages/${packageId}`).toPromise()
+    return this.http.get<BackEndPackage>(`${environment.serverHost}/merchants/${merchantId}/packages/${packageId}`).toPromise()
       .then(backEndPackage => this.mapPackage(merchantId, backEndPackage));
   }
 
   public async createPackage(merchantId: string): Promise<Package> {
-    return this.http.post<BackEndPackage>(`${environment.serverHost}/merchants/12/packages`, {}).toPromise()
+    return this.http.post<BackEndPackage>(`${environment.serverHost}/merchants/${merchantId}/packages`, {}).toPromise()
       .then(backEndPackage => this.mapPackage(merchantId, backEndPackage));
   }
 
   public async updatePackage(merchantId: string, packageId: string, update: PackageDetails): Promise<Package> {
-    return this.http.put<BackEndPackage>(`${environment.serverHost}/merchants/12/packages/${packageId}`, this.toBackEndPackage(update))
+    return this.http.put<BackEndPackage>(`${environment.serverHost}/merchants/${merchantId}/packages/${packageId}`, this.toBackEndPackage(update))
       .toPromise().then(backEndPackage => this.mapPackage(merchantId, backEndPackage));
   }
 
   public async deletePackage(merchantId: string, packageId: string): Promise<void> {
-    await this.http.delete<Package>(`${environment.serverHost}/merchants/12/packages/${packageId}`).toPromise();
+    await this.http.delete<Package>(`${environment.serverHost}/merchants/${merchantId}/packages/${packageId}`).toPromise();
   }
 }
 
