@@ -83,12 +83,16 @@ export class StoreService {
         score: Math.floor((Math.random() * 5) + 3),
         count: Math.floor((Math.random() * 100) + 1)
       },
-      subscription: inputPackage.subscriptionPlans && inputPackage.subscriptionPlans.length > 1 ? {
+      subscription: inputPackage.subscriptionPlans && inputPackage.subscriptionPlans.length > 0 ? {
         basicPlanId: inputPackage.subscriptionPlans[0].id,
-        mostPopularPlanId: inputPackage.subscriptionPlans[1].id,
+        mostPopularPlanId: inputPackage.subscriptionPlans[0].id,
         plans: inputPackage.subscriptionPlans,
-      } : null,
-      items: inputPackage.items !== null ? await Promise.all(inputPackage.items.map(async item => await this.mapPackageItemToStorePackageItem(item, inputPackage.merchantId))) : null
+      } : {
+        basicPlanId: undefined,
+        mostPopularPlanId: undefined,
+        plans: []
+      },
+      items: inputPackage.items !== null ? await Promise.all(inputPackage.items.map(async item => await this.mapPackageItemToStorePackageItem(item, inputPackage.merchantId))) : []
     }
   }
 
