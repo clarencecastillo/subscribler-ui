@@ -93,7 +93,7 @@ export class StoreService {
         plans: []
       },
       items: inputPackage.items !== null ? await Promise.all(inputPackage.items.map(async item => await this.mapPackageItemToStorePackageItem(item, inputPackage.merchantId))) : []
-    }
+    };
   }
 
   private async mapMerchantToStore(merchantId: string, backEndStore: BackEndStore): Promise<Store> {
