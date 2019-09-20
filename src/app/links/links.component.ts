@@ -24,14 +24,13 @@ export class LinksComponent implements OnInit {
   ) {
     const merchantId = this.authService.getUserId();
     this.merchantPageUrl = `http://localhost:4200/store/${merchantId}`;
-    const encodedMerchantPageUrl = encodeURIComponent(this.merchantPageUrl);
-    this.qrPosterUrl = `${environment.serverHost}/merchants/${merchantId}/qrcode/${encodeURIComponent(encodedMerchantPageUrl)}`;
+    const encodedMerchantPageUrl = escape(encodeURIComponent(this.merchantPageUrl));
+    this.qrPosterUrl = `${environment.serverHost}/merchants/${merchantId}/qrcode/${encodedMerchantPageUrl}`;
     this.fetchEmbeddedLinkCode(merchantId, encodedMerchantPageUrl);
   }
 
-  async fetchEmbeddedLinkCode(merchantId: string, url: string) {
-    this.buttonLinkCode = await this.storeService.getEmbeddedButton(merchantId, url);
-    console.log(this.buttonLinkCode);
+  private async fetchEmbeddedLinkCode(merchantId: string, encodedUrl: string) {
+    this.buttonLinkCode = await this.storeService.getEmbeddedButton(merchantId, encodedUrl);
   }
 
   ngOnInit() {

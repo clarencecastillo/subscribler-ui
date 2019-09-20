@@ -168,8 +168,8 @@ export class StoreService {
     return Promise.resolve(newPackages);
   }
 
-  public async getEmbeddedButton(merchantId: string, url: string) {
-    return this.http.get(`${environment.serverHost}/merchants/${merchantId}/embed/${encodeURIComponent(url)}`, {
+  public async getEmbeddedButton(merchantId: string, encodedUrl: string) {
+    return this.http.get(`${environment.serverHost}/merchants/${merchantId}/embed/${encodedUrl}`, {
       responseType: 'text'
     }).toPromise();
   }

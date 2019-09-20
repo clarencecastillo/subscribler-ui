@@ -14,7 +14,7 @@ export class QrPrinterComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     const merchantId = this.authService.getUserId();
-    const storePage = encodeURIComponent(encodeURIComponent(`http://localhost:4200/store/${merchantId}`));
+    const storePage = escape(encodeURIComponent(`http://localhost:4200/store/${merchantId}`));
     this.qrPosterUrl = `${environment.serverHost}/merchants/${merchantId}/qrcode/${storePage}`;
   }
 
