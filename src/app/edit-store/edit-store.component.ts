@@ -30,9 +30,9 @@ export class EditStoreComponent implements OnInit, OnChanges {
         bankName: ['']
       }),
       address: this.formBuilder.group({
-        addressLine1: [''],
-        addressLine2: [''],
-        postalCode: ['']
+        addressLine1: ['1 Fusionopolis View'],
+        addressLine2: ['Sandcrawler Building'],
+        postalCode: ['138577']
       })
     });
   }
@@ -42,7 +42,8 @@ export class EditStoreComponent implements OnInit, OnChanges {
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     if (simpleChanges.store && simpleChanges.store.currentValue) {
-      this.storeForm.setValue(_.pick(this.store, 'business', 'bankAccount', 'address'));
+      // this.storeForm.setValue(_.pick(this.store, 'business', 'bankAccount', 'address'));
+      this.storeForm.setValue(_.pick(this.store, 'business', 'bankAccount'));
     }
   }
 

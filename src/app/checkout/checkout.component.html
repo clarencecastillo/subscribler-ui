@@ -3,19 +3,72 @@
     <div class="col-lg-7 col-md-12">
       <div class="row sticky-top p-4">
         <div class="col">
-          <div class="pb-4">
-            <a class="text-dark h4 text-decoration-none" [routerLink]="['/', 'store', package.merchantId, 'package', package.id]">{{package.name}}</a>
-            <br>
-            <span>by <a [routerLink]="['/', 'store', package.merchantId]">{{package.merchantName}}</a></span>
+          <div class="row pb-4">
+            <div class="col">
+              <a class="text-dark h4 text-decoration-none" [routerLink]="['/', 'store', package.merchantId, 'package', package.id]">{{package.name}}</a>
+              <br>
+              <span>by <a [routerLink]="['/', 'store', package.merchantId]">{{package.merchantName}}</a></span>
+            </div>
           </div>
-          <div class="img-container pb-4">
-            <img class="img-fluid rounded border" [src]="package.imageUrl">
+          <div class="row pb-4">
+            <div class="col">
+              <div class="img-container">
+                <img class="img-fluid rounded border" [src]="package.imageUrl">
+              </div>
+            </div>
           </div>
-          <p>{{package.description}}</p>
+          <div class="row pb-4">
+            <div class="col">
+              <p>{{package.description}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h5 class="text-dark border-bottom pb-2">What's Included</h5>
+              <table class="table table-borderless table-hover" *ngIf="package">
+                <tbody>
+                  <tr *ngFor="let packageItem of package.items">
+                    <td [style.line-height]="1.2">
+                      <strong class="d-block">{{packageItem.item.name}}</strong>
+                    </td>
+                    <th scope="row" class="text-center align-middle" [style.width.%]="25">{{packageItem.quantity}} {{packageItem.item.unit}}(s)</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-lg-5 col-md-12 p-4">
+      <div class="row" id="customize">
+        <div class="col pb-4">
+          <h5 class="mb-4 text-dark border-bottom pb-2">Personalization</h5>
+          <div class="row pb-4" *ngFor="let item of customizationItems" [id]="item.id">
+            <div class="col">
+              <label>{{item.label}}</label>
+              <button class="btn mb-2 p-0 w-100 btn-block btn-{{subscriptionForm.get('customization').get(item.id).value === option ? 'primary' : 'light'}}"
+                [ngx-scroll-to]="item.id" [ngx-scroll-to-offset]="280" *ngFor="let option of item.options" (click)="subscriptionForm.get('customization').get(item.id).setValue(option)">
+                <div class="card">
+                  <div class="card-body w-100 text-left">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div [style.line-height]="1.2" class="text-left">
+                        <div class="text-dark">{{option}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="checkout-remarks">Remarks</label>
+              <textarea id="checkout-remarks" type="text" class="form-control" placeholder="Remarks"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row" id="plans">
         <div class="col pb-4">
           <h5 class="mb-4 text-dark border-bottom pb-2">Selected Plan</h5>
@@ -48,10 +101,36 @@
               <div class="card-body w-100 text-left">
                 <div class="d-flex align-items-center">
                   <fa-icon [icon]="addressHomeIcon" class="text-gray-400 mr-4" [style.font-size.rem]="2"></fa-icon>
-                  <div>
-                    <span class="badge badge-primary text-uppercase mr-2">{{address.label}}</span><br>
-                    <span class="text-muted">{{address.address.addressLine1}}</span><br>
-                    <span class="text-muted">{{address.address.addressLine2}}</span>
+                  <div class="flex-grow-1" [style.line-height]="0.8">
+                    <span class="badge badge-primary text-uppercase mr-2 mb-1">{{address.label}}</span>
+                    <br>
+                    <span class="text-muted text-xs">{{address.address.addressLine1}}</span>
+                    <br>
+                    <span class="text-muted text-xs">{{address.address.addressLine2}}</span>
+                  </div>
+                  <div class="d-flex">
+                    <fa-icon [icon]="deliverySurchargeIcon" class="text-gray-400 mr-2" [style.font-size.rem]="1.2"></fa-icon>
+                    <div [style.line-height]="0.5">
+                      <h6 class="font-weight-bold text-dark text-right m-0">SGD {{address.surcharge | currency}}</h6>
+                      <span class="text-muted text-xs">per package</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
+          <button class="btn mb-2 p-0 w-100 btn-block btn-{{subscriptionForm.get('deliveryAddressId').value === 'selfcollect' ? 'primary' : 'light'}}"
+            (click)="subscriptionForm.get('deliveryAddressId').setValue('selfcollect')" ngx-scroll-to="address" [ngx-scroll-to-offset]="260">
+            <div class="card">
+              <div class="card-body w-100 text-left">
+                <div class="d-flex align-items-center">
+                  <fa-icon [icon]="selfCollectIcon" class="d-block text-gray-400 mr-4" [style.font-size.rem]="1.7"></fa-icon>
+                  <div class="flex-grow-1" [style.line-height]="0.8">
+                    <span class="badge badge-primary text-uppercase mr-2 mb-1">Self Pick Up</span>
+                    <br>
+                    <span class="text-muted text-xs">1 Fusionopolis View</span>
+                    <br>
+                    <span class="text-muted text-xs">Sandcrawler Building</span>
                   </div>
                 </div>
               </div>
@@ -60,8 +139,8 @@
         </div>
       </div>
       <div class="row position-relative" id="start-date">
-        <div class="position-absolute w-100 h-100 bg-light d-block" [style.z-index]="1" [style.opacity]="0.5" *ngIf="!subscriptionForm.get('deliveryAddressId').value"></div>
-        <div class="col pb-4">
+        <div class="position-absolute w-100 h-100 bg-light d-block rounded" [style.z-index]="2" [style.opacity]="0.5" *ngIf="!subscriptionForm.get('deliveryAddressId').value"></div>
+        <div class="col py-4">
           <h5 class="mb-4 text-dark border-bottom pb-2">Starting Date</h5>
           <div class="card">
             <div class="card-body">
@@ -77,19 +156,34 @@
               </div>
             </div>
           </div>
-          <div class="alert alert-light mt-2" [style.line-height]="1.2" *ngIf="expiryDate">
-            <small>
-              Packages will be delivered every {{package.cycle | cycle : 'unit'}} with the first package arriving
-              <span class="text-dark font-weight-bold">{{subscriptionForm.get('startDate').value | amTimeAgo : false }}</span>.
-              Your last package will be delivered on
-              <span class="text-dark font-weight-bold">{{expiryDate | amDateFormat : 'D MMMM YYYY'}}</span>.
-            </small>
+        </div>
+      </div>
+      <div class="row mt-4" *ngIf="subscriptionForm.valid">
+        <div class="col pb-4">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="mb-4 text-dark border-bottom py-4 font-weight-bolder text-center">SGD {{total | currency}}</h3>
+              <div class="alert alert-light mt-2" [style.line-height]="1.2" *ngIf="subscriptionForm.get('deliveryAddressId').value === 'selfcollect'">
+                <small>
+                  Self collections will be done every {{package.cycle | cycle : 'unit'}} with the first collection
+                  <span class="text-dark font-weight-bold">{{subscriptionForm.get('startDate').value | amTimeAgo : false }}</span>.
+                  Your last package can be collected on
+                  <span class="text-dark font-weight-bold">{{expiryDate | amDateFormat : 'D MMMM YYYY'}}</span>.
+                </small>
+              </div>
+              <div class="alert alert-light mt-2" [style.line-height]="1.2" *ngIf="subscriptionForm.get('deliveryAddressId').value !== 'selfcollect'">
+                <small>
+                  Packages will be delivered every {{package.cycle | cycle : 'unit'}} with the first package arriving
+                  <span class="text-dark font-weight-bold">{{subscriptionForm.get('startDate').value | amTimeAgo : false }}</span>.
+                  Your last package will be delivered on
+                  <span class="text-dark font-weight-bold">{{expiryDate | amDateFormat : 'D MMMM YYYY'}}</span>.
+                </small>
+              </div>
+              <button class="btn btn-block btn-primary" [disabled]="!subscriptionForm.valid">Make Payment</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-end">
-    <button class="btn btn-primary" [disabled]="!subscriptionForm.valid">Make Payment</button>
   </div>
 </form>
