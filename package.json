@@ -38,7 +38,7 @@
     "faker": "^4.1.0",
     "hover.css": "^2.3.2",
     "html2canvas": "^1.0.0-rc.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "ng2-charts": "^2.3.0",
     "ngx-clipboard": "^12.2.1",
