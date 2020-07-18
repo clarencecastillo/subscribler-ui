@@ -39,7 +39,7 @@
     "hover.css": "^2.3.2",
     "html2canvas": "^1.0.0-rc.3",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "ng2-charts": "^2.3.0",
     "ngx-clipboard": "^12.2.1",
     "ngx-file-drop": "^8.0.7",
